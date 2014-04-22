@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Registre des acte de Naissance</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+            <ui:define name="content">
+
+                <div class="search" align="center">
+                    <h:form>  
+                        <h:panelGrid columns="4" style="margin-bottom:1px;" cellpadding="7">
+                            <p:spinner min="1" value="#{searchBean.search.numActe}"/>
+                            <p:inputMask mask="9999" value="#{searchBean.search.numReg}"/>
+                            <p:selectOneMenu value="#{searchBean.search.type}">  
+                                <f:selectItem itemLabel="Type" itemValue="" />  
+                                <f:selectItem itemLabel="Naissance" itemValue="Naissance" />  
+                                <f:selectItem itemLabel="Mariage" itemValue="Mariage" />  
+                                <f:selectItem itemLabel="Décés" itemValue="Deces" />  
+                            </p:selectOneMenu>
+
+                            <p:commandButton icon="ui-icon-search" action="#{searchBean.recherche}"/> 
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+                <div class="breadcrumb">
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Home" url="#{menuBean.home}"/>
+                        </p:breadCrumb>
+                    </h:form>
+                </div>
+                <h1 align="center">REGISTRE DES ACTES DE NAISSANCE</h1>
+                <div class="panContent">
+                    <h:form id="form"> 
+                        <p:growl id="growl" showDetail="true" life="6000" /> 
+
+                        <div align="center">
+                            <p:dataTable var="acte" value="#{decANBean.allActe}" paginator="true" rows="10" 
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                         rowsPerPageTemplate="5,10,15" style="width: 98%;">  
+
+
+
+                                <p:column headerText="Acte n°" style="width: 8%; text-align: center;" sortBy="#{dec.numero_acte}" filterBy="#{dec.numero_acte}">  
+                                    <h:outputText value="#{acte.numero_acte}" />  
+                                </p:column>  
+ 
+
+                                <p:column headerText="Prénoms">  
+                                    <h:outputText value="#{acte.prenom_enfant}" sortBy="#{dec.prenom_enfant}" filterBy="#{dec.prenom_enfant}"/>  
+                                </p:column>  
+
+                                <p:column headerText="Nom">  
+                                    <h:outputText value="#{acte.nom_enfant}" sortBy="#{dec.nom_enfant}" filterBy="#{dec.nom_enfant}"/>  
+                                </p:column>  
+
+                                <p:column headerText="Date de naissance">  
+                                    <h:outputText value="#{acte.date_naissance_enfant}" sortBy="#{dec.date_naissance_enfant}" filterBy="#{dec.date_naissance_enfant}"/>  
+                                </p:column>
+                                
+                                <p:column headerText="Lieu de naissance" sortBy="#{dec.lieu_naissance_enfant}" filterBy="#{dec.lieu_naissance_enfant}">  
+                                    <h:outputText value="#{acte.lieu_naissance_enfant}" />  
+                                </p:column> 
+                                
+                                <p:column headerText="Date de déclaration" style="width: 10%; text-align: center;">  
+                                    <h:outputText value="#{acte.date_creation}" />  
+                                </p:column> 
+
+                                <p:column style="width:6%; text-align: center;">  
+                                    <p:commandButton id="selectButton" update=":form:growl"  icon="ui-icon-search" title="Consulter" action="#{consultBean.viewActeNaissance}" 
+                                                     oncomplete="handleLoginRequest(xhr, status, args)">
+                                        <f:setPropertyActionListener value="#{acte}" target="#{consultBean.decToConsult}"/>
+                                    </p:commandButton>  
+                                </p:column> 
+                            </p:dataTable>  
+                        </div>
+                    </h:form> 
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

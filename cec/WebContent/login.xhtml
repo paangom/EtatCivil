@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Login</title>
+	<link type="text/css"
+		href="#{request.contextPath}/resources/css/login.css" rel="stylesheet" />
+	<link type="text/css"
+		href="#{request.contextPath}/resources/css/cssLayout.css"
+		rel="stylesheet" />
+</h:head>
+<h:body>
+	<div class="container">
+		<p:ajaxStatus onstart="statusDialog.show();"
+			onsuccess="statusDialog.hide();" />
+		<p:dialog modal="true" widgetVar="statusDialog" header="Status"
+			draggable="false" closable="false">
+			<p:graphicImage value="/resources/images/ajax.gif" />
+		</p:dialog>
+
+	<div>
+		<h:form id="formLogin">
+			<p:growl id="growl" showDetail="true" life="3000" />
+			<p:messages id="messages">
+				<p:effect type="pulsate" event="load" delay="1000">
+					<f:param name="mode" value="'show'" />
+				</p:effect>
+			</p:messages>
+			<h:panelGrid columns="3" cellpadding="5" style="padding-top: 70px;padding-left:55px;">
+
+				<h:outputText value="Utilisateur:" />
+				<p:inputText value="#{loginBean.user.userUserName}" id="username"
+					label="Username" required="true" requiredMessage="requis" />
+				<p:message for="username" />
+
+				<h:outputText value="Mot de passe:" />
+				<p:password value="#{loginBean.user.userPassword}" id="password"
+					required="true" requiredMessage="requis" label="Mot de passe"/>
+				<p:message for="password" />
+
+			</h:panelGrid>
+
+			<p:separator />
+			<h:panelGrid columns="2" columnClasses="label, value" style="text-align: left;">
+				<p:commandButton id="loginButton" value="Se connecter"
+					update="growl" action="#{loginBean.login}" icon="icon-login"
+					oncomplete="handleLoginRequest(xhr, status, args)" />
+
+				<p:commandButton name="reset" type="reset" value="Effacer"
+					icon="icon-delete" />
+			</h:panelGrid>
+
+		</h:form>
+	</div>
+
+	</div>
+	<script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed || !args.loggedIn) {
+                    jQuery('#formLogin').effect("shake", {times: 3}, 100);
+                }
+                else {
+                    location.href = args.route;
+                }
+            }
+        </script>
+</h:body>
+</html>

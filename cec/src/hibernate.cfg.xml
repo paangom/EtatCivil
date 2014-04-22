@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration
+    PUBLIC "-//Hibernate/Hibernate Configuration 3.0 DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory >
+
+		<!-- local connection properties -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/etatcivil</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password"></property>
+
+		<!-- Comportement pour la conservation des tables -->
+		<property name="hbm2ddl.auto">update</property>
+
+		<!-- Fichiers à mapper -->
+		<mapping class="models.Centres" />
+		<mapping class="models.Users" />
+		<mapping class="models.Connected" />
+		<mapping class="models.DeclarationDeces" />
+		<mapping class="models.DeclarationNaissance" />
+		<mapping class="models.DeclarationMariage" />
+		<mapping class="models.PiecesAnnexes" />
+
+    </session-factory>
+</hibernate-configuration>

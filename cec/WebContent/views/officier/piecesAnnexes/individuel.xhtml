@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Pièces annexes</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+
+    <body>
+
+        <ui:composition template="./../../adminTemplate.xhtml">
+
+                      <ui:define name="content">
+                <div class="search" align="center">
+                    <h:form>  
+                        <h:panelGrid columns="4" style="margin-bottom:1px;" cellpadding="7">
+                            <p:spinner min="1" value="#{searchBean.search.numActe}"/>
+                            <p:inputMask mask="9999" value="#{searchBean.search.numReg}"/>
+                            <p:selectOneMenu value="#{searchBean.search.type}">  
+                                <f:selectItem itemLabel="Type" itemValue="" />  
+                                <f:selectItem itemLabel="Naissance" itemValue="Naissance" />  
+                                <f:selectItem itemLabel="Mariage" itemValue="Mariage" />  
+                                <f:selectItem itemLabel="Décès" itemValue="Décès" />  
+                            </p:selectOneMenu>
+
+                            <p:commandButton icon="ui-icon-search" action="#{searchBean.recherche}"/> 
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+                <div class="breadcrumb">
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Accueil" url="#{menuBean.home}"/>
+                        </p:breadCrumb>
+                    </h:form>
+                </div>
+                <h1 align="center">CERTIFICAT DE VIE INDIVIDUEL</h1>
+                <div class="panContent" align="center">
+                    <h:form id="formAddDec">
+						<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
+                        <p:growl id="growl" showDetail="true" life="6000" /> 
+						
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="L'INTERESSE(E)">
+                                <div align="center">
+                                    <h:panelGrid columns="4" cellpadding="6" style="width: 80%;"> 
+                                        <h:outputLabel for="firstname" value="Prénoms" style="text-align: right;" />  
+                                        <p:inputText id="firstname" value="#{vieIndividuel.prenom}" required="true" label="Prénoms" />  
+
+                                        <h:outputLabel for="nom" value="Nom" style="text-align: right;"/>  
+                                        <p:inputText id="nom" value="#{vieIndividuel.nom}" required="true" label="NOM"/> 
+
+                                        <h:outputLabel for="dateN" value="Date de naissance" style="text-align: right;" />  
+                                        <p:calendar id="dateN" pattern="dd/MM/yyyy" showButtonPanel="true" effect="fadeIn" navigator="true" value="#{vieIndividuel.dateNaissance}" maxdate="calwidget.today()" widgetVar="calwidget" />
+										
+										<h:outputLabel for="sexe" value="Sexe" style="text-align: right;" />  
+                                        <p:selectOneRadio id="sexe" value="#{vieIndividuel.sexe}" >  
+                                            <f:selectItem itemLabel="Masculin " itemValue="Masculin" />  
+                                            <f:selectItem itemLabel="Féminin " itemValue="Féminin" />  
+                                        </p:selectOneRadio> 
+
+										
+                                        <h:outputLabel for="lieuN" value="Lieu de naissance" style="text-align: right;"/>  
+                                        <p:inputText id="lieuN" value="#{vieIndividuel.lieu_naissance}" required="true" label="Lieu de naissance"/> 
+
+                                        <h:outputLabel for="adresse" value="Domicile" style="text-align: right;"/>  
+                                        <p:inputText id="adresse" value="#{vieIndividuel.domicile}" label="Domicile"/> 
+                                        
+                                        
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="1" cellspacing="5">
+                            <p:commandButton value="Valider" update="growl" action="#{vieIndividuel.save}" />
+                            
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed) {
+                    jQuery('#formAddDec').effect("shake", {times: 6}, 100);
+                }
+                else {
+                    location.href = args.route;
+                }
+            }
+        </script> 
+    </body>
+</html>

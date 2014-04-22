@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Gestion des pièces annexes</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+    <body>
+
+        <ui:composition template="./../../../adminTemplate.xhtml">
+
+
+            <ui:define name="content">
+                <p:growl id="msgs" showDetail="true" /> 
+                <div class="contenu">
+                    <div class="search" align="center">
+                        <h:form>  
+                            <h:panelGrid columns="4" style="margin-bottom:1px;" cellpadding="7">
+                                <p:spinner min="1" value="#{searchBean.search.numActe}"/>
+                                <p:inputMask mask="9999" value="#{searchBean.search.numReg}"/>
+                                <p:selectOneMenu value="#{searchBean.search.type}">  
+                                    <f:selectItem itemLabel="Type" itemValue="" />  
+                                    <f:selectItem itemLabel="Naissance" itemValue="Naissance" />  
+                                    <f:selectItem itemLabel="Mariage" itemValue="Mariage" />  
+                                    <f:selectItem itemLabel="Décès" itemValue="Décès" />  
+                                </p:selectOneMenu>
+
+                                <p:commandButton icon="ui-icon-search" action="#{searchBean.recherche}"/> 
+                            </h:panelGrid>
+                        </h:form>
+                    </div>
+                    <div class="breadcrumb">
+                        <h:form>
+                            <p:breadCrumb>
+                                <p:menuitem value="Home" url="#{menuBean.home}"/>
+                            </p:breadCrumb>
+                        </h:form>
+                    </div>
+                    <h:form>
+                        <p:commandButton id="btnUserCreate" update=":formCreate" oncomplete="pieceDialogCreate.show()" icon="ui-icon-search" title="Ajouter" value="Ajouter une nouvelle pièce"/> 
+                    </h:form>
+                    <h1 align="center">LISTE DES PIECES ETAT-CIVIL ET ADMINISTRATIF</h1>
+                    <div class="panContent" align="center">
+                        <h:form id="formDataTable">  
+                            
+                            <p:dataTable id="pieces" var="piece" value="#{piecesBean.allPieces}" style="width: 90%" stickyHeader="true" paginator="true" rows="10"  emptyMessage="Il n'existe aucun pièce"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                         rowsPerPageTemplate="5,10,15">  
+
+								<p:column headerText="Libelé" style="text-align: center;">  
+                                    <h:outputText value="#{piece.libelle}" />  
+                                </p:column>  
+
+                                <p:column headerText="Prix" style="text-align: center;">  
+                                    <h:outputText value="#{piece.prix}" />  
+                                </p:column>
+                                
+                                <p:column headerText="Date création" style="text-align: center;">  
+                                    <h:outputText value="#{piece.date_creation}" />  
+                                </p:column> 
+                                
+                                <p:column headerText="Objectif" style="text-align: center;">  
+                                    <h:outputText value="#{piece.objectif}" />  
+                                </p:column>  
+                                <p:column style="width:14%; text-align: center;">  
+                                    <h:panelGrid columns="3" cellpadding="5">
+                                        <p:commandButton id="btnUpdateUser" update=":formUpdate" oncomplete="pieceDialogUpdate.show()" icon="ui-icon-edit" title="Modifier">  
+                                            <f:setPropertyActionListener value="#{piece}" target="#{piecesBean.pieceToConsult}" />  
+                                        </p:commandButton>
+                                        <p:commandButton id="btnDeleteUser"  update=":formDelete" oncomplete="pieceDialogDelete.show()" icon="ui-icon-trash" title="Supprimer">  
+                                            <f:setPropertyActionListener value="#{piece}" target="#{piecesBean.pieceToConsult}" />  
+                                        </p:commandButton>
+                                    </h:panelGrid>
+                                </p:column>  
+
+                            </p:dataTable>
+                        </h:form>
+
+                        <h:form id="formCreate">
+                            <p:dialog header="Ajouter une nouvelle pièce" widgetVar="pieceDialogCreate" resizable="false" id="pieceDlgCreate"  
+                                      showEffect="fade" hideEffect="explode" modal="true">  
+
+                                <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">   
+
+                                    <h:outputText value="Libelé : " />  
+                                    <p:inputText value="#{piecesBean.pieceTOAdd.libelle}" required="true"/>
+                                    
+                                    <h:outputText value="Prix : " />  
+                                    <p:inputText value="#{piecesBean.pieceTOAdd.prix}" />
+                                    
+                                    <h:outputText value="Objectif : " />  
+                                    <h:inputTextarea value="#{piecesBean.pieceTOAdd.objectif}" style="width:auto;"/>
+                                    <f:facet name="footer">
+                                        <p:separator/>
+                                        <p:commandButton id="btnCreateOK" update=":formDataTable, :msgs" action="#{piecesBean.savePieces}" oncomplete="pieceDialogCreate.hide()" icon="ui-icon-disk" title="Sauvegarder" value="Sauver"/> 
+                                        <p:commandButton id="btnCreateCancel" oncomplete="pieceDialogCreate.hide()" icon="ui-icon-closethick" title="Annuler" value="Annuler"/> 
+                                    </f:facet>
+                                </h:panelGrid>  
+
+                            </p:dialog>  
+
+                        </h:form>  
+                        <h:form id="formUpdate">
+                            <p:dialog header="Modifier le document" widgetVar="pieceDialogUpdate" resizable="false" id="pieceDlgUpdate"  
+                                      showEffect="fade" hideEffect="explode" modal="true">  
+
+                                <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+
+                                     <h:outputText value="Libelé : " />  
+                                    <p:inputText value="#{piecesBean.pieceToConsult.libelle}" required="true"/>
+                                    
+                                    <h:outputText value="Prix : " />  
+                                    <p:inputText value="#{piecesBean.pieceToConsult.prix}" />
+                                    
+                                    <h:outputText value="Objectif : " />  
+                                    <h:inputTextarea value="#{piecesBean.pieceToConsult.objectif}" style="width:auto;"/>
+                                    <f:facet name="footer">
+                                        <p:separator/>
+                                        <p:commandButton id="btnUpdateeOK" update=":formDataTable, :msgs" action="#{piecesBean.updatePieces}" oncomplete="pieceDialogUpdate.hide()" icon="ui-icon-disk" title="Sauvegarder" value="Sauver"/> 
+                                        <p:commandButton id="btnUpdateCancel" oncomplete="pieceDialogUpdate.hide()" icon="ui-icon-closethick" title="Annuler" value="Annuler"/> 
+                                    </f:facet>
+                                </h:panelGrid>  
+
+                            </p:dialog>  
+
+                        </h:form>  
+
+                        <h:form id="formDelete">
+                            <p:confirmDialog id="confirmDialog" message="Etes-vous sûr de vouloir supprimer la pièce?"
+                                             header="Suppression de pièces" severity="alert" widgetVar="pieceDialogDelete" showEffect="fade" hideEffect="explode" >  
+
+
+                                <p:commandButton value="OUI" id="confirm" icon="ui-icon-check" 
+                                                 oncomplete="pieceDialogDelete.hide()" update=":formDataTable:, :msgs" action="#{piecesBean.deletePieces}" />  
+                                <p:commandButton value="NON" id="cancel" icon="ui-icon-close" onclick="pieceDialogDelete.hide()" type="button" />       
+                            </p:confirmDialog> 
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

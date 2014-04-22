@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Consultation d'acte de naissance</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+    <body>
+
+        <ui:composition template="./../../../template.xhtml">
+
+            <ui:define name="content">
+                <div class="search" align="center">
+                    <h:form>  
+                        <h:panelGrid columns="4" style="margin-bottom:1px;" cellpadding="7">
+                            <p:spinner min="1" value="#{searchBean.search.numActe}"/>
+                            <p:inputMask mask="9999" value="#{searchBean.search.numReg}"/>
+                            <p:selectOneMenu value="#{searchBean.search.type}">  
+                                <f:selectItem itemLabel="Type" itemValue="" />  
+                                <f:selectItem itemLabel="Naissance" itemValue="Naissance" />  
+                                <f:selectItem itemLabel="Mariage" itemValue="Mariage" />  
+                                <f:selectItem itemLabel="Décés" itemValue="Deces" />  
+                            </p:selectOneMenu>
+
+                            <p:commandButton icon="ui-icon-search" action="#{searchBean.recherche}"/> 
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+                <div class="breadcrumb">
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Home" url="#{menuBean.home}"/>
+                        </p:breadCrumb>
+                    </h:form>
+                </div>
+                <h1 align="center">Acte de naissance numéro #{consultBean.decToConsult.numero_acte} dans le registre du #{consultBean.decToConsult.date_creation} </h1>
+                <div class="panContent" align="center">
+                    <h:form id="formViewDec">
+
+                        <p:growl id="growl" showDetail="true" life="6000" /> 
+
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="INFORMATIONS SUR L'ENFANT">
+                                <div align="center">
+                                    <h:panelGrid columns="4" cellpadding="10" style="width: 80%;"> 
+                                        <h:outputLabel for="firstname" value="Prénom" style="text-align: right;" />  
+                                        <h:outputText id="firstname" value="#{consultBean.decToConsult.prenom_enfant}" style="font-weight:bold;"/>  
+
+                                        <h:outputLabel for="nom" value="Nom" style="text-align: right;"/>  
+                                        <h:outputText id="nom" value="#{consultBean.decToConsult.nom_enfant}" style="font-weight:bold;"/>
+
+                                        <h:outputLabel for="dateN" value="Date de naissance" style="text-align: right;" />  
+                                        <h:outputText id="dateN"  value="#{consultBean.decToConsult.date_naissance_enfant}" style="font-weight:bold;" />
+
+                                        <h:outputLabel for="heureN" value="Heure de naissance" style="text-align: right;" />  
+                                        <h:outputText id="heureN" value="#{consultBean.decToConsult.heure_naissance_enfant}" style="font-weight:bold;"/>
+
+                                        <h:outputLabel for="lieuN" value="Lieu de naissance" style="text-align: right;"/>  
+                                        <h:outputText id="lieuN" value="#{consultBean.decToConsult.lieu_naissance_enfant}" style="font-weight:bold;"/> 
+
+                                        <h:outputLabel for="sexe" value="Sexe" style="text-align: right;" />  
+                                        <h:outputText id="sexe" value="#{consultBean.decToConsult.sexe}" style="font-weight:bold;"/>  
+
+
+                                        <h:outputLabel for="formationS" value="Formation sanitaire" style="text-align: right;"/>  
+                                        <h:outputText id="formationS" value="#{consultBean.decToConsult.formation_sanitaire}" style="font-weight:bold;"/> 
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                       	<h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="INFORMATIONS SUR LES PARENT">
+                                <h:panelGrid columns="2" cellpadding="4" style="width: 100%">
+                                    <p:panel header="LA MERE" style="width:auto">
+                                        <h:panelGrid columns="2" cellpadding="10" style="width: 100%">
+                                            <h:outputLabel for="firstnameM" value="Prénom" style="text-align: right;" />  
+                                            <h:outputText id="firstnameM" value="#{consultBean.decToConsult.prenom_mere}" style="font-weight:bold;" />  
+
+                                            <h:outputLabel for="nomM" value="Nom" style="text-align: right;"/>  
+                                            <h:outputText id="nomM" value="#{consultBean.decToConsult.nom_mere}" style="font-weight:bold;"/> 
+
+                                            <h:outputLabel for="dateNM" value="Date de naissance" style="text-align: right;" />  
+                                            <h:outputText id="dateNM"  value="#{consultBean.decToConsult.date_naissance_mere}" style="font-weight:bold;"/>
+
+                                            <h:outputLabel for="lieuNM" value="Lieu de naissance" style="text-align: right;"/>  
+                                            <h:outputText id="lieuNM" value="#{consultBean.decToConsult.lieu_naissance_mere}" style="font-weight:bold;"/> 
+
+                                            <h:outputLabel for="adresseM" value="Adresse" style="text-align: right;" />  
+                                            <h:outputText id="adresseM" value="#{consultBean.decToConsult.domicile_mere}" style="font-weight:bold;"/>  
+
+                                            <h:outputLabel for="professionM" value="Profession" style="text-align: right;"/>  
+                                            <h:outputText id="professionM" value="#{consultBean.decToConsult.profession_mere}" style="font-weight:bold;"/> 
+                                        </h:panelGrid>
+                                    </p:panel>
+                                    <p:panel header="LE PERE" style="width:auto">
+                                        <h:panelGrid columns="2" cellpadding="10" style="width: 100%">
+                                            <h:outputLabel for="firstnameP" value="Prénom" style="text-align: right;" />  
+                                            <h:outputText id="firstnameP" value="#{consultBean.decToConsult.prenom_pere}" style="font-weight:bold;"/>  
+
+                                            <h:outputLabel for="nomP" value="Nom" style="text-align: right;"/>  
+                                            <h:outputText id="nomP" value="#{consultBean.decToConsult.nom_pere}" style="font-weight:bold;"/> 
+
+                                            <h:outputLabel for="dateNP" value="Date de naissance" style="text-align: right;" />  
+                                            <h:outputText id="dateNP"  value="#{consultBean.decToConsult.date_naissance_pere}" style="font-weight:bold;"/>
+
+                                            <h:outputLabel for="lieuNP" value="Lieu de naissance" style="text-align: right;"/>  
+                                            <h:outputText id="lieuNP" value="#{consultBean.decToConsult.lieu_naissance_pere}" style="font-weight:bold;"/> 
+
+                                            <h:outputLabel for="adresseP" value="Adresse" style="text-align: right;" />  
+                                            <h:outputText id="adresseP" value="#{consultBean.decToConsult.domicile_pere}" style="font-weight:bold;"/>  
+
+                                            <h:outputLabel for="professionP" value="Profession" style="text-align: right;"/>  
+                                            <h:outputText id="professionP" value="#{consultBean.decToConsult.profession_pere}" style="font-weight:bold;"/> 
+                                        </h:panelGrid>
+                                    </p:panel>
+                                </h:panelGrid>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="INFORMATIONS SUR LE DECLARANT">
+                                <div align="left">
+                                    <h:panelGrid columns="4" cellpadding="10">
+                                        <h:outputText value="Déclaré par: " />  
+                                        <h:outputText value="#{consultBean.decToConsult.declarant}" style="font-weight:bold;"/>  
+                                        
+                                        <h:outputLabel for="identif" value="Numéro de carte d'identité" style="text-align: right;"/>  
+                                        <h:outputText id="identif" value="#{consultBean.decToConsult.num_identification_declarant}" style="font-weight:bold;"/> 
+                                         
+                                        <h:outputLabel for="firstnameD" value="Prénom" style="text-align: right;" />  
+                                        <h:outputText id="firstnameD" value="#{consultBean.decToConsult.prenom_declarant}" style="font-weight:bold;"/>  
+
+                                        <h:outputLabel for="nomD" value="Nom" style="text-align: right;"/>  
+                                        <h:outputText id="nomD" value="#{consultBean.decToConsult.nom_declarant}" style="font-weight:bold;"/> 
+
+                                        <h:outputLabel for="adresseD" value="Adresse" style="text-align: right;" />  
+                                        <h:outputText id="adresseD" value="#{consultBean.decToConsult.domicile_declarant}" style="font-weight:bold;"/>  
+
+                                        <h:outputLabel for="professionD" value="Profession" style="text-align: right;"/>  
+                                        <h:outputText id="professionD" value="#{consultBean.decToConsult.profession_declarant}" style="font-weight:bold;"/>
+
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="COMPLEMENTS">
+                                <div >
+                                    <h:panelGrid columns="4" cellpadding="15">
+                                        
+                                         <h:outputLabel value="Numéro de jugement" style="text-align: right;"/>  
+                                            <h:outputText value="#{consultBean.decToConsult.numero_jugement}" style="font-weight:bold;" /> 
+                                            
+                                            <h:outputText value="Date de Jugement " style="text-align: right;"/>   
+                                            <h:outputText value="#{consultBean.decToConsult.date_jugement}"  style="font-weight:bold;"/>
+                                        
+                                            <h:outputLabel value="Tribunal" style="text-align: right;"/>  
+                                            <h:outputText value="#{consultBean.decToConsult.tribunal}" style="font-weight:bold;" /> 
+                                       
+
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="MENTIONS MARGINALES">
+                                <div align="center">
+                                    <h:panelGrid columns="1" cellpadding="5">
+                                      	<div align="center">
+                                    		<p:inputTextarea value="#{consultBean.decToConsult.mention_marginale}" disabled="true"  rows="15" cols="160" style="width: 100%; " label="Mention marginale" />  
+                                		</div>
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid >
+                        
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+						<p:fieldset legend="IMPRESSIONS">
+						<div align="center">
+                        <h:panelGrid columns="4" >
+                        	
+                             <p:commandButton value="Acte" update="growl" action="#{consultBean.printActeNaissance}"/>
+                            <p:commandButton value="Extrait" update="growl" action="#{consultBean.printExtraitNaissance}"/>
+                            <p:commandButton value="Bulletin" update="growl" action="#{consultBean.printBulletinNaissance}"/>
+                            <p:commandButton value="Copie littérale" update="growl" action="#{consultBean.printCopieLitteraleNaissance}"/>
+                             
+                           
+                        </h:panelGrid>
+                        </div>
+						</p:fieldset>
+						</h:panelGrid>
+						<h:panelGrid columns="1" >
+                        	                             
+                            <p:commandButton value="Retour" action="#{consultBean.retourRegistreNaissance}" update="growl"/>
+                           
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

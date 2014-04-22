@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Pièces annexes</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+
+    <body>
+
+        <ui:composition template="./../../adminTemplate.xhtml">
+
+                      <ui:define name="content">
+                <div class="search" align="center">
+                    <h:form>  
+                        <h:panelGrid columns="4" style="margin-bottom:1px;" cellpadding="7">
+                            <p:spinner min="1" value="#{searchBean.search.numActe}"/>
+                            <p:inputMask mask="9999" value="#{searchBean.search.numReg}"/>
+                            <p:selectOneMenu value="#{searchBean.search.type}">  
+                                <f:selectItem itemLabel="Type" itemValue="" />  
+                                <f:selectItem itemLabel="Naissance" itemValue="Naissance" />  
+                                <f:selectItem itemLabel="Mariage" itemValue="Mariage" />  
+                                <f:selectItem itemLabel="Décès" itemValue="Décès" />  
+                            </p:selectOneMenu>
+
+                            <p:commandButton icon="ui-icon-search" action="#{searchBean.recherche}"/> 
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+                <div class="breadcrumb">
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Accueil" url="#{menuBean.home}"/>
+                        </p:breadCrumb>
+                    </h:form>
+                </div>
+                <h1 align="center">CERTIFICAT DE CELIBAT</h1>
+                <div class="panContent" align="center">
+                    <h:form id="formAddDec">
+						<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
+                        <p:growl id="growl" showDetail="true" life="6000" /> 
+						
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="L'INTERESSE(E)">
+                                <div align="center">
+                                    <h:panelGrid columns="4" cellpadding="6" style="width: 80%;"> 
+                                        <h:outputLabel for="firstname" value="Prénoms" style="text-align: right;" />  
+                                        <p:inputText id="firstname" value="#{celibat.prenom_Epouse}" required="true" label="Prénoms" />  
+
+                                        <h:outputLabel for="nom" value="Nom" style="text-align: right;"/>  
+                                        <p:inputText id="nom" value="#{celibat.nom_Epouse}" required="true" label="NOM"/> 
+
+                                        <h:outputLabel for="dateN" value="Date de naissance" style="text-align: right;" />  
+                                        <p:calendar id="dateN" pattern="dd/MM/yyyy" showButtonPanel="true" effect="fadeIn" navigator="true" value="#{celibat.dateNEpouse}" maxdate="calwidget.today()" widgetVar="calwidget" />
+										
+										<h:outputLabel for="sexe" value="Sexe" style="text-align: right;" />  
+                                        <p:selectOneRadio id="sexe" value="#{celibat.sexe}" >  
+                                            <f:selectItem itemLabel="Masculin " itemValue="Masculin" />  
+                                            <f:selectItem itemLabel="Féminin " itemValue="Féminin" />  
+                                        </p:selectOneRadio> 
+
+										
+                                        <h:outputLabel for="lieuN" value="Lieu de naissance" style="text-align: right;"/>  
+                                        <p:inputText id="lieuN" value="#{celibat.lieu_NEpouse}" required="true" label="Lieu de naissance"/> 
+
+                                        <h:outputLabel for="adresse" value="Domicile" style="text-align: right;"/>  
+                                        <p:inputText id="adresse" value="#{celibat.domicile_Epouse}" label="Domicile"/> 
+                                        
+                                        
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                        <p:fieldset legend="LES PARENTS" style="width: 97%;">
+                                            <h:panelGrid columns="2" cellpadding="5" style="width: 100%;">
+                                                <p:panel header="LE PERE">
+                                                    <h:panelGrid columns="2" cellpadding="6" style="width: 100%;"> 
+                                                        <h:outputLabel for="firstnamePE" value="Prénoms" style="text-align: right;" />  
+                                                        <p:inputText id="firstnamePE"  label="Prenoms" value="#{celibat.prenom_PEpouse}"/>  
+
+                                                        <h:outputLabel for="nomPE" value="Nom" style="text-align: right;"/>  
+                                                        <p:inputText id="nomPE" label="Nom" value="#{celibat.nom_PEpouse}"/> 
+
+                                                    </h:panelGrid>
+                                                </p:panel>
+                                                <p:panel header="LA MERE">
+                                                    <h:panelGrid columns="2" cellpadding="6" style="width: 100%;"> 
+                                                        <h:outputLabel for="firstnameME" value="Prénoms" style="text-align: right;" />  
+                                                        <p:inputText id="firstnameME" label="Prenoms" value="#{celibat.prenom_MEpouse}"/>  
+
+                                                        <h:outputLabel for="nomME" value="Nom" style="text-align: right;"/>  
+                                                        <p:inputText id="nomME" label="Nom" value="#{celibat.nom_MEpouse}"/> 
+                                                    </h:panelGrid>
+                                                </p:panel>
+
+                                            </h:panelGrid>
+                                        </p:fieldset>
+                                        
+                                        <p:fieldset legend="LES TEMOINS" style="width: 97%;">
+                                            <h:panelGrid columns="2" cellpadding="5" style="width: 100%;">
+                                                <p:panel header="PREMIER TEMOIN">
+                                                    <h:panelGrid columns="2" cellpadding="6" style="width: 100%;"> 
+                                                        <h:outputLabel for="firstnameT1" value="Prénoms" style="text-align: right;" />  
+                                                        <p:inputText id="firstnameT1"  label="Prenoms" value="#{celibat.prenom_T1}"/>  
+
+                                                        <h:outputLabel for="nomT1" value="Nom" style="text-align: right;"/>  
+                                                        <p:inputText id="nomT1" label="Nom" value="#{celibat.nom_T1}"/> 
+
+                                                        <h:outputLabel for="dateT1" value="Date de naissance" style="text-align: right;" />  
+                                                        <p:calendar id="dateT1" effect="fadeIn" navigator="true" value="#{celibat.dateNT1}" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true"/>
+
+                                                        <h:outputLabel for="lieuNT1" value="Lieu de naissance" style="text-align: right;"/>  
+                                                        <p:inputText id="lieuNT1" label="Lieu de naissance" value="#{celibat.lieu_NT1}"/> 
+
+                                                        <h:outputLabel for="professionT1" value="Carte d'identité nationale" style="text-align: right;"/>  
+                                                        <p:inputText id="professionT1"  label="Carte d'identité nationale" value="#{celibat.cni_T1}"/> 
+
+                                                        <h:outputLabel for="domicilleT1" value="Adresse" style="text-align: right;"/>  
+                                                        <p:inputText id="domicilleT1" label="Adresse" value="#{celibat.adresse_T1}"/> 
+
+                                                    </h:panelGrid>
+                                                </p:panel>
+                                                <p:panel header="SECOND TEMOIN">
+                                                    <h:panelGrid columns="2" cellpadding="6" style="width: 100%;"> 
+                                                        <h:outputLabel for="firstnameT2" value="Prénoms" style="text-align: right;" />  
+                                                        <p:inputText id="firstnameT2" label="Prenoms" value="#{celibat.prenom_T2}"/>  
+
+                                                        <h:outputLabel for="nomT2" value="Nom" style="text-align: right;"/>  
+                                                        <p:inputText id="nomT2" label="Nom" value="#{celibat.nom_T2}"/> 
+
+                                                        <h:outputLabel for="dateNT2" value="Date de naissance" style="text-align: right;" />  
+                                                        <p:calendar id="dateNT2" effect="fadeIn" navigator="true"  value="#{celibat.dateNT2}" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true"/>
+
+                                                        <h:outputLabel for="lieuNT2" value="Lieu de naissance" style="text-align: right;"/>  
+                                                        <p:inputText id="lieuNT2" label="Lieu de naissance" value="#{celibat.lieu_NT2}"/> 
+
+                                                        <h:outputLabel for="professionT2" value="Carte d'identité" style="text-align: right;"/>  
+                                                        <p:inputText id="professionT2"  label="Carte d'identité nationale" value="#{celibat.cni_T2}"/> 
+
+                                                        <h:outputLabel for="domicilleT2" value="Adresse" style="text-align: right;"/>  
+                                                        <p:inputText id="domicilleT2"  label="Adresse" value="#{celibat.adresse_T2}"/> 
+
+                                                    </h:panelGrid>
+                                                </p:panel>
+
+                                            </h:panelGrid>
+                                        </p:fieldset>
+                        			</h:panelGrid>
+                        <h:panelGrid columns="1" cellspacing="5">
+                            <p:commandButton value="Valider" update="growl" action="#{celibat.save}" />
+                            
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed) {
+                    jQuery('#formAddDec').effect("shake", {times: 6}, 100);
+                }
+                else {
+                    location.href = args.route;
+                }
+            }
+        </script> 
+    </body>
+</html>

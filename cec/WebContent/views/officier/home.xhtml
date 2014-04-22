@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Accueil</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+
+    <body>
+
+        <ui:composition template="./../adminTemplate.xhtml">
+
+            <ui:define name="content">
+                <div class="contenu">
+                    <div class="search" align="center">
+                        <h:form>  
+                            <h:panelGrid columns="4" style="margin-bottom:1px;" cellpadding="7">
+                                <p:spinner min="1" value=""/>
+                                <p:inputMask mask="9999" value=""/>
+                                <p:selectOneMenu value="">  
+                                    <f:selectItem itemLabel="Type" itemValue="" />  
+                                    <f:selectItem itemLabel="Naissance" itemValue="Naissance" />  
+                                    <f:selectItem itemLabel="Mariage" itemValue="Mariage" />  
+                                    <f:selectItem itemLabel="Décès" itemValue="Deces" />  
+                                </p:selectOneMenu>
+
+                                <p:commandButton icon="ui-icon-search" /> 
+                            </h:panelGrid>
+                        </h:form>
+                    </div>
+                    <div class="contenu">
+                        <h:form>
+                        <p:growl id="growl" showDetail="true" life="6000" />
+                            <h:panelGrid columns="2" cellpadding="10" style="width: 100%;"> 
+
+                                <p:panel header="A propos du Centre" footer="Visca el Barca!">  
+                                    <h:outputText value="FC Barcelona is one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,  
+                                                  having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.  
+                                                  They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,  
+                                                  including ten UEFA competitions. They have won three UEFA Champions League titles, a record four UEFA Cup Winners' Cups,  
+                                                  a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.  
+                                                  The club is also the only European side to have played continental football in every season since its inception in 1955." />  
+                                </p:panel> 
+
+                                <p:panel header="Les agents du centre" footer="Visca el Barca!">  
+                                    <h:outputText value="FC Barcelona is one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,  
+                                                  having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.  
+                                                  They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,  
+                                                  including ten UEFA competitions. They have won three UEFA Champions League titles, a record four UEFA Cup Winners' Cups,  
+                                                  a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.  
+                                                  The club is also the only European side to have played continental football in every season since its inception in 1955." />  
+                                </p:panel> 
+                                <p:panel header="Les registre de l'année 2014" footer="Visca el Barca!">  
+                                    <!-- <p:barChart id="basic" legendPosition="ne"  
+            									title="Basic Bar Chart" min="0" max="200" style="height:300px"/> -->
+            						<h:outputText value="FC Barcelona is one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,  
+                                                  having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.  
+                                                  They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,  
+                                                  including ten UEFA competitions. They have won three UEFA Champions League titles, a record four UEFA Cup Winners' Cups,  
+                                                  a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.  
+                                                  The club is also the only European side to have played continental football in every season since its inception in 1955." />  
+                                </p:panel>
+                                
+                                <p:panel header="Les registre de l'année 2014" footer="Visca el Barca!">  
+                                    <h:outputText value="FC Barcelona is one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,  
+                                                  having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.  
+                                                  They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,  
+                                                  including ten UEFA competitions. They have won three UEFA Champions League titles, a record four UEFA Cup Winners' Cups,  
+                                                  a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.  
+                                                  The club is also the only European side to have played continental football in every season since its inception in 1955." />  
+                                </p:panel> 
+                            </h:panelGrid>
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

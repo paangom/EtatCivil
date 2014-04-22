@@ -1,0 +1,54 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package services;
+
+import dao.UserDAO;
+import java.io.Serializable;
+import java.util.List;
+import models.Users;
+import util.Factory;
+
+/**
+ *
+ * @author sambasow
+ */
+public class UserServices implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private UserDAO uDAO = Factory.getUserUserDAO();
+    
+    public Users finUser(Users u){
+        return uDAO.findByUser(u);
+    }
+    
+    public Users connectUser(Users u){
+        return uDAO.login(u);
+    }
+    
+    public List<Users> getAllUser(){
+        return uDAO.findAll();
+    }
+    
+    public boolean addUser(Users u){
+        return uDAO.create(u);
+    }
+    
+    public boolean updateUser(Users u){
+    	System.out.println(u.getUserId()+"service");
+        return uDAO.update(u);
+    }
+    
+    public boolean deleteUser(Users u){
+        return uDAO.delete(u.getUserId());
+    }
+    
+    public Users findByUsername(String uname){
+        return uDAO.findByUserName(uname);
+    }
+}

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <f:metadata>
+            <p:idleMonitor timeout="#{session.maxInactiveInterval * 1000 - 125000}"/>
+            <f:event listener="#{loginBean.verifyUseLogin}" type="preRenderView" />
+        </f:metadata>
+        <title>Etat civil</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top" class="ui-widget ui-widget-header ui-corner-all">
+            <ui:insert name="top">
+                <div align="left" >
+                
+                </div>
+                <div class="profil" align="right" >
+                    <h:form>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h3>Bienvenue <a href="#" >#{loginBean.user.userUserName}</a></h3>
+                            <p:commandButton value="Déconnexion" action="#{loginBean.logout}" />
+                        </h:panelGrid>
+
+                    </h:form>
+                </div>
+            </ui:insert>
+        </div>
+        <div id="page">
+            <div id="left">
+                
+                    <h:form>
+                        <p:growl id="messages"/>  
+  
+                        <h2 style="margin-left: 10px;">MENU PRINCIPAL</h2>  
+                        <p:menu style="width:100%;" >  
+                        <p:menuitem value ="Home" url="#{menuBean.home}"/>
+                        <p:separator/>
+                        <p:submenu label="Naissance">  
+                            <p:menuitem value="Nouveelle déclaration" update="messages" url="#{menuBean.declarerN}" />  
+                            <p:menuitem value="Liste des déclarations" url="#{menuBean.listeDA}"  update="messages" /> 
+                            <p:menuitem value="Régistres"  update="messages" url="#{menuBean.registreNaissance}"/> 
+                        </p:submenu>  
+                        <p:submenu label="Mariage">  
+                            <p:menuitem value="Nouvelle déclaration"  update="messages" url="#{menuBean.declarerM}" />  
+                            <p:menuitem value="Liste des déclarations"  update="messages" url="#{menuBean.listeDM}" /> 
+                            <p:menuitem value="Régistres"  update="messages" url="#{menuBean.registreMariage}" /> 
+                        </p:submenu> 
+                        <p:submenu label="Décès">  
+                            <p:menuitem value="Nouvelle déclaration"  update="messages" url="#{menuBean.declarerD}" />  
+                            <p:menuitem value="Liste des déclarations"  update="messages" url="#{menuBean.listeDD}" /> 
+                            <p:menuitem value="Régistres"  update="messages" url="#{menuBean.registreDeces}" /> 
+                        </p:submenu>
+                      </p:menu>
+                      <p:commandButton id="dynaButton" value="Pièces annexes" type="button" style="width:100%;"/>
+                      <p:menu style="width:200px;" trigger="dynaButton" overlay="true"> 
+                        	<p:menuitem value="Attestation de coutume"  update="messages"  /> 
+                            <p:menuitem value="Attestation de non existance"  update="messages"  />
+                            <p:menuitem value="Attestation de résidence"  update="messages"  /> 
+                            <p:menuitem value="Certificat de Célibat"  update="messages"  />
+                            <p:menuitem value="Certificat d'individualité"  update="messages"  />
+                            <p:menuitem value="Certificat de non divorce, de non séparation de corps"  update="messages"  />
+                            <p:menuitem value="Certificat de non inscription"  update="messages"  />
+                            <p:menuitem value="Certificat de non mariage, de non divorce"  update="messages"  />
+                            <p:menuitem value="Certificat de non mariage, de non remariage"  update="messages"  /> 
+                            <p:menuitem value="Certificat de non inscription de mariage"  update="messages"  />
+                            <p:menuitem value="Certificat de vie collectif"  update="messages"  />
+                            <p:menuitem value="Certificat de vie collectif, de charge de famille"  update="messages"  /> 
+                            <p:menuitem value="Certificat de vie individuel"  update="messages"  />  
+                            <p:menuitem value="Certificat de vie individuel, de charge de famille"  update="messages"  />
+                            <p:menuitem value="Permis d'inhumation"  update="messages"  /> 
+                        
+                        </p:menu>
+                    </h:form>
+               
+            </div>
+            <div id="content" class="left_content ui-widget">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+        </div>
+        <div id="bottom" class="ui-widget ui-widget-header ui-corner-all">
+            <ui:insert name="bottom">
+                <div class="footer">
+                    CEC &copy;2014 - Designed by <a href="http://www.syscoweb.com">SYSCOWEB</a>
+                </div>
+            </ui:insert>
+        </div>
+        
+        
+        
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                location.href = args.route;
+            }
+        </script> 
+
+    </h:body>
+
+</html>

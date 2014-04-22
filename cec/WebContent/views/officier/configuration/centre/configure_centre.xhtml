@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../../configureTemp.xhtml">
+
+            <ui:define name="content">
+                <div class="panContent" align="center">
+                    <h:form id="formAddDec">
+
+                        <p:growl id="growl" showDetail="true" life="6000" /> 
+
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 70%;">
+                            <p:fieldset>
+                                <div align="center">
+                                    <h:panelGrid columns="4" cellpadding="6" style="width: 80%;">
+                                        <h:outputLabel for="code" value="CODE DU CENTRE" style="text-align: right;" />  
+                                        <p:spinner id="code"  required="true" label="Code du centre" value="#{centreBean.centreToAdd.centerCode}" />
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset> 
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 70%;">
+                            <p:fieldset legend="INFORMATION SUR LE(A) DEFUNT(E)">
+                                <div align="center">
+                                    <h:panelGrid columns="4" cellpadding="6" style="width: 90%;"> 
+                                        <h:outputLabel for="region" value="REGION" style="text-align: right;" />  
+                                        <p:inputText id="region"  required="true" label="Région" value="#{centreBean.centreToAdd.centerRegion}" />  
+
+                                        <h:outputLabel for="departement" value="DEPARTEMENT" style="text-align: right;"/>  
+                                        <p:inputText id="departement"  required="true" label="DEPARTEMENT" value="#{centreBean.centreToAdd.centerDepartement}"/> 
+
+                                        <h:outputLabel for="arrondissement" value="ARRONDISSEMENT" style="text-align: right;"/>  
+                                        <p:inputText id="arrondissement" required="true" label="ARRONDISSEMENT" value="#{centreBean.centreToAdd.centerArrondissement}"/> 
+                                        
+                                        <h:outputText value="TYPE COLLECTIVITE" />  
+                                        <p:selectOneMenu value="#{centreBean.centreToAdd.centerCollectivite}">  
+                                            <f:selectItem itemLabel="TYPE COLLECTIVITÉ?" itemValue="" />  
+                                            <f:selectItem itemLabel="COMMUNE" itemValue="COMMUNE" />  
+                                            <f:selectItem itemLabel="COMMUNAUTE RURALE" itemValue="COMMUNATE RURALE" />  
+                                        </p:selectOneMenu>
+                                        
+                                        <h:outputText value="TYPE DE CENTRE" />  
+                                        <p:selectOneMenu value="#{centreBean.centreToAdd.centerType}">  
+                                            <f:selectItem itemLabel="TYPE DE CENTRE?" itemValue="" />  
+                                            <f:selectItem itemLabel="PRINCIPALE" itemValue="PRINCIPALE" />  
+                                            <f:selectItem itemLabel="SECONDAIRE" itemValue="SECONDAIRE" />  
+                                        </p:selectOneMenu>
+                                        
+                                        <h:outputLabel for="nomcentre" value="NOM DU CENTRE" style="text-align: right;"/>  
+                                        <p:inputText id="nomcentre"  required="true" label="Nom du cnetre" value="#{centreBean.centreToAdd.centerName}"/> 
+                                        
+                                        <h:outputLabel for="adressecentre" value="ADRESSE DU CENTRE" style="text-align: right;"/>  
+                                        <p:inputText id="adressecentre"  required="true" label="Adresse du centre" value="#{centreBean.centreToAdd.centerAddress}"/> 
+                                        
+                                        <h:outputLabel for="bp" value="BOITE POSTALE" style="text-align: right;"/>  
+                                        <p:spinner id="bp"  required="true" label="BP" value="#{centreBean.centreToAdd.centerBp}"/> 
+                                        
+                                        <h:outputLabel for="mail" value="ADRESSE MAIL" style="text-align: right;"/>  
+                                        <p:inputText id="mail"  required="true" label="Adresse mail" value="#{centreBean.centreToAdd.centerMail}"/> 
+                                        
+                                        <h:outputLabel for="tel" value="NUMERO TELEPHONE" style="text-align: right;" value="#{centreBean.centreToAdd.centerPhone}"/>  
+                                        <p:inputText id="tel"  required="true" label="TEL"/> 
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        <h:panelGrid cellspacing="5">
+                            <p:commandLink value="MODIFIER LES INFORMATIONS DU CENTRE"/>
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+            
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Modification Information du Centre</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+
+    <body>
+
+        <ui:composition template="./../../../adminTemplate.xhtml">
+
+            <ui:define name="content">
+                <div class="search" align="center">
+                    <h:form>  
+                        <h:panelGrid columns="4" style="margin-bottom:1px;" cellpadding="7">
+                            <p:spinner min="1" value="#{searchBean.search.numActe}"/>
+                            <p:inputMask mask="9999" value="#{searchBean.search.numReg}"/>
+                            <p:selectOneMenu value="#{searchBean.search.type}">  
+                                <f:selectItem itemLabel="Type" itemValue="" />  
+                                <f:selectItem itemLabel="Naissance" itemValue="Naissance" />  
+                                <f:selectItem itemLabel="Mariage" itemValue="Mariage" />  
+                                <f:selectItem itemLabel="Décès" itemValue="Décès" />  
+                            </p:selectOneMenu>
+
+                            <p:commandButton icon="ui-icon-search" action="#{searchBean.recherche}"/> 
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+                <div class="breadcrumb">
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Home" url="#{menuBean.home}"/>
+                        </p:breadCrumb>
+                    </h:form>
+                </div>
+
+                <div class="panContent" align="center">
+                    <h:form id="formUpdate">
+
+                        <p:growl id="growl" showDetail="true" life="6000" /> 
+
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 70%;">
+                            <p:fieldset legend="MODIFICATION DES INFORMATIONS DU CENTRE">
+                                <div align="center">
+                                    <h:panelGrid columns="1" cellpadding="5" style="width: 70%;">
+                                        <p:fieldset>
+                                            <div align="center">
+                                                <h:panelGrid columns="4" cellpadding="6" style="width: 80%;">
+                                                    <h:outputLabel for="code" value="CODE DU CENTRE" style="text-align: right;" />  
+                                                    <p:spinner id="code"  required="true" label="Code du centre" value="#{centreBean.centreToUpdate.centerCode}" />
+                                                </h:panelGrid>
+                                            </div>
+                                        </p:fieldset> 
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" cellpadding="6" style="width: 60%;"> 
+                                        <h:outputLabel for="region" value="REGION" style="text-align: right;" />  
+                                        <p:inputText id="region"  required="true" label="Région" value="#{centreBean.centreToUpdate.centerRegion}" />  
+
+                                        <h:outputLabel for="departement" value="DEPARTEMENT" style="text-align: right;"/>  
+                                        <p:inputText id="departement"  required="true" label="DEPARTEMENT" value="#{centreBean.centreToUpdate.centerDepartement}"/> 
+
+                                        <h:outputLabel for="arrondissement" value="ARRONDISSEMENT" style="text-align: right;"/>  
+                                        <p:inputText id="arrondissement" required="true" label="ARRONDISSEMENT" value="#{centreBean.centreToUpdate.centerArrondissement}"/> 
+
+                                        <h:outputText value="TYPE COLLECTIVITE" />  
+                                        <p:selectOneMenu value="#{centreBean.centreToUpdate.centerCollectivite}">  
+                                            <f:selectItem itemLabel="TYPE COLLECTIVITÉ?" itemValue="" />  
+                                            <f:selectItem itemLabel="COMMUNE" itemValue="Commune" />  
+                                            <f:selectItem itemLabel="COMMUNAUTE RURALE" itemValue="Communauté rurale" />  
+                                        </p:selectOneMenu>
+
+                                        <h:outputText value="TYPE DE CENTRE" />  
+                                        <p:selectOneMenu value="#{centreBean.centreToUpdate.centerType}">  
+                                            <f:selectItem itemLabel="TYPE DE CENTRE?" itemValue="" />  
+                                            <f:selectItem itemLabel="PRINCIPALE" itemValue="Principal" />  
+                                            <f:selectItem itemLabel="SECONDAIRE" itemValue="Secondair" />  
+                                        </p:selectOneMenu>
+
+                                        <h:outputLabel for="nomcentre" value="NOM DU CENTRE" style="text-align: right;"/>  
+                                        <p:inputText id="nomcentre"  required="true" label="Nom du cnetre" value="#{centreBean.centreToUpdate.centerName}"/> 
+
+                                        <h:outputLabel for="adressecentre" value="ADRESSE DU CENTRE" style="text-align: right;"/>  
+                                        <p:inputText id="adressecentre"  required="true" label="Adresse du centre" value="#{centreBean.centreToUpdate.centerAddress}"/> 
+
+                                        <h:outputLabel for="bp" value="BOITE POSTALE" style="text-align: right;"/>  
+                                        <p:spinner id="bp"  required="true" label="BP" value="#{centreBean.centreToUpdate.centerBp}"/> 
+
+                                        <h:outputLabel for="mail" value="ADRESSE MAIL" style="text-align: right;"/>  
+                                        <p:inputText id="mail"  required="true" label="Adresse mail" value="#{centreBean.centreToUpdate.centerMail}"/> 
+
+                                        <h:outputLabel for="tel" value="NUMERO TELEPHONE" style="text-align: right;"/>  
+                                        <p:inputText id="tel"  required="true" label="TEL" value="#{centreBean.centreToUpdate.centerPhone}"/> 
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        <div align="center">
+                            <h:panelGrid columns="2" cellspacing="5">
+                                <p:commandButton value=" Enregistrer " update="growl" action="#{centreBean.updateConfigurationCentre}"/>
+                                <p:commandButton value=" Annuler "/>
+                            </h:panelGrid>
+                        </div>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

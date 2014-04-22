@@ -1,0 +1,1301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ddd" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="anneeChiffre" class="java.lang.String"/>
+	<parameter name="numVolet" class="java.lang.String"/>
+	<parameter name="region" class="java.lang.String"/>
+	<parameter name="departement" class="java.lang.String"/>
+	<parameter name="arrondissement" class="java.lang.String"/>
+	<parameter name="commune" class="java.lang.String"/>
+	<parameter name="type" class="java.lang.String"/>
+	<parameter name="collectivite" class="java.lang.String"/>
+	<parameter name="num1" class="java.lang.String"/>
+	<parameter name="num2" class="java.lang.String"/>
+	<parameter name="num3" class="java.lang.String"/>
+	<parameter name="num4" class="java.lang.String"/>
+	<parameter name="num5" class="java.lang.String"/>
+	<parameter name="num6" class="java.lang.String"/>
+	<parameter name="prenomEnfant" class="java.lang.String"/>
+	<parameter name="nomEnfant" class="java.lang.String"/>
+	<parameter name="sexeEnfant" class="java.lang.String"/>
+	<parameter name="dateNaissEnfant" class="java.lang.String"/>
+	<parameter name="heureNaissEnfant" class="java.lang.String"/>
+	<parameter name="lieuNaissEnfant" class="java.lang.String"/>
+	<parameter name="formationSanitaire" class="java.lang.String"/>
+	<parameter name="jourEnfant" class="java.lang.String"/>
+	<parameter name="moisEnfant" class="java.lang.String"/>
+	<parameter name="anneeEnfant" class="java.lang.String"/>
+	<parameter name="prenomPere" class="java.lang.String"/>
+	<parameter name="nomPere" class="java.lang.String"/>
+	<parameter name="dateNaissPere" class="java.lang.String"/>
+	<parameter name="lieuNaissPere" class="java.lang.String"/>
+	<parameter name="professionPere" class="java.lang.String"/>
+	<parameter name="domicilePere" class="java.lang.String"/>
+	<parameter name="jourPere" class="java.lang.String"/>
+	<parameter name="moisPere" class="java.lang.String"/>
+	<parameter name="anneePere" class="java.lang.String"/>
+	<parameter name="prenomMere" class="java.lang.String"/>
+	<parameter name="nomMere" class="java.lang.String"/>
+	<parameter name="dateNaissMere" class="java.lang.String"/>
+	<parameter name="lieuNaissMere" class="java.lang.String"/>
+	<parameter name="professionMere" class="java.lang.String"/>
+	<parameter name="domicileMere" class="java.lang.String"/>
+	<parameter name="jourMere" class="java.lang.String"/>
+	<parameter name="moisMere" class="java.lang.String"/>
+	<parameter name="anneeMere" class="java.lang.String"/>
+	<parameter name="declarant" class="java.lang.String"/>
+	<parameter name="prenomDeclarant" class="java.lang.String"/>
+	<parameter name="nomDeclarant" class="java.lang.String"/>
+	<parameter name="professionDeclarant" class="java.lang.String"/>
+	<parameter name="adresseDeclarant" class="java.lang.String"/>
+	<parameter name="cniDeclarant" class="java.lang.String"/>
+	<parameter name="dateDeclaration" class="java.lang.String"/>
+	<parameter name="numJugement" class="java.lang.String"/>
+	<parameter name="dateJugement" class="java.lang.String"/>
+	<parameter name="lieuInscrit" class="java.lang.String"/>
+	<parameter name="dateInscrit" class="java.lang.String"/>
+	<parameter name="jourDeclaration" class="java.lang.String"/>
+	<parameter name="moisDeclaration" class="java.lang.String"/>
+	<parameter name="anneeDeclaration" class="java.lang.String"/>
+	<parameter name="mentionsMarginales" class="java.lang.String"/>
+	<parameter name="typeDeclaration" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="801" splitType="Stretch">
+			<staticText>
+				<reportElement x="86" y="0" width="223" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPUBLIQUE DU SENEGAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="204" y="20" width="64" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ANNEE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="53" width="470" height="18"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Région.......................................Département..............................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="68" width="468" height="17"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Arrodissement.............................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="82" width="468" height="17"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Commune/Communauté rurale de...............................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="96" width="469" height="17"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Centre :......................................de.............................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="177" width="557" height="18"/>
+				<textElement textAlignment="Justified" verticalAlignment="Bottom">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESEIGNEMENT SUR L'ENFANT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="331" width="517" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lieu de naissance :.......................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="608" width="85" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Les Témoins]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="510" width="476" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Profession :..................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="524" width="477" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Adresse :......................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="206" width="469" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sexe :..........................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="552" width="384" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Date de la déclaration :....................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="594" width="476" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Fait à............................................, le..........................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="242" y="608" width="77" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Le Déclarant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="495" width="475" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Prénoms :.........................................................Nom :..................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="157" y="478" width="319" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[....................................................................ou de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="580" width="333" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Bottom">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EN FOI DE QUOI NOUS AVONS REDIGE LE PRESENT ACTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="359" width="475" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Domicile :.....................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="234" width="470" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Heure :........................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="345" width="475" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Profession :.................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="249" width="469" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lieu de naissance :......................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="428" width="478" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lieu de naissance :.....................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="219" width="387" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Date de naissance :...........................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="653" width="167" height="19"/>
+				<textElement textAlignment="Justified" verticalAlignment="Bottom">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MENTIONS MARGINALES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="385" width="558" height="16"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESEIGNEMENT SUR LA MERE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="566" width="477" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Jugement d'autorisation N°..............................du.......................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="305" width="475" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Prénoms :.............................................................Nom :...............................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="263" width="468" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Formation sanitaire :....................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="481" width="421" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Bottom">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUR LA DECLARATION DE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="538" width="476" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Numéro d'identification :..............................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="442" width="480" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Profession :.................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="400" width="475" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Prénoms :...........................................................Nom :................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="192" width="469" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Prénoms :..........................................................Nom :.................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="414" width="377" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Date de naissance :..........................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="608" width="128" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[L'officier d'Etat-Civil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="290" width="556" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Bottom">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESEIGNEMENT SUR LE PERE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="457" width="481" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Domicile :.....................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="319" width="376" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Date de naissance :............................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="124" width="454" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ACTE DE NAISSANCE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="150" width="29" height="17"/>
+				<textElement textAlignment="Justified" verticalAlignment="Bottom">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="672" width="470" height="114"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[.........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................]]></text>
+			</staticText>
+			<line>
+				<reportElement x="149" y="39" width="36" height="1"/>
+			</line>
+			<line>
+				<reportElement x="149" y="25" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="184" y="26" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="167" y="26" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="465" y="59" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="476" y="60" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="486" y="60" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="465" y="70" width="22" height="1"/>
+			</line>
+			<line>
+				<reportElement x="465" y="445" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="465" y="456" width="22" height="1"/>
+			</line>
+			<line>
+				<reportElement x="486" y="446" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="476" y="446" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="475" y="348" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="485" y="348" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="464" y="348" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="464" y="359" width="22" height="1"/>
+			</line>
+			<line>
+				<reportElement x="365" y="225" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="365" y="236" width="22" height="1"/>
+			</line>
+			<line>
+				<reportElement x="386" y="226" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="376" y="226" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="408" y="225" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="408" y="236" width="22" height="1"/>
+			</line>
+			<line>
+				<reportElement x="429" y="226" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="419" y="226" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="457" y="225" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="457" y="236" width="44" height="1"/>
+			</line>
+			<line>
+				<reportElement x="478" y="226" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="468" y="226" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="489" y="226" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="501" y="226" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="389" y="223" width="13" height="14"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[JJ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="223" width="24" height="14"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[MM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="220" width="53" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ANNEE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="487" y="53" width="13" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[R]]></text>
+			</staticText>
+			<line>
+				<reportElement x="420" y="323" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="366" y="322" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="490" y="323" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="479" y="323" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="502" y="323" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="409" y="322" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="433" y="320" width="24" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[MM]]></text>
+			</staticText>
+			<line>
+				<reportElement x="458" y="333" width="44" height="1"/>
+			</line>
+			<line>
+				<reportElement x="458" y="322" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="366" y="333" width="22" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="504" y="319" width="53" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ANNEE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="430" y="323" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="390" y="320" width="13" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[JJ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="469" y="323" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="409" y="333" width="22" height="1"/>
+			</line>
+			<line>
+				<reportElement x="387" y="323" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="377" y="323" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="418" y="414" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="364" y="413" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="488" y="414" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="477" y="414" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="500" y="414" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="407" y="413" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="431" y="411" width="24" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[MM]]></text>
+			</staticText>
+			<line>
+				<reportElement x="456" y="424" width="44" height="1"/>
+			</line>
+			<line>
+				<reportElement x="456" y="413" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="364" y="424" width="22" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="503" y="410" width="53" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ANNEE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="428" y="414" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="388" y="411" width="13" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[JJ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="467" y="414" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="407" y="424" width="22" height="1"/>
+			</line>
+			<line>
+				<reportElement x="385" y="414" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="375" y="414" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="416" y="555" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="362" y="554" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="486" y="555" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="475" y="555" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="498" y="555" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="405" y="554" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="429" y="552" width="24" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[MM]]></text>
+			</staticText>
+			<line>
+				<reportElement x="454" y="565" width="44" height="1"/>
+			</line>
+			<line>
+				<reportElement x="454" y="554" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="362" y="565" width="22" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="500" y="551" width="53" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ANNEE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="426" y="555" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="386" y="550" width="13" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[JJ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="465" y="555" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="405" y="565" width="22" height="1"/>
+			</line>
+			<line>
+				<reportElement x="383" y="555" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="373" y="555" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="508" y="362" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="464" y="361" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="526" y="358" width="28" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[DP]]></text>
+			</staticText>
+			<line>
+				<reportElement x="475" y="362" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="496" y="362" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="464" y="372" width="55" height="1"/>
+			</line>
+			<line>
+				<reportElement x="485" y="362" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="519" y="362" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="527" y="457" width="28" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[DM]]></text>
+			</staticText>
+			<line>
+				<reportElement x="486" y="461" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="509" y="461" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="476" y="461" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="497" y="461" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="465" y="460" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="520" y="461" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="465" y="471" width="55" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="493" y="442" width="28" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[PM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="489" y="346" width="28" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[PP]]></text>
+			</staticText>
+			<line>
+				<reportElement x="465" y="279" width="11" height="1"/>
+			</line>
+			<line>
+				<reportElement x="465" y="269" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="476" y="269" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="480" y="263" width="28" height="17"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[FS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="206" width="40" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[SEXE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="477" y="211" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="466" y="221" width="11" height="1"/>
+			</line>
+			<line>
+				<reportElement x="466" y="211" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="536" y="124" width="18" height="18"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[TD]]></text>
+			</staticText>
+			<line>
+				<reportElement x="532" y="131" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="521" y="141" width="11" height="1"/>
+			</line>
+			<line>
+				<reportElement x="521" y="131" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="480" y="97" width="16" height="16"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[TC]]></text>
+			</staticText>
+			<line>
+				<reportElement x="476" y="102" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="465" y="112" width="11" height="1"/>
+			</line>
+			<line>
+				<reportElement x="465" y="102" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="482" y="68" width="14" height="17"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[A]]></text>
+			</staticText>
+			<line>
+				<reportElement x="478" y="74" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="467" y="84" width="11" height="1"/>
+			</line>
+			<line>
+				<reportElement x="467" y="74" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="536" y="53" width="18" height="21"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[DT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="532" y="59" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="521" y="70" width="11" height="1"/>
+			</line>
+			<line>
+				<reportElement x="521" y="59" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement x="479" y="82" width="28" height="16"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[C/CR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="475" y="87" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="464" y="97" width="11" height="1"/>
+			</line>
+			<line>
+				<reportElement x="464" y="87" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="521" y="102" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="521" y="113" width="22" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="543" y="98" width="13" height="18"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[C]]></text>
+			</staticText>
+			<line>
+				<reportElement x="542" y="103" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="532" y="103" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="167" y="166" width="113" height="1"/>
+			</line>
+			<line>
+				<reportElement x="167" y="150" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="186" y="150" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="205" y="150" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="224" y="150" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="243" y="150" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="262" y="150" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="280" y="150" width="1" height="16"/>
+			</line>
+			<textField>
+				<reportElement x="149" y="22" width="38" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{anneeChiffre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="0" width="150" height="36"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{numVolet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="50" width="149" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{region}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="268" y="50" width="185" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{departement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="86" y="66" width="367" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{arrondissement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="168" y="80" width="285" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{commune}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="94" width="146" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="224" y="94" width="230" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{collectivite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="263" y="150" width="16" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{num1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="244" y="150" width="16" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{num2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="149" width="17" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{num3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="207" y="149" width="17" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{num4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="149" width="17" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{num5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="150" width="16" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{num6}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="191" width="231" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{prenomEnfant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="191" width="139" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nomEnfant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="203" width="301" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{sexeEnfant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="219" width="233" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{dateNaissEnfant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="234" width="312" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{heureNaissEnfant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="119" y="248" width="335" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{lieuNaissEnfant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="126" y="262" width="335" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{formationSanitaire}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="366" y="219" width="20" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{jourEnfant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="219" width="16" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{moisEnfant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="220" width="32" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{anneeEnfant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="66" y="304" width="231" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{prenomPere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="311" y="303" width="153" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nomPere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="318" width="235" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{dateNaissPere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="124" y="331" width="288" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{lieuNaissPere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="344" width="358" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{professionPere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="358" width="384" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{domicilePere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="367" y="317" width="21" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{jourPere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="317" width="20" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{moisPere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="461" y="317" width="40" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{anneePere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="61" y="399" width="226" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{prenomMere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="398" width="142" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nomMere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="413" width="230" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{dateNaissMere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="98" y="427" width="355" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{lieuNaissMere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="441" width="358" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{professionMere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="456" width="403" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{domicileMere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="365" y="409" width="20" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{jourMere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="409" width="20" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{moisMere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="409" width="39" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{anneeMere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="178" y="478" width="252" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{declarant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="66" y="493" width="218" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{prenomDeclarant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="324" y="493" width="142" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nomDeclarant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="507" width="380" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{professionDeclarant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="521" width="403" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{adresseDeclarant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="535" width="315" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{cniDeclarant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="109" y="550" width="235" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{dateDeclaration}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="564" width="106" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{numJugement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="563" width="153" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{dateJugement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="592" width="175" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{lieuInscrit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="592" width="223" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{dateInscrit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="549" width="20" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{jourDeclaration}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="407" y="549" width="18" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{moisDeclaration}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="549" width="40" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{anneeDeclaration}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="672" width="466" height="114"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{mentionsMarginales}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="0" width="154" height="14" forecolor="#FF0000"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{typeDeclaration}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

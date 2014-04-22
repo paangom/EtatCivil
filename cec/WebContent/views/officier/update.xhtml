@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	 <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title> Etat civil</title>
+    </h:head>
+    <body>
+    <div class="panContent" align="center">
+    <div align="center">
+     <p:spacer height="20" />
+    <h1>MISE A JOUR DES PARAMETRES DE CONNEXIONS</h1>
+    </div>
+		 <h:form id="form">
+		 <p:growl id="growl" showDetail="true" sticky="true" /> 
+                    <p:panel header="INFORMATIONS">       
+							<p:messages id="messages" showDetail="true" autoUpdate="true" /> 
+                                <h:panelGrid id="matchGrid" columns="2" >  
+
+                                    <h:outputLabel for="login1" value="Nouveau login *: " />  
+                                    <p:inputText id="login1" value="#{loginBean.user.userUserName}" required="true" label="Nouveau login"/>  
+									
+									<p:spacer height="10" /><p:spacer height="10" />
+									<p:spacer height="10" /><p:spacer height="10" />
+									
+                                    <h:outputLabel for="pwd1" value="Nouveau mot de passe: *" />  
+            						<p:password id="pwd1" value="#{loginBean.user.userPassword}" match="pwd2" label="Nouveau mot de passe" required="true" feedback="true"/>  
+  									
+  									<p:spacer height="10" /><p:spacer height="10" />
+            						<p:spacer height="10" /><p:spacer height="10" />
+            						
+            						<h:outputLabel for="pwd2" value="Retaper le nouveau mot de passe: *" />  
+            						<p:password id="pwd2" value="#{loginBean.user.userPassword}" label="Retaper le nouveau mot de passe" required="true" feedback="true"/> 
+  									
+  									<p:spacer height="10" /><p:spacer height="10" />
+  									<p:spacer height="10" /><p:spacer height="10" />
+  									
+                                </h:panelGrid>  
+  								<p:commandButton id="saveButton" value="Enregistrer" update="matchGrid growl" action="#{loginBean.verifyLoginOfficier}"/> 
+  					</p:panel>
+  					
+  			 </h:form> 
+  			 
+  			 
+		 </div> 
+    </body>
+</html>

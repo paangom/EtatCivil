@@ -1,0 +1,391 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Déclaration d'Acte de Mariage</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+
+    <body>
+
+        <ui:composition template="./../../../adminTemplate.xhtml">
+
+            <ui:define name="content">
+                <div class="search" align="center">
+                    <h:form>  
+                        <h:panelGrid columns="4" style="margin-bottom:1px;" cellpadding="7">
+                            <p:spinner min="1" value="#{searchBean.search.numActe}"/>
+                            <p:inputMask mask="9999" value="#{searchBean.search.numReg}"/>
+                            <p:selectOneMenu value="#{searchBean.search.type}">  
+                                <f:selectItem itemLabel="Type" itemValue="" />  
+                                <f:selectItem itemLabel="Naissance" itemValue="Naissance" />  
+                                <f:selectItem itemLabel="Mariage" itemValue="Mariage" />  
+                                <f:selectItem itemLabel="Décés" itemValue="Deces" />  
+                            </p:selectOneMenu>
+
+                            <p:commandButton icon="ui-icon-search" action="#{searchBean.recherche}"/> 
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+                <div class="breadcrumb">
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Home" url="#{menuBean.home}"/>
+                            <p:menuitem value="Déclaration d'Acte de Mariage"/>
+                        </p:breadCrumb>
+                    </h:form>
+                </div>
+                <h1 align="center">Acte de mariage numéro #{consultBean.decMarToConsult.numero_Acte} dans le registre du #{consultBean.decMarToConsult.date_creation}</h1>
+                <div class="panContent" align="center">
+                    <h:form id="formAddDec">
+
+                        <p:growl id="growl" showDetail="true" life="6000" /> 
+
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="INFORMATIONS SUR LE MARIAGE">
+                                <div align="center">
+                                    <h:panelGrid columns="4" cellpadding="6" style="width: 80%;">
+                                    
+                                        <h:outputLabel value="Date mariage" />   
+                                        <h:outputText value="#{consultBean.decMarToConsult.date_Mariage}" style="font-weight: bold"/>
+                                        
+                                        <h:outputLabel for="lieuM" value="Lieu du mariage" style="text-align: right;" />  
+                                        <h:outputText id="lieuM"   value="#{consultBean.decMarToConsult.lieu_Mariage}" style="font-weight: bold" />
+
+                                        <h:outputLabel for="heureM" value="Heure du mariage" style="text-align: right;" />  
+                                        <h:outputText id="heureM"  value="#{consultBean.decMarToConsult.heure_Mariage}" style="font-weight: bold"/>
+
+										<h:outputLabel value="Genre" />
+                                        <h:outputText value="#{consultBean.decMarToConsult.genre_Mariage}" style="font-weight: bold"/>  
+
+
+                                        <h:outputLabel for="dot" value="Dot"/>
+                                        <h:outputText id="dot"  value="#{consultBean.decMarToConsult.dot_Mariage}" style="font-weight: bold"/>
+
+                                        <h:outputLabel value="Régime matrimonial" />
+                                        <h:outputText value="#{consultBean.decMarToConsult.regime_Mariage}" style="font-weight: bold"/>  
+
+
+                                        <h:outputLabel for="type" value="Type de mariage" style="text-align: right;" />  
+                                        <h:outputText id="type" value="#{consultBean.decMarToConsult.type_Mariage}" style="font-weight: bold"/>  
+
+
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset> 
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="INFORMATIONS SUR L'EPOUX" >
+                                <div align="center">
+                                    <h:panelGrid columns="1" cellpadding="5" style="width: 95%;">
+                                        <p:fieldset legend="LE MARI" style="width: 97%;">
+                                            <h:panelGrid columns="4" cellpadding="6" style="width: 100%;" > 
+                                                <h:outputLabel for="firstname" value="Prénoms" style="text-align: right;" />  
+                                                <h:outputText id="firstname"   value="#{consultBean.decMarToConsult.prenom_Epoux}" style="font-weight: bold"/>  
+
+                                                <h:outputLabel for="nom" value="Nom" style="text-align: right;"/>  
+                                                <h:outputText id="nom"  value="#{consultBean.decMarToConsult.nom_Epoux}" style="font-weight: bold"/> 
+
+                                                <h:outputLabel for="dateN" value="Date de naissance" style="text-align: right;" />  
+                                                <h:outputText id="dateN"  value="#{consultBean.decMarToConsult.date_Naissance_Epoux}" style="font-weight: bold"/>
+
+                                                <h:outputLabel for="lieuN" value="Lieu de naissance" style="text-align: right;"/>  
+                                                <h:outputText id="lieuN"  value="#{consultBean.decMarToConsult.lieu_Naissance_Epoux}" style="font-weight: bold"/> 
+
+                                                <h:outputLabel for="professiondc" value="Profession" style="text-align: right;"/>  
+                                                <h:outputText id="professiondc"  value="#{consultBean.decMarToConsult.profession_Epoux}" style="font-weight: bold"/> 
+
+                                                <h:outputLabel for="domicille" value="Domicille" style="text-align: right;"/>  
+                                                <h:outputText id="domicille"  value="#{consultBean.decMarToConsult.domicile_Epoux}" style="font-weight: bold"/> 
+
+                                                <h:outputLabel for="residence" value="Résidence" style="text-align: right;"/>  
+                                                <h:outputText id="residence" value="#{consultBean.decMarToConsult.residence_Epoux}" style="font-weight: bold"/> 
+
+                                                <h:outputLabel for="mariedTO" value="Marié à (1)" style="text-align: right;"/>  
+                                                <h:outputText id="mariedTO" value="#{consultBean.decMarToConsult.precedent_Conjoint}" style="font-weight: bold"/> 
+                                            </h:panelGrid>
+                                        </p:fieldset>
+
+                                        <p:fieldset legend="PARENTS DU MARI" style="width: 97%;">
+                                            <h:panelGrid columns="2" cellpadding="5" style="width: 100%;">
+                                                <p:panel header="LE PERE">
+                                                    <h:panelGrid columns="2" cellpadding="6" style="width: 100%;"> 
+                                                        <h:outputLabel for="firstnamePE" value="Prénoms" style="text-align: right;" />  
+                                                        <h:outputText id="firstnamePE"  value="#{consultBean.decMarToConsult.prenom_Pere_Epoux}" style="font-weight: bold"/>  
+
+                                                        <h:outputLabel for="nomPE" value="Nom" style="text-align: right;"/>  
+                                                        <h:outputText id="nomPE"  value="#{consultBean.decMarToConsult.nom_Pere_Epoux}" style="font-weight: bold"/> 
+
+                                                        <h:outputLabel for="dateNPE" value="Date de naissance" style="text-align: right;" />  
+                                                        <h:outputText id="dateNPE" value="#{consultBean.decMarToConsult.date_Naissance_Pere_Epoux}" style="font-weight: bold"/>
+
+                                                        <h:outputLabel for="lieuNPE" value="Lieu de naissance" style="text-align: right;"/>  
+                                                        <h:outputText id="lieuNPE"  value="#{consultBean.decMarToConsult.lieu_Naissance_Pere_Epoux}" style="font-weight: bold"/> 
+
+                                                        <h:outputLabel for="professionPE" value="Profession" style="text-align: right;"/>  
+                                                        <h:outputText id="professionPE"  value="#{consultBean.decMarToConsult.profession_Pere_Epoux}" style="font-weight: bold"/> 
+
+                                                        <h:outputLabel for="domicillePE" value="Domicille" style="text-align: right;"/>  
+                                                        <h:outputText id="domicillePE"  value="#{consultBean.decMarToConsult.domicile_Pere_Epoux}" style="font-weight: bold"/> 
+
+                                                    </h:panelGrid>
+                                                </p:panel>
+                                                <p:panel header="LA MERE">
+                                                    <h:panelGrid columns="2" cellpadding="6" style="width: 100%;"> 
+                                                        <h:outputLabel for="firstnameME" value="Prénoms" style="text-align: right;" />  
+                                                        <h:outputText id="firstnameME"  value="#{consultBean.decMarToConsult.prenom_Mere_Epoux}" style="font-weight: bold"/>  
+
+                                                        <h:outputLabel for="nomME" value="Nom" style="text-align: right;"/>  
+                                                        <h:outputText id="nomME"  value="#{consultBean.decMarToConsult.nom_Mere_Epoux}" style="font-weight: bold"/> 
+
+                                                        <h:outputLabel for="dateNME" value="Date de naissance" style="text-align: right;" />  
+                                                        <h:outputText id="dateNME" value="#{consultBean.decMarToConsult.date_Naissance_Mere_Epoux}" style="font-weight: bold"/>
+
+                                                        <h:outputLabel for="lieuNME" value="Lieu de naissance" style="text-align: right;"/>  
+                                                        <h:outputText id="lieuNME" value="#{consultBean.decMarToConsult.lieu_Naissance_Mere_Epoux}" style="font-weight: bold"/> 
+
+                                                        <h:outputLabel for="professionME" value="Profession" style="text-align: right;"/>  
+                                                        <h:outputText id="professionME" value="#{consultBean.decMarToConsult.profession_Mere_Epoux}" style="font-weight: bold"/> 
+
+                                                        <h:outputLabel for="domicilleME" value="Domicille" style="text-align: right;"/>  
+                                                        <h:outputText id="domicilleME" value="#{consultBean.decMarToConsult.domicile_Mere_Epoux}" style="font-weight: bold"/> 
+
+                                                    </h:panelGrid>
+                                                </p:panel>
+
+                                            </h:panelGrid>
+                                        </p:fieldset>
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                            <p:fieldset legend="INFORMATIONS SUR L'EPOUSE" >
+                                <div align="center">
+                                    <h:panelGrid columns="1" cellpadding="5" style="width: 95%;">
+                                        <p:fieldset legend="LA MARIEE" style="width: 97%;">
+                                            <h:panelGrid columns="4" cellpadding="6" style="width: 100%;" > 
+                                                <h:outputLabel for="firstnameZ" value="Prénoms" style="text-align: right;" />  
+                                                <h:outputText id="firstnameZ"  value="#{consultBean.decMarToConsult.prenom_Epouse}" style="font-weight: bold"/>  
+
+                                                <h:outputLabel for="nomZ" value="Nom" style="text-align: right;"/>  
+                                                <h:outputText id="nomZ"  value="#{consultBean.decMarToConsult.nom_Epouse}" style="font-weight: bold"/> 
+
+                                                <h:outputLabel for="dateNZ" value="Date de naissance" style="text-align: right;" />  
+                                                <h:outputText id="dateNZ"  value="#{consultBean.decMarToConsult.date_Naissance_Epouse}" style="font-weight: bold"/>
+
+                                                <h:outputLabel for="lieuNZ" value="Lieu de naissance" style="text-align: right;"/>  
+                                                <h:outputText id="lieuNZ" value="#{consultBean.decMarToConsult.lieu_Naissance_Epouse}" style="font-weight: bold"/> 
+
+                                                <h:outputLabel for="professionZ" value="Profession" style="text-align: right;"/>  
+                                                <h:outputText id="professionZ"  value="#{consultBean.decMarToConsult.profession_Epouse}" style="font-weight: bold"/> 
+
+                                                <h:outputLabel for="domicilleZ" value="Domicille" style="text-align: right;"/>  
+                                                <h:outputText id="domicilleZ"   value="#{consultBean.decMarToConsult.domicile_Epouse}" style="font-weight: bold"/> 
+
+                                                <h:outputLabel for="residenceZ" value="Résidence" style="text-align: right;"/>  
+                                                <h:outputText id="residenceZ"  value="#{consultBean.decMarToConsult.residence_Epouse}" style="font-weight: bold"/> 
+
+                                            </h:panelGrid>
+                                        </p:fieldset>
+
+                                        <p:fieldset legend="PARENTS DE LA MARIEE" style="width: 97%;">
+                                            <h:panelGrid columns="2" cellpadding="5" style="width: 100%;">
+                                                <p:panel header="LE PERE">
+                                                    <h:panelGrid columns="2" cellpadding="6" style="width: 100%;"> 
+                                                        <h:outputLabel for="firstnamePZ" value="Prénoms" style="text-align: right;" />  
+                                                        <h:outputText id="firstnamePZ"  value="#{consultBean.decMarToConsult.prenom_Pere_Epouse}" style="font-weight: bold"/>  
+
+                                                        <h:outputLabel for="nomPZ" value="Nom" style="text-align: right;"/>  
+                                                        <h:outputText id="nomPZ"   value="#{consultBean.decMarToConsult.nom_Pere_Epouse}" style="font-weight: bold"/> 
+
+                                                        <h:outputLabel for="dateNPZ" value="Date de naissance" style="text-align: right;" />  
+                                                        <h:outputText id="dateNPZ"  value="#{consultBean.decMarToConsult.date_Naissance_Pere_Epouse}" style="font-weight: bold"/>
+
+                                                        <h:outputLabel for="lieuNPZ" value="Lieu de naissance" style="text-align: right;"/>  
+                                                        <h:outputText id="lieuNPZ" value="#{consultBean.decMarToConsult.lieu_Naissance_Pere_Epouse}" style="font-weight: bold"/> 
+
+                                                        <h:outputLabel for="professionPZ" value="Profession" style="text-align: right;"/>  
+                                                        <h:outputText id="professionPZ" value="#{consultBean.decMarToConsult.profession_Pere_Epouse}" style="font-weight: bold"/> 
+
+                                                        <h:outputLabel for="domicillePZ" value="Domicille" style="text-align: right;"/>  
+                                                        <h:outputText id="domicillePZ" value="#{consultBean.decMarToConsult.domicile_Pere_Epouse}" style="font-weight: bold"/> 
+
+                                                    </h:panelGrid>
+                                                </p:panel>
+                                                <p:panel header="LA MERE">
+                                                    <h:panelGrid columns="2" cellpadding="6" style="width: 100%;"> 
+                                                        <h:outputLabel for="firstnameMZ" value="Prénoms" style="text-align: right;" />  
+                                                        <h:outputText id="firstnameMZ" value="#{consultBean.decMarToConsult.prenom_Mere_Epouse}" style="font-weight: bold"/>  
+
+                                                        <h:outputLabel for="nomMZ" value="Nom" style="text-align: right;"/>  
+                                                        <h:outputText id="nomMZ"  value="#{consultBean.decMarToConsult.nom_Mere_Epouse}" style="font-weight: bold"/> 
+
+                                                        <h:outputLabel for="dateNMZ" value="Date de naissance" style="text-align: right;" />  
+                                                        <h:outputText id="dateNMZ" value="#{consultBean.decMarToConsult.date_Naissance_Mere_Epouse}" style="font-weight: bold"/>
+
+                                                        <h:outputLabel for="lieuNMZ" value="Lieu de naissance" style="text-align: right;"/>  
+                                                        <h:outputText id="lieuNMZ" value="#{consultBean.decMarToConsult.lieu_Naissance_Mere_Epouse}" style="font-weight: bold"/> 
+
+                                                        <h:outputLabel for="professionMZ" value="Profession" style="text-align: right;"/>  
+                                                        <h:outputText id="professionMZ"  value="#{consultBean.decMarToConsult.profession_Mere_Epouse}" style="font-weight: bold"/> 
+
+                                                        <h:outputLabel for="domicilleMZ" value="Domicille" style="text-align: right;"/>  
+                                                        <h:outputText id="domicilleMZ" value="#{consultBean.decMarToConsult.domicile_Mere_Epouse}" style="font-weight: bold"/> 
+
+                                                    </h:panelGrid>
+                                                </p:panel>
+
+                                            </h:panelGrid>
+                                        </p:fieldset>
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="INFORMATIONS SUR LES TEMOINS">
+                                <h:panelGrid columns="2" cellpadding="4" style="width: 100%">
+                                    <p:panel header="EPOUX">
+                                        <h:panelGrid columns="2" cellpadding="5" style="width: 100%">
+                                            <h:outputLabel for="firstnameTX1" value="1 - Prénoms" style="text-align: right;" />  
+                                            <h:outputText id="firstnameTX1" value="#{consultBean.decMarToConsult.prenom_Temoin1_Epoux}" style="font-weight: bold"/>  
+
+                                            <h:outputLabel for="nomTX1" value="1 - Nom" style="text-align: right;"/>  
+                                            <h:outputText id="nomTX1" value="#{consultBean.decMarToConsult.nom_Temoin1_Epoux}" style="font-weight: bold"/> 
+
+                                            <h:outputLabel for="adresseTX1" value="1 - Domicille" style="text-align: right;" />  
+                                            <h:outputText id="adresseTX1"  value="#{consultBean.decMarToConsult.domicile_Temoin1_Epoux}" style="font-weight: bold"/>  
+
+                                            <h:outputLabel for="professionTX1" value="1 - Profession" style="text-align: right;"/>  
+                                            <h:outputText id="professionTX1" value="#{consultBean.decMarToConsult.profession_Temoin1_Epoux}" style="font-weight: bold"/> 
+                                            
+                                            <h:outputLabel for="cnTX1" value="1 - Numéro carte d'idnetité" style="text-align: right;" />  
+                                            <h:outputText id="cnTX1" value="#{consultBean.decMarToConsult.cni_Temoin1_Epoux}" style="font-weight: bold"/>
+                                            
+                                        </h:panelGrid>
+                                        <p:separator/>
+                                        <h:panelGrid columns="2" cellpadding="5" style="width: 100%">
+                                            <h:outputLabel for="firstnameTX2" value="2 - Prénoms" style="text-align: right;" />  
+                                            <h:outputText id="firstnameTX2"  value="#{consultBean.decMarToConsult.prenom_Temoin2_Epoux}" style="font-weight: bold"/>  
+
+                                            <h:outputLabel for="nomTX2" value="2 - Nom" style="text-align: right;"/>  
+                                            <h:outputText id="nomTX2" value="#{consultBean.decMarToConsult.nom_Temoin2_Epoux}" style="font-weight: bold"/> 
+
+                                            <h:outputLabel for="adresseTX2" value="2 - Domicille" style="text-align: right;" />  
+                                            <h:outputText id="adresseTX2"  value="#{consultBean.decMarToConsult.domicile_Temoin2_Epoux}" style="font-weight: bold"/>  
+
+                                            <h:outputLabel for="professionTX2" value="2 - Profession" style="text-align: right;"/>  
+                                            <h:outputText id="professionTX2"  value="#{consultBean.decMarToConsult.profession_Temoin2_Epoux}" style="font-weight: bold"/> 
+                                            
+                                            <h:outputLabel for="cnTX2" value="2 - Numéro carte d'idnetité" style="text-align: right;"/>  
+                                            <h:outputText id="cnTX2"  value="#{consultBean.decMarToConsult.cni_Temoin2_Epoux}" style="font-weight: bold"/>
+                                            
+                                        </h:panelGrid>
+                                    </p:panel>
+                                    <p:panel header="EPOUSE">
+                                        <h:panelGrid columns="2" cellpadding="5" style="width: 100%">
+                                            <h:outputLabel for="firstnameTY1" value="1 - Prénoms" style="text-align: right;" />  
+                                            <h:outputText id="firstnameTY1" value="#{consultBean.decMarToConsult.prenom_Temoin1_Epouse}" style="font-weight: bold"/>  
+
+                                            <h:outputLabel for="nomTY1" value="1 - Nom" style="text-align: right;"/>  
+                                            <h:outputText id="nomTY1" value="#{consultBean.decMarToConsult.nom_Temoin1_Epouse}" style="font-weight: bold"/> 
+
+                                            <h:outputLabel for="adresseTY1" value="1 - Domicille" style="text-align: right;" />  
+                                            <h:outputText id="adresseTY1"  value="#{consultBean.decMarToConsult.domicile_Temoin1_Epouse}" style="font-weight: bold"/>  
+
+                                            <h:outputLabel for="professionTY1" value="1 - Profession" style="text-align: right;"/>  
+                                            <h:outputText id="professionTY1" value="#{consultBean.decMarToConsult.profession_Temoin1_Epouse}" style="font-weight: bold"/> 
+                                            
+                                            <h:outputLabel for="cnTY1" value="1 - Numéro carte d'idnetité" style="text-align: right;"/>  
+                                            <h:outputText id="cnTY1" value="#{consultBean.decMarToConsult.cni_Temoin1_Epouse}" style="font-weight: bold"/>
+                                            
+                                        </h:panelGrid>
+                                        <p:separator/>
+                                        <h:panelGrid columns="2" cellpadding="5" style="width: 100%">
+                                            <h:outputLabel for="firstnameTY2" value="2 - Prénoms" style="text-align: right;" />  
+                                            <h:outputText id="firstnameTY2" value="#{consultBean.decMarToConsult.prenom_Temoin2_Epouse}" style="font-weight: bold"/>  
+
+                                            <h:outputLabel for="nomTY2" value="2 - Nom" style="text-align: right;"/>  
+                                            <h:outputText id="nomTY2" value="#{consultBean.decMarToConsult.nom_Temoin2_Epouse}" style="font-weight: bold"/> 
+
+                                            <h:outputLabel for="adresseTY2" value="2 - Domicille" style="text-align: right;" />  
+                                            <h:outputText id="adresseTY2"  value="#{consultBean.decMarToConsult.domicile_Temoin2_Epouse}" style="font-weight: bold"/>  
+
+                                            <h:outputLabel for="professionTY2" value="2 - Profession" style="text-align: right;"/>  
+                                            <h:outputText id="professionTY2" value="#{consultBean.decMarToConsult.profession_Temoin2_Epouse}" style="font-weight: bold"/> 
+                                            
+                                            <h:outputLabel for="cnTY2" value="2 - Numéro carte d'idnetité" style="text-align: right;"/>  
+                                            <h:outputText id="cnTY2"  value="#{consultBean.decMarToConsult.cni_Temoin2_Epouse}" style="font-weight: bold"/>
+                                            
+                                        </h:panelGrid>
+                                    </p:panel>
+                                </h:panelGrid>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="MENTIONS MARGINALES">
+                                <div align="center">
+                                    <p:inputTextarea rows="15" style="width: 95%; font-weight: bold" disabled="true" label="MENTIONS MARGINALES" value="#{consultBean.decMarToConsult.mentions_Marginales}" />  
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="COMPLEMENTS">
+                                <div align="center">
+                                    
+                                    <p:fieldset>
+                                        <div align="center">
+                                            <h:panelGrid columns="4" cellpadding="5" style="width: 90%">
+                                            	<h:outputLabel value="Numéro de jugement" style="text-align: right;"/>  
+                                                <h:outputText  value="#{consultBean.decMarToConsult.numero_Jugement}" style="font-weight: bold"/>
+                                                
+                                                <h:outputLabel value="Date de jugement" />   
+                                                <h:outputText value="#{consultBean.decMarToConsult.date_Jugement}" style="font-weight: bold"/>
+
+                                                <h:outputLabel value="Tribunal" style="text-align: right;"/>  
+                                                <h:outputText  value="#{consultBean.decMarToConsult.tribunal}" style="font-weight: bold"/> 
+                                            </h:panelGrid>
+                                        </div>
+                                    </p:fieldset>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="IMPRESSIONS">
+                                <div align="center">
+                                    
+                                    <p:fieldset>
+                                        <div align="center">
+                                            <h:panelGrid columns="3" >
+                                            	<p:commandButton value="Acte" update="growl"  action="#{consultBean.printActeMariage}"/>
+		                                        <p:commandButton value="Copie litterale" update="growl" action="#{consultBean.printCopieLitteraleMariage}"/>
+		                                        <p:commandButton value="Certificat" update="growl" />
+                                            </h:panelGrid>
+                                        </div>
+                                    </p:fieldset>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                      
+                          
+                                <div align="center">
+                                    <h:panelGrid columns="1" >
+                                    
+                                        <p:commandButton value="Retour" update="growl" action="#{consultBean.retourRegistreMariage}"/>
+                                        
+                                    </h:panelGrid>
+                                </div>
+                            
+                        
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+        
+    </body>
+</html>
