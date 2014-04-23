@@ -18,7 +18,7 @@
             <ui:define name="content">
                 <div class="contenu">
                     <div class="search" align="center">
-                        <h:form>  
+                        <!-- <h:form>  
                             <h:panelGrid columns="4" style="margin-bottom:1px;" cellpadding="7">
                                 <p:spinner min="1" value=""/>
                                 <p:inputMask mask="9999" value=""/>
@@ -31,7 +31,11 @@
 
                                 <p:commandButton icon="ui-icon-search" /> 
                             </h:panelGrid>
-                        </h:form>
+                        </h:form> -->
+                        <b><h1><h:outputText value="BIENVENUE DANS LE CENTRE D'ETAT-CIVIL DE #{userBean.userConnect.centre.centerName}" style="font-size:25px;"/></h1></b>
+                        <br />
+                        <br />
+                        <br />
                     </div>
                     <div class="contenu">
                         <h:form>
@@ -48,12 +52,15 @@
                                 </p:panel> 
 
                                 <p:panel header="Les agents du centre" footer="Visca el Barca!">  
-                                    <h:outputText value="FC Barcelona is one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,  
-                                                  having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.  
-                                                  They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,  
-                                                  including ten UEFA competitions. They have won three UEFA Champions League titles, a record four UEFA Cup Winners' Cups,  
-                                                  a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.  
-                                                  The club is also the only European side to have played continental football in every season since its inception in 1955." />  
+                                   <h:form prependId="false">  
+									    <p:growl id="growl1" showDetail="true" />  
+  										<p:poll interval="3" update="pieChart" /> 
+    									<p:pieChart id="pieChart" value="#{menuBean.pieModel}" legendPosition="w"  
+       										     title="Diagramme des registres" style="width:400px;height:300px" >  
+        									<p:ajax event="itemSelect" listener="#{menuBean.itemSelect}" update="growl1" />  
+    									</p:pieChart>  
+  
+									</h:form>   
                                 </p:panel> 
                                 <p:panel header="Les registre de l'année 2014" footer="Visca el Barca!">  
                                     <!-- <p:barChart id="basic" legendPosition="ne"  

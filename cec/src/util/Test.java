@@ -38,8 +38,7 @@ public class Test {
 	public static void main(String[] args) {
 		
 		// TODO Auto-generated method stub
-		boolean t=Test.numeroActe("1", "2014");
-		System.out.println(Tools.getCurrentDateTime().substring(14, 16));
+		System.out.println(Tools.getCurrentDate().substring(6, 10));
 	}
 
 }

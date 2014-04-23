@@ -63,6 +63,8 @@ public class Users  implements java.io.Serializable {
     private boolean modify;
 	
 
+	
+
 	@ManyToOne
 	(
 			cascade={CascadeType.PERSIST, CascadeType.MERGE}

@@ -20,7 +20,7 @@ public class LoginBean implements Serializable{
 	private Users user = null;
     private Users userConnect = null;
     private UserServices uService = new UserServices();
-    private boolean isLogin;
+    private boolean isLogin;  
 
     /**
      * Creates a new instance of loginBean
@@ -29,6 +29,7 @@ public class LoginBean implements Serializable{
         if (this.user == null) {
             this.user = new Users();
         }
+        
     }
 
     public Users getUser() {

@@ -11,7 +11,7 @@
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/etatcivil</property>
 		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.connection.password">Papa2013</property>
 
 		<!-- Comportement pour la conservation des tables -->
 		<property name="hbm2ddl.auto">update</property>

@@ -62,6 +62,9 @@ public class Centres  implements java.io.Serializable {
 	@Column(name = "Type", columnDefinition="varchar(30) default '' ", nullable=true)
     private String centerType;
 	
+	@Column(name = "Annee", columnDefinition="varchar(5) default '' ", nullable=false)
+    private String anneeRegistre;
+	
 	
 	@OneToMany(mappedBy="centre")
 	private List<Users> userList;
@@ -71,7 +74,7 @@ public class Centres  implements java.io.Serializable {
     }
 
     public Centres(String centerAddress, String centerArrondissement, String centerBp, String centerCode, String centerCollectivite, String centerDepartement, 
-    		String centerMail, String centerName, String centerPhone, String mainCenter, String centerRegion, String centerType) {
+    		String centerMail, String centerName, String centerPhone, String mainCenter, String centerRegion, String centerType, String anneeRegistre) {
        this.centerAddress = centerAddress;
        this.centerArrondissement = centerArrondissement;
        this.centerBp = centerBp;
@@ -84,6 +87,7 @@ public class Centres  implements java.io.Serializable {
        this.mainCenter = mainCenter;
        this.centerRegion = centerRegion;
        this.centerType = centerType;
+       this.anneeRegistre = anneeRegistre;
     }
    
 
@@ -201,6 +205,16 @@ public class Centres  implements java.io.Serializable {
 	public void setUserList(List<Users> userList) {
 		this.userList = userList;
 	}
+
+	public String getAnneeRegistre() {
+		return anneeRegistre;
+	}
+
+	public void setAnneeRegistre(String anneeRegistre) {
+		this.anneeRegistre = anneeRegistre;
+	}
+	
+	
 
 
 }

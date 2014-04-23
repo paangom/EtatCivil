@@ -40,6 +40,21 @@
                     </h:form>
                 </div>
                 <h1 align="center">REGISTRE DES ACTES DE NAISSANCE</h1>
+                <p align="center">
+                <h:form>  
+                            <h:panelGrid columns="3" style="margin-bottom:1px;" cellpadding="7" >
+                                <p>Les régistres de </p>
+                                <p:selectOneMenu value="#{centreBean.selectedAnnees}">  
+                                      
+                                    <f:selectItems value="#{centreBean.annees}"/>
+                                    <f:selectItem itemLabel="Tous" itemValue="" /> 
+                                    
+                                </p:selectOneMenu>
+
+                                <p:commandButton icon="ui-icon-search" /> 
+                            </h:panelGrid>
+                     </h:form>
+                  </p>
                 <div class="panContent">
                     <h:form id="form"> 
                         <p:growl id="growl" showDetail="true" life="6000" /> 

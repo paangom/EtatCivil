@@ -122,10 +122,11 @@ public class UserBean implements Serializable{
         //UserDAO userDao = new UserDAOImp();
         String msg;
         
-        this.userToCreate.setUserUserName(this.userToCreate.getUserProfil()+this.userToCreate.getUserNom().toLowerCase());
+        this.userToCreate.setUserUserName("passer");
         this.userToCreate.setUserPassword("passer");
         this.userToCreate.setModify(false);
         this.userToCreate.setCentre(MyUtil.getUserLogged().getCentre());
+       // this.userToCreate.setCreateurUser(this.userConnect.getUserId());
         
         if(uService.addUser(userToCreate)){
             msg = "L'utilisateur a été bien créé!";
@@ -144,7 +145,6 @@ public class UserBean implements Serializable{
     public void btnUpdateUser(){
         //this.selectedUser = (User) this.users.getRowData();
         String msg;
-         System.out.println("teste: "+this.selectedUser.getUserProfil());
         if(uService.updateUser(selectedUser)){
             msg = "La modification de l'utilisateur s'est correctement passée.";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);

@@ -6,13 +6,9 @@
 
 package util;
 
-import models.Centres;
-import models.Users;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 /**
@@ -42,27 +38,28 @@ public class HibernateUtil {
         return sessionFactory.openSession();
     }
     
-public static void populateDB(){
-		
-		Centres c=new Centres("Malika", "Thiaroye", "0012", "194", "commune", "Pikine", "paangom@gmail.com", "Syscoweb SA", "774246535", "", "Dakar", "Principal");
-		Session s1 = getSessionFactory();
-		
-		Transaction t1 = s1.beginTransaction();
-		s1.save(c);
-		t1.commit();
-		
-		s1.close();
-
-		
-		Users u1 = new Users(c, "Malika","NGOM", "00001", "778921429", "gayame", "Papa", "officier","papa",true);
-		
-		Session s = getSessionFactory();
-		
-		Transaction t = s.beginTransaction();
-		s.save(u1);
-		t.commit();
-		
-		s.close();
-		
-	}
+//public static void populateDB(){
+//		
+//		Centres c=new Centres("Malika", "Thiaroye", "0012", "194", "commune", "Pikine", "paangom@gmail.com", "Syscoweb SA", "774246535", "", "Dakar", "Principal");
+//		Session s1 = getSessionFactory();
+//		
+//		
+//		Transaction t1 = s1.beginTransaction();
+//		s1.save(c);
+//		t1.commit();
+//		
+//		s1.close();
+//
+//		
+//		Users u1 = new Users(c, "Malika","NGOM", "00001", "778921429", "gayame", "Papa", "officier","papa",true);
+//		
+//		Session s = getSessionFactory();
+//		
+//		Transaction t = s.beginTransaction();
+//		s.save(u1);
+//		t.commit();
+//		
+//		s.close();
+//		
+//	}
 }

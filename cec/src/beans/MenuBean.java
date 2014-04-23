@@ -13,7 +13,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.ItemSelectEvent;
+import org.primefaces.model.chart.PieChartModel;
 
+import services.ActeDecesServices;
+import services.ActeMariageServices;
+import services.ActeNaissanceServices;
 import util.MyUtil;
 
 /**
@@ -61,6 +66,10 @@ public class MenuBean implements Serializable{
     private String individuel;
     private String individuelFammile;
     private String inhumation;
+	private PieChartModel pieModel;
+	private ActeDecesServices dServices = new ActeDecesServices();
+	private ActeMariageServices mService = new ActeMariageServices();
+	private ActeNaissanceServices nService = new ActeNaissanceServices();
     
     /**
      * Creates a new instance of menuBean
@@ -68,6 +77,7 @@ public class MenuBean implements Serializable{
     
     
     public MenuBean(){
+    	
         declarerN = MyUtil.pathDeclaration()+"naissance.xhtml";
         listeDA = MyUtil.basePath()+"liste-declaration/naissance.xhtml";
         declarerM = MyUtil.pathDeclaration()+"mariage.xhtml";
@@ -99,6 +109,7 @@ public class MenuBean implements Serializable{
         individuel  = MyUtil.basePath()+"piecesAnnexes/individuel.xhtml";
         individuelFammile  = MyUtil.basePath()+"piecesAnnexes/individuelFamille.xhtml";
         inhumation  = MyUtil.basePath()+"piecesAnnexes/inhumation.xhtml";
+        createPieModel();
     }
 
     public String getDeclarerN() {
@@ -421,4 +432,48 @@ public class MenuBean implements Serializable{
 	public void setInhumation(String inhumation) {
 		this.inhumation = inhumation;
 	}  
+	
+
+	/**
+	 * @return the pieModel
+	 */
+	public PieChartModel getPieModel() {
+		
+		Number n = nService.getAllActe().size();
+		Number m = mService.getRegistreMariage().size();
+		Number d = dServices.getRegistreDece().size();
+		
+		pieModel.getData().put("Naissance", n);
+		pieModel.getData().put("Mariage", m);
+		pieModel.getData().put("Décès", d);
+		
+		return pieModel;
+	}
+
+	/**
+	 * @param pieModel the pieModel to set
+	 */
+	public void setPieModel(PieChartModel pieModel) {
+		this.pieModel = pieModel;
+	}
+	
+	private void createPieModel() {  
+        pieModel = new PieChartModel();  
+  
+        Number t=0;
+        t = nService.getAllActe().size();
+        pieModel.set("Naissance", t);
+        t = mService.getRegistreMariage().size();
+        pieModel.set("Mariage", t); 
+        t =  dServices.getRegistreDece().size();
+        pieModel.set("Décès", t);
+    }
+	
+	 public void itemSelect(ItemSelectEvent event) {  
+	        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Item selected",  
+	                        "Item Index: " + event.getItemIndex() + ", Series Index:" + event.getSeriesIndex());  
+	  
+	        FacesContext.getCurrentInstance().addMessage(null, msg);  
+	}  
+
 }
