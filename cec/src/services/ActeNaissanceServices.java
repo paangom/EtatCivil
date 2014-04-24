@@ -99,4 +99,11 @@ public class ActeNaissanceServices implements Serializable {
     public boolean verifyNumeroJugement(String num, String annee, Integer id){
     	return acteDAO.verifyNumeroJugement(num, annee, id);
     }
+    
+    public List<DeclarationNaissance> registresCurrentYear(String year){
+    	
+    	return acteDAO.registresCurrentYear(year);
+    }
+    
+   
 }

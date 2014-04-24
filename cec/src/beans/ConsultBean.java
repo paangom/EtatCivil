@@ -8,14 +8,13 @@ package beans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
-import org.primefaces.model.chart.CartesianChartModel;
-import org.primefaces.model.chart.ChartSeries;
 
 import models.DeclarationDeces;
 import models.DeclarationMariage;
@@ -32,6 +31,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import services.ActeDecesServices;
 import services.ActeMariageServices;
 import services.ActeNaissanceServices;
+import services.CentreServices;
 import util.MyUtil;
 import util.NombreEnLettre;
 import util.Tools;
@@ -54,6 +54,7 @@ public class ConsultBean implements Serializable {
     private ActeNaissanceServices acteService = new ActeNaissanceServices();
     private ActeDecesServices deceService = new ActeDecesServices();
     private ActeMariageServices marService = new ActeMariageServices();
+    private CentreServices cenServ = new CentreServices();
     @SuppressWarnings("rawtypes")
 	private Map parameter = new HashMap();
     
@@ -61,43 +62,36 @@ public class ConsultBean implements Serializable {
     private DeclarationDeces filterDeces;
     private DeclarationMariage filterMariage;
     
-    private CartesianChartModel categoryModel;
+    
+    private List<DeclarationNaissance> registreCurrentYear;
+    private List<DeclarationNaissance> registreYear = null;
+    
+    private List<DeclarationMariage> registreMariageCurrentYear;
+    private List<DeclarationMariage> registreMariageYear = null;
+    
+    private List<DeclarationDeces> registreDecesCurrentYear;
+    private List<DeclarationDeces> registreDecesYear = null;
+    
+ 
+    private String selectedAnnees;
+    public String type;
+    private List<String> annees;
   
     /**
      * Creates a new instance of consultBean
      */
     public ConsultBean() {
-    	createCategoryModel(); 
+    	 annees= new ArrayList<String>(); 
+         int a = Integer.parseInt(cenServ.getCentre().getAnneeRegistre());
+ 		
+ 		for(int i = anneeCourant ; i >= a; i--){
+ 			annees.add(i+""); 
+ 		} 
+ 		
+ 				
     }
     
-    public CartesianChartModel getCategoryModel() {  
-        return categoryModel;  
-    }  
-  
-    private void createCategoryModel() {  
-        categoryModel = new CartesianChartModel();  
-  
-        ChartSeries boys = new ChartSeries();  
-        boys.setLabel("Boys");  
-  
-        boys.set("2004", 120);  
-        boys.set("2005", 100);  
-        boys.set("2006", 44);  
-        boys.set("2007", 150);  
-        boys.set("2008", 25);  
-  
-        ChartSeries girls = new ChartSeries();  
-        girls.setLabel("Girls");  
-  
-        girls.set("2004", 52);  
-        girls.set("2005", 60);  
-        girls.set("2006", 110);  
-        girls.set("2007", 135);  
-        girls.set("2008", 120);  
-  
-        categoryModel.addSeries(boys);  
-        categoryModel.addSeries(girls);  
-    }  
+   
 
     public DeclarationNaissance getDecToConsult() {
         return decToConsult;
@@ -128,36 +122,50 @@ public class ConsultBean implements Serializable {
     }
     
     public String viewDecclaration(){
-        
-        return MyUtil.pathConsultationDeclaration()+"naissance?faces-redirect=true";
+        if(MyUtil.getProfil() != null)
+        	return MyUtil.pathConsultationDeclaration()+"naissance?faces-redirect=true";
+        else
+        	return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     public String viewDecclarationDeces(){
-        
-        return MyUtil.pathConsultationDeclaration()+"deces?faces-redirect=true";
+        if(MyUtil.getProfil() != null)
+        	return MyUtil.pathConsultationDeclaration()+"deces?faces-redirect=true";
+        else
+        	return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     public String viewDeclarationMariage(){
-        return MyUtil.pathConsultationDeclaration()+"mariage?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return MyUtil.pathConsultationDeclaration()+"mariage?faces-redirect=true";
+    	else
+    		return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     public String viewActeNaissance(){
-        
-        return MyUtil.pathConsultationActe()+"naissance?faces-redirect=true";
+        if(MyUtil.getProfil() != null)
+        	return MyUtil.pathConsultationActe()+"naissance?faces-redirect=true";
+        else
+        	return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     public String viewActeDeces(){
-        
-        return MyUtil.pathConsultationActe()+"deces?faces-redirect=true";
+        if(MyUtil.getProfil() != null)
+        	return MyUtil.pathConsultationActe()+"deces?faces-redirect=true";
+        else
+        	return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     public String viewActeMariage(){
-        
-        return MyUtil.pathConsultationActe()+"mariage?faces-redirect=true";
+        if(MyUtil.getProfil() != null)
+        	return MyUtil.pathConsultationActe()+"mariage?faces-redirect=true";
+        else
+        	return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     public String validateDeclarationNaissance() {
         String route = "";
+        if(MyUtil.getProfil() != null){
         this.decToConsult.setEtat("Valider");
         this.decToConsult.setValidateurNaissance(MyUtil.getUserLogged());
         this.decToConsult.setNumero_acte(acteService.numeroActe(this.decToConsult.getDate_creation().substring(6, 10)));
@@ -172,12 +180,16 @@ public class ConsultBean implements Serializable {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas été validée!", null);
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+        }
+        else
+        	route  = MyUtil.basePath() + "views/login?faces-redirect=true";
         
         return  route;
     }
     
     public String validateDeclarationDeces() {
         String route = "";
+        if(MyUtil.getProfil() != null){
         this.decDCToConsult.setEtat("Valider");
         this.decDCToConsult.setNumero_acte(deceService.numeroActe(this.decDCToConsult.getDate_creation().substring(6, 10)));
         this.decDCToConsult.setDate_modification(Tools.getCurrentDateTime());
@@ -194,11 +206,15 @@ public class ConsultBean implements Serializable {
         	route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/consultation/declaration/deces?faces-redirect=true";
         
         }
+        }
+        else
+        	route = MyUtil.basePath() + "views/login?faces-redirect=true";
         return route;
     }
     
     public String validateDeclarationMariage() {
         String route = "";
+        if(MyUtil.getProfil() != null){
         this.decMarToConsult.setEtat("Valider");
         this.decMarToConsult.setNumero_Acte(marService.numeroActe(this.decMarToConsult.getDate_creation().substring(6, 10)));
         this.decMarToConsult.setDate_modification(Tools.getCurrentDateTime());
@@ -213,30 +229,38 @@ public class ConsultBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, messages);
         	route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/consultation/declaration/mariage?faces-redirect=true";
         }
+        }
+        else
+        	route = MyUtil.basePath() + "views/login?faces-redirect=true";
         return route;
     }
 
     public String rejectDeclarationNaissance() {
     	String route = "";
+    	if(MyUtil.getProfil() != null){
         this.decToConsult.setEtat("Rejeter");
         this.decToConsult.setValidateurNaissance(MyUtil.getUserLogged());
         this.decToConsult.setDate_modification(Tools.getCurrentDateTime());
         if (acteService.updateDeclarationNaissance(this.decToConsult)) {
         	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "La déclaration de naissance est bien rejetée!", null);
             FacesContext.getCurrentInstance().addMessage(null, messages);
-            route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/liste-declaration/naissance?faces-redirect=true";
+            route =  MyUtil.basePath() + "views/" + MyUtil.getProfil() + "/liste-declaration/naissance?faces-redirect=true";
         }
         else{
         	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être rejeter!", null);
             FacesContext.getCurrentInstance().addMessage(null, messages);
-            route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/consultation/declaration/naissance?faces-redirect=true";
+            route =  MyUtil.basePath() + "views/" + MyUtil.getProfil() + "/consultation/declaration/naissance?faces-redirect=true";
         }
+    	}
+    	else
+    		route =  MyUtil.basePath() + "views/login?faces-redirect=true";
         //context.addCallbackParam("route", route);
         return route;
     }
     
     public String rejectDeclarationDece() {
         String route = "";
+        if(MyUtil.getProfil() != null){
         this.decDCToConsult.setEtat("Rejeter");
         this.decDCToConsult.setDate_modification(Tools.getCurrentDateTime());
         this.decDCToConsult.setModificateurDeces(MyUtil.getUserLogged());
@@ -250,12 +274,16 @@ public class ConsultBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, messages);
             route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/consultation/declaration/deces?faces-redirect=true";
         }
+        }
+        else
+        	route = MyUtil.basePath() + "views/login?faces-redirect=true";
         //context.addCallbackParam("route", route);
         return route;
     }
     
     public String rejectDeclarationMariage() {
     	String route = "";
+    	if(MyUtil.getProfil() != null){
         this.decMarToConsult.setEtat("Rejeter");
         this.decMarToConsult.setDate_modification(Tools.getCurrentDateTime());
         this.decMarToConsult.setModificateurMariage(MyUtil.getUserLogged());
@@ -269,6 +297,9 @@ public class ConsultBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, messages);
             route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/consultation/declaration/mariage?faces-redirect=true";
         }
+    	}
+    	else
+    		route = MyUtil.basePath() + "views/login?faces-redirect=true";
             
         return route;
     }
@@ -277,7 +308,7 @@ public class ConsultBean implements Serializable {
     
     public String updateDeclarationNaissance() {
         String route = "";
-        
+        if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationNaissance(Tools.formatDay(this.decToConsult.getDate_naissanceE())))){
         	if("".equals(this.decToConsult.getNumero_jugement()) || "".equals(this.decToConsult.getDate_j()) || "".equals(this.decToConsult.getTribunal())){
         		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
@@ -340,13 +371,15 @@ public class ConsultBean implements Serializable {
             }
             
         }
-        
+        }
+        else
+        	route = MyUtil.basePath() + "views/login?faces-redirect=true";
         return route;
     }
     
     public String updateDeclarationMariage() {
         String route = "";
-        
+        if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationMariage(Tools.formatDay(this.decMarToConsult.getDateMariage())))){
         	if("".equals(this.decMarToConsult.getNumero_Jugement()) || "".equals(this.decMarToConsult.getDateJugement()) || "".equals(this.decMarToConsult.getTribunal())){
         		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
@@ -405,13 +438,16 @@ public class ConsultBean implements Serializable {
             
             }
         }
+        }
+        else
+        	route = MyUtil.basePath() + "views/login?faces-redirect=true";
                 
         return route;
     }
     
     public String updateDeclarationDeces() {
         String route = "";
-        
+        if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationDeces(Tools.formatDay(this.decDCToConsult.getDate_d())))){
         	if("".equals(this.decDCToConsult.getNum_jugement()) || "".equals(this.decDCToConsult.getDate_j()) || "".equals(this.decDCToConsult.getTribunal())){
         		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
@@ -486,20 +522,31 @@ public class ConsultBean implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
         }
-        
+        }
+        else
+        	route = MyUtil.basePath() + "views/login?faces-redirect=true";
         return route;
     }
     
     public String updateDecNaissance(){
-    	return  MyUtil.pathModificationDeclaration()+"naissance?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return  MyUtil.pathModificationDeclaration()+"naissance?faces-redirect=true";
+    	else
+    		return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     public String updateDecMariage(){
-    	return  MyUtil.pathModificationDeclaration()+"mariage?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return  MyUtil.pathModificationDeclaration()+"mariage?faces-redirect=true";
+    	else
+    		return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     public String updateDecDeces(){
-    	return  MyUtil.pathModificationDeclaration()+"deces?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return  MyUtil.pathModificationDeclaration()+"deces?faces-redirect=true";
+    	else
+    		return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     //Fin de la liste des méthodes
@@ -507,28 +554,46 @@ public class ConsultBean implements Serializable {
     
     //Liste des méthodes pour les retours
     public String retourRegistreNaissance(){
-    	return "/views/" + MyUtil.getProfil() + "/registre/naissance?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return "/views/" + MyUtil.getProfil() + "/registre/naissance?faces-redirect=true";
+    	else
+    		return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     public String retourRegistreMariage(){
-    	return "/views/" + MyUtil.getProfil() + "/registre/mariage?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return "/views/" + MyUtil.getProfil() + "/registre/mariage?faces-redirect=true";
+    	else
+    		return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     public String retourRegistreDeces(){
-    	return "/views/" + MyUtil.getProfil() + "/registre/dece?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return "/views/" + MyUtil.getProfil() + "/registre/dece?faces-redirect=true";
+    	else
+    		return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     
     public String retourDeclarationNaissance(){
-    	return "/views/" + MyUtil.getProfil() + "/liste-declaration/naissance?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return "/views/" + MyUtil.getProfil() + "/liste-declaration/naissance?faces-redirect=true";
+    	else
+    		return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     public String retourDeclarationMariage(){
-    	return "/views/" + MyUtil.getProfil() + "/liste-declaration/mariage?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return "/views/" + MyUtil.getProfil() + "/liste-declaration/mariage?faces-redirect=true";
+    	else
+    		return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     public String retourDeclarationDeces(){
-    	return "/views/" + MyUtil.getProfil() + "/liste-declaration/deces?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return "/views/" + MyUtil.getProfil() + "/liste-declaration/deces?faces-redirect=true";
+    	else
+    		return MyUtil.basePath() + "views/login?faces-redirect=true";
     }
     
     
@@ -1390,4 +1455,203 @@ public class ConsultBean implements Serializable {
 	}
     
   
+	public String registre(){
+		if(MyUtil.getProfil() != null){
+		   registreYear = null;
+		   if("Tous".equalsIgnoreCase(this.selectedAnnees)){
+			   registreYear = acteService.getAllActe();
+		   }
+		   else{
+			   registreYear = acteService.registresCurrentYear(this.selectedAnnees);
+		   }
+		   return "/views/" + MyUtil.getProfil() + "/registre/naissance-for-year?faces-redirect=true";
+		}
+		else
+			return MyUtil.basePath() + "views/login?faces-redirect=true";
+	   }
+	
+	
+	public String registreMariage(){
+		if(MyUtil.getProfil() != null){
+			registreMariageYear = null;
+		   if("Tous".equalsIgnoreCase(this.selectedAnnees)){
+			   registreMariageYear = marService.getRegistreMariage();
+		   }
+		   else{
+			   registreMariageYear = marService.registreMariageCurrentYear(this.selectedAnnees);
+		   }
+		   return "/views/" + MyUtil.getProfil() + "/registre/mariage-for-year?faces-redirect=true";
+		}
+		else
+			return MyUtil.basePath() + "views/login?faces-redirect=true";
+	   }
+	
+	
+	public String registreDeces(){
+		if(MyUtil.getProfil() != null){
+		registreDecesYear = null;
+	   if("Tous".equalsIgnoreCase(this.selectedAnnees)){
+		   registreDecesYear = deceService.getRegistreDece();
+	   }
+	   else{
+		   registreDecesYear = deceService.getRegistreDeceByNum(this.selectedAnnees);
+	   }
+	   return "/views/" + MyUtil.getProfil() + "/registre/dece-for-year?faces-redirect=true";
+		}
+		else
+			return MyUtil.basePath() + "views/login?faces-redirect=true";
+   }
+	   
+
+		public List<String> getAnnees() {
+			return annees;
+		}
+
+
+
+	public void setAnnees(List<String> annees) {
+		this.annees = annees;
+	}
+
+
+
+		/**
+	 * @return the selectedAnnees
+	 */
+	public String getSelectedAnnees() {
+		return selectedAnnees;
+	}
+
+
+
+	/**
+	 * @param selectedAnnees the selectedAnnees to set
+	 */
+	public void setSelectedAnnees(String selectedAnnees) {
+		this.selectedAnnees = selectedAnnees;
+	}
+
+		
+
+
+		public String getType() {
+		return type;
+	}
+
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+
+
+		/**
+	 * @return the registreYear
+	 */
+	public List<DeclarationNaissance> getRegistreYear() {
+		return registreYear;
+	}
+
+	/**
+	 * @param registreYear the registreYear to set
+	 */
+	public void setRegistreYear(List<DeclarationNaissance> registreYear) {
+		this.registreYear = registreYear;
+	}
+	
+	/**
+	 * @return the registreCurrentYear
+	 */
+	public List<DeclarationNaissance> getRegistreCurrentYear() {
+		String year = Tools.getCurrentDate().substring(6, 10);
+		registreCurrentYear = acteService.registresCurrentYear(year);
+		return registreCurrentYear;
+	}
+
+	/**
+	 * @param registreCurrentYear the registreCurrentYear to set
+	 */
+	public void setRegistreCurrentYear(List<DeclarationNaissance> registreCurrentYear) {
+		this.registreCurrentYear = registreCurrentYear;
+	}
+
+
+	/**
+	 * @return the registreMariageCurrentYear
+	 */
+	public List<DeclarationMariage> getRegistreMariageCurrentYear() {
+		String year = Tools.getCurrentDate().substring(6, 10);
+		registreMariageCurrentYear = marService.registreMariageCurrentYear(year);
+		return registreMariageCurrentYear;
+	}
+
+
+
+	/**
+	 * @param registreMariageCurrentYear the registreMariageCurrentYear to set
+	 */
+	public void setRegistreMariageCurrentYear(
+			List<DeclarationMariage> registreMariageCurrentYear) {
+		this.registreMariageCurrentYear = registreMariageCurrentYear;
+	}
+
+
+	/**
+	 * @return the registreMariageYear
+	 */
+	public List<DeclarationMariage> getRegistreMariageYear() {
+		return registreMariageYear;
+	}
+
+
+
+	/**
+	 * @param registreMariageYear the registreMariageYear to set
+	 */
+	public void setRegistreMariageYear(List<DeclarationMariage> registreMariageYear) {
+		this.registreMariageYear = registreMariageYear;
+	}
+
+
+	/**
+	 * @return the registreDecesCurrentYear
+	 */
+	public List<DeclarationDeces> getRegistreDecesCurrentYear() {
+		String year = Tools.getCurrentDate().substring(6, 10);
+		registreDecesCurrentYear = deceService.getRegistreDeceByNum(year);
+		return registreDecesCurrentYear;
+	}
+
+
+
+	/**
+	 * @param registreDecesCurrentYear the registreDecesCurrentYear to set
+	 */
+	public void setRegistreDecesCurrentYear(List<DeclarationDeces> registreDecesCurrentYear) {
+		this.registreDecesCurrentYear = registreDecesCurrentYear;
+	}
+
+
+	/**
+	 * @return the registreDecesYear
+	 */
+	public List<DeclarationDeces> getRegistreDecesYear() {
+		return registreDecesYear;
+	}
+
+
+
+	/**
+	 * @param registreDecesYear the registreDecesYear to set
+	 */
+	public void setRegistreDecesYear(List<DeclarationDeces> registreDecesYear) {
+		this.registreDecesYear = registreDecesYear;
+	}
+
+
+	private int anneeCourant = Integer.parseInt(Tools.getCurrentDate().substring(6, 10));
+
+
 }

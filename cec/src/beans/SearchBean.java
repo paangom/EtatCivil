@@ -28,7 +28,7 @@ public class SearchBean implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Search search = null;
-    private List<DeclarationNaissance> resultN = null;
+    private List<DeclarationNaissance> resultN;
     private List<DeclarationDeces> resultDc = null;
     private List<DeclarationMariage> resultMar = null;
     private ActeDecesServices dcServ = new ActeDecesServices();

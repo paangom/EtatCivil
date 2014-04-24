@@ -51,4 +51,6 @@ public interface ActeNaissanceDAO {
     
     public boolean verifyNumeroJugement(String num, String annee, Integer id);
     
+    public List<DeclarationNaissance> registresCurrentYear(String year);
+    
 }

@@ -16,22 +16,7 @@
         <ui:composition template="./../../../adminTemplate.xhtml">
 
             <ui:define name="content">
-                <div class="search" align="center">
-                    <h:form>  
-                        <h:panelGrid columns="4" style="margin-bottom:1px;" cellpadding="7">
-                            <p:spinner min="1" value="#{searchBean.search.numActe}"/>
-                            <p:inputMask mask="9999" value="#{searchBean.search.numReg}"/>
-                            <p:selectOneMenu value="#{searchBean.search.type}">  
-                                <f:selectItem itemLabel="Type" itemValue="" />  
-                                <f:selectItem itemLabel="Naissance" itemValue="Naissance" />  
-                                <f:selectItem itemLabel="Mariage" itemValue="Mariage" />  
-                                <f:selectItem itemLabel="Décès" itemValue="Décès" />  
-                            </p:selectOneMenu>
-
-                            <p:commandButton icon="ui-icon-search" action="#{searchBean.recherche}"/> 
-                        </h:panelGrid>
-                    </h:form>
-                </div>
+                
                 <div class="breadcrumb">
                     <h:form>
                         <p:breadCrumb>
@@ -81,18 +66,21 @@
                                             <f:selectItem itemLabel="PRINCIPALE" itemValue="Principal" />  
                                             <f:selectItem itemLabel="SECONDAIRE" itemValue="Secondair" />  
                                         </p:selectOneMenu>
+                                        
+                                        <h:outputText value="ANNEES DES REGISTRES" />
+                                        <p:inputMask value="#{centreBean.centreToUpdate.anneeRegistre}" maxlength="4" mask="9999" required="true"/>  
 
                                         <h:outputLabel for="nomcentre" value="NOM DU CENTRE" style="text-align: right;"/>  
                                         <p:inputText id="nomcentre"  required="true" label="Nom du cnetre" value="#{centreBean.centreToUpdate.centerName}"/> 
 
                                         <h:outputLabel for="adressecentre" value="ADRESSE DU CENTRE" style="text-align: right;"/>  
-                                        <p:inputText id="adressecentre"  required="true" label="Adresse du centre" value="#{centreBean.centreToUpdate.centerAddress}"/> 
+                                        <p:inputText id="adressecentre" label="Adresse du centre" value="#{centreBean.centreToUpdate.centerAddress}"/> 
 
                                         <h:outputLabel for="bp" value="BOITE POSTALE" style="text-align: right;"/>  
-                                        <p:spinner id="bp"  required="true" label="BP" value="#{centreBean.centreToUpdate.centerBp}"/> 
+                                        <p:spinner id="bp" label="BP" value="#{centreBean.centreToUpdate.centerBp}"/> 
 
                                         <h:outputLabel for="mail" value="ADRESSE MAIL" style="text-align: right;"/>  
-                                        <p:inputText id="mail"  required="true" label="Adresse mail" value="#{centreBean.centreToUpdate.centerMail}"/> 
+                                        <p:inputText id="mail" label="Adresse mail" value="#{centreBean.centreToUpdate.centerMail}"/> 
 
                                         <h:outputLabel for="tel" value="NUMERO TELEPHONE" style="text-align: right;"/>  
                                         <p:inputText id="tel"  required="true" label="TEL" value="#{centreBean.centreToUpdate.centerPhone}"/> 

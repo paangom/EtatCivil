@@ -205,18 +205,18 @@ public class ActeNaissanceDAOImp implements ActeNaissanceDAO {
         if (session == null) {
             session = HibernateUtil.getSessionFactory();
         }
-        
         if(!"".equals(s.getNumActe()) && !"".equals(s.getNumReg())){
         	Query q = session.createQuery("FROM DeclarationNaissance n WHERE n.etat = :etat and n.numero_acte = :acte and n.date_creation like :date")
         			.setString("etat", "Valider").setString("acte", s.getNumActe()).setString("date", "%"+s.getNumReg()+"%");
     		list = q.list();
+    		
     	}
     	else if(!"".equals(s.getNumActe()) && "".equals(s.getNumReg())){
     		Query q = session.createQuery("FROM DeclarationNaissance n WHERE n.etat = :etat and n.numero_acte = :acte")
         			.setString("etat", "Valider").setString("acte", s.getNumActe());
     		list = q.list();
     	}
-    	else if(!"".equals(s.getNumReg()) && "".equals(s.getNumActe())){
+    	else if("".equals(s.getNumReg()) && !"".equals(s.getNumActe())){
     		Query q = session.createQuery("FROM DeclarationNaissance n WHERE n.etat = :etat and n.date_creation like :date")
         			.setString("etat", "Valider").setString("date", "%"+s.getNumReg()+"%");
     		list = q.list();
@@ -270,4 +270,20 @@ public class ActeNaissanceDAOImp implements ActeNaissanceDAO {
 				flag=true;
 			return flag;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DeclarationNaissance> registresCurrentYear(String year) {
+		// TODO Auto-generated method stub
+		List<DeclarationNaissance> list = null;
+    	if (session == null)
+			session = HibernateUtil.getSessionFactory();
+		
+		Query q = session.createQuery("from DeclarationNaissance a where a.date_creation like  :annee and etat = :etat")
+				.setString("annee", "%"+year+"%").setString("etat", "Valider");
+		list = q.list();
+        return list;
+	}
+
+
 }

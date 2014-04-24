@@ -16,22 +16,7 @@
         <ui:composition template="./../../adminTemplate.xhtml">
 
             <ui:define name="content">
-                <div class="search" align="center">
-                    <h:form>  
-                        <h:panelGrid columns="4" style="margin-bottom:1px;" cellpadding="7">
-                            <p:spinner min="1" value="#{searchBean.search.numActe}"/>
-                            <p:inputMask mask="9999" value="#{searchBean.search.numReg}"/>
-                            <p:selectOneMenu value="#{searchBean.search.type}">  
-                                <f:selectItem itemLabel="Type" itemValue="" />  
-                                <f:selectItem itemLabel="Naissance" itemValue="Naissance" />  
-                                <f:selectItem itemLabel="Mariage" itemValue="Mariage" />  
-                                <f:selectItem itemLabel="Décés" itemValue="Deces" />  
-                            </p:selectOneMenu>
-
-                            <p:commandButton icon="ui-icon-search" action="#{searchBean.recherche}"/> 
-                        </h:panelGrid>
-                    </h:form>
-                </div>
+                
                 <div class="breadcrumb">
                     <h:form>
                         <p:breadCrumb>
@@ -40,12 +25,27 @@
                     </h:form>
                 </div>
                 <h1 align="center">REGISTRE DES ACTES DE MARIAGE</h1>
+                <div align="right">
+                <h:form>  
+                            <h:panelGrid columns="3" style="margin-bottom:1px;" cellpadding="7" >
+                                <p>Les régistres de </p>
+                                <p:selectOneMenu value="#{consultBean.selectedAnnees}">  
+                                      
+                                    <f:selectItems value="#{consultBean.annees}"/>
+                                    <f:selectItem itemLabel="Tous" itemValue="Tous" /> 
+                                    
+                                </p:selectOneMenu>
+
+                                <p:commandButton icon="ui-icon-search" action="#{consultBean.registreMariage}"/> 
+                            </h:panelGrid>
+                     </h:form>
+                  </div>
                 <div class="panContent">
                     <h:form id="form"> 
                         <p:growl id="growl" showDetail="true" life="6000" /> 
 
                         <div align="center">
-                            <p:dataTable var="dec" value="#{decAMBean.allActe}" paginator="true" rows="10" 
+                            <p:dataTable var="dec" value="#{consultBean.registreMariageCurrentYear}" paginator="true" rows="10" emptyMessage="Aucun d'acte dans les registres"
                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                          rowsPerPageTemplate="5,10,15" style="width: 98%;">  
 

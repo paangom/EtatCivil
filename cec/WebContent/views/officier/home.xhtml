@@ -17,26 +17,12 @@
 
             <ui:define name="content">
                 <div class="contenu">
-                    <div class="search" align="center">
-                        <!-- <h:form>  
-                            <h:panelGrid columns="4" style="margin-bottom:1px;" cellpadding="7">
-                                <p:spinner min="1" value=""/>
-                                <p:inputMask mask="9999" value=""/>
-                                <p:selectOneMenu value="">  
-                                    <f:selectItem itemLabel="Type" itemValue="" />  
-                                    <f:selectItem itemLabel="Naissance" itemValue="Naissance" />  
-                                    <f:selectItem itemLabel="Mariage" itemValue="Mariage" />  
-                                    <f:selectItem itemLabel="Décès" itemValue="Deces" />  
-                                </p:selectOneMenu>
-
-                                <p:commandButton icon="ui-icon-search" /> 
-                            </h:panelGrid>
-                        </h:form> -->
-                        <b><h1><h:outputText value="BIENVENUE DANS LE CENTRE D'ETAT-CIVIL DE #{userBean.userConnect.centre.centerName}" style="font-size:25px;"/></h1></b>
+                       
+                        <b><h:outputText value="BIENVENUE DANS LE CENTRE D'ETAT-CIVIL DE #{userBean.userConnect.centre.centerName}" style="font-size:25px;"/></b>
                         <br />
                         <br />
                         <br />
-                    </div>
+                    
                     <div class="contenu">
                         <h:form>
                         <p:growl id="growl" showDetail="true" life="6000" />

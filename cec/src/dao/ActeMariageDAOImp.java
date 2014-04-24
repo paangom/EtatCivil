@@ -289,6 +289,20 @@ public class ActeMariageDAOImp implements ActeMariageDAO, Serializable {
 			return flag;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DeclarationMariage> registreMariageCurrentYear(String year) {
+		// TODO Auto-generated method stub
+		List<DeclarationMariage> list = null;
+        if (session == null)
+			session = HibernateUtil.getSessionFactory();
+		
+		Query q = session.createQuery("from DeclarationMariage a where a.etat = :valider and date_creation like :annee" )
+				.setString("valider", "Valider").setString("annee", "%"+year+"%");
+		list = q.list();
+		return list;
+	}
+
    
     
 }

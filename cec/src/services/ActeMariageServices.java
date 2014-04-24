@@ -61,4 +61,8 @@ public class ActeMariageServices {
     	return mariageDAO.verifyNumeroJugement(num, annee, id);
     }
     
+    public List<DeclarationMariage> registreMariageCurrentYear(String year){
+    	return mariageDAO.registreMariageCurrentYear(year);
+    }
+    
 }

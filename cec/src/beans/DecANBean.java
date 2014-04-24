@@ -32,12 +32,13 @@ public class DecANBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ActeNaissanceServices acteService = new ActeNaissanceServices();
-    private DeclarationNaissance decToAdd = null;
+	private DeclarationNaissance decToAdd = null;
     private DeclarationNaissance decToConsult = null;
     private List<DeclarationNaissance> filterNaissance = null;
     private List<DeclarationNaissance> allDec;
     private List<DeclarationNaissance> allDecByUser;
     private List<DeclarationNaissance> allActe;
+    
 
     /**
      * Creates a new instance of decANBean
@@ -47,6 +48,7 @@ public class DecANBean implements Serializable {
         if (this.decToAdd == null) {
             this.decToAdd = new DeclarationNaissance();
         }
+       
     }
 
     public DeclarationNaissance getDecToAdd() {
@@ -188,4 +190,7 @@ public class DecANBean implements Serializable {
 		this.filterNaissance = filterNaissance;
 	}
 
+	
+	
+	   
 }

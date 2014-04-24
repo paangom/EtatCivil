@@ -16,22 +16,7 @@
         <ui:composition template="./../../../template.xhtml">
 
             <ui:define name="content">
-                <div class="search" align="center">
-                    <h:form>  
-                        <h:panelGrid columns="4" style="margin-bottom:1px;" cellpadding="7">
-                            <p:spinner min="1" value="#{searchBean.search.numActe}"/>
-                            <p:inputMask mask="9999" value="#{searchBean.search.numReg}"/>
-                            <p:selectOneMenu value="#{searchBean.search.type}">  
-                                <f:selectItem itemLabel="Type" itemValue="" />  
-                                <f:selectItem itemLabel="Naissance" itemValue="Naissance" />  
-                                <f:selectItem itemLabel="Mariage" itemValue="Mariage" />  
-                                <f:selectItem itemLabel="Décés" itemValue="Deces" />  
-                            </p:selectOneMenu>
-
-                            <p:commandButton icon="ui-icon-search" action="#{searchBean.recherche}"/> 
-                        </h:panelGrid>
-                    </h:form>
-                </div>
+                
                 <div class="breadcrumb">
                     <h:form>
                         <p:breadCrumb>
