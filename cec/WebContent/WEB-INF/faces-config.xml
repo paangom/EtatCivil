@@ -135,5 +135,11 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     
+    <managed-bean>
+        <managed-bean-name>nonExistence</managed-bean-name>
+        <managed-bean-class>pieces.AttestationNonExistance</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
     
 </faces-config>

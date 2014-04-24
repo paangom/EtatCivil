@@ -52,6 +52,8 @@
 										<h:outputLabel for="lieuD" value="Formation sanitaire" style="text-align: right;"/>  
                                         <p:inputText id="lieuD" value="#{permis.formationSanitaire}" required="true" label="Formation sanitaire"/> 
                                         
+                                        <h:outputLabel for="cim" value="Cimetière" style="text-align: right;"/>  
+                                        <p:inputText id="cim" value="#{permis.cimetiere}" required="true" label="Cimetère"/> 
                                     </h:panelGrid>
                                 </div>
                             </p:fieldset>
@@ -59,8 +61,11 @@
                         
                         
                         <h:panelGrid columns="1" cellspacing="5">
-                            <p:commandButton value="Valider" update="growl" action="#{permis.save}" />
-                            
+                            <h:panelGrid columns="2" cellspacing="5">
+                            <p:commandButton value="Enregistrer" update="growl" action="#{permis.dddd}" />
+                            <p:commandButton value="Annuler" update="growl" action="#{decANBean.cancel}"   
+                                             oncomplete="handleLoginRequest(xhr, status, args)"/>
+                        </h:panelGrid>
                         </h:panelGrid>
                     </h:form>
                 </div>

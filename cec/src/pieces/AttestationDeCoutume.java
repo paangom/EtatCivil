@@ -1,6 +1,24 @@
 package pieces;
 
+import java.io.IOException;
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
+
+import util.MyUtil;
+import util.NombreEnLettre;
+import util.Tools;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class AttestationDeCoutume {
 
@@ -22,6 +40,8 @@ public class AttestationDeCoutume {
 	private Date dateN;
 	private Date dateC;
 	
+	@SuppressWarnings("rawtypes")
+	private Map parameter = new HashMap();
 	
 	public String getOfficier() {
 		return officier;
@@ -114,7 +134,30 @@ public class AttestationDeCoutume {
 		this.dateC = dateC;
 	}
 	
-	public void save(){
+	@SuppressWarnings("unchecked")
+	public void save() throws IOException, JRException {
+		parameter.put("region", MyUtil.getUserLogged().getCentre().getCenterRegion());
+		parameter.put("depart", MyUtil.getUserLogged().getCentre().getCenterDepartement());
+		parameter.put("arrond", MyUtil.getUserLogged().getCentre().getCenterArrondissement());
+		parameter.put("centre", MyUtil.getUserLogged().getCentre().getCenterType());
+		parameter.put("nomcentre", MyUtil.getUserLogged().getCentre().getCenterName());
+		parameter.put("dateN", NombreEnLettre.convert(Tools.getDayForDate(Tools.formatDay(this.getDateN())))+" "
+				+Tools.getMoisLettre(Tools.formatDay(this.getDateN()))+" "
+				+NombreEnLettre.convert(Tools.getYearForDate(Tools.formatDay(this.getDateN()))));
+		parameter.put("personne", this.getPrenom()+" "+this.getNom());
+		parameter.put("pere", this.getPrenom_P()+" "+this.getNom_P());
+		parameter.put("mere", this.getPrenom_M()+" "+this.getNom_M());
+		parameter.put("coutume", this.getCoutume());
+		parameter.put("dateC", Tools.getformatDate(Tools.getCurrentDateDDMMYYYY()));
+		parameter.put("officier", MyUtil.getUserLogged().getUserPrenom()+" "+MyUtil.getUserLogged().getUserNom());
 		
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		String reportSource = context.getExternalContext().getRealPath("ActeNPDF/pieces/attestationCoutume.jrxml");
+
+		JasperDesign jasperDesign=JRXmlLoader.load(reportSource);
+		JasperReport jasperReport =JasperCompileManager.compileReport(jasperDesign);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, new JREmptyDataSource());
+		JasperViewer.viewReport(jasperPrint,false);
 	}
 }

@@ -1,20 +1,38 @@
 package pieces;
 
+import java.io.IOException;
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
+
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import util.MyUtil;
+import util.Tools;
 
 public class Residence {
+	
+	@SuppressWarnings("rawtypes")
+	private Map parameter = new HashMap();
 	
 	private String prenom;
 	private String nom;
 	private String date_naissance;
 	private String lieu_naissance;
-	private String prenom_pere;
-	private String nom_pere;
-	private String prenom_mere;
-	private String nom_mere;
 	private String sexe;
 	private String date_residence;
 	private String lieu_residence;
+	private String motif;
+	private String quartier;
 	
 	private Date dateNaissance;
 	private Date dateResidence;
@@ -44,30 +62,8 @@ public class Residence {
 	public void setLieu_naissance(String lieu_naissance) {
 		this.lieu_naissance = lieu_naissance;
 	}
-	public String getPrenom_pere() {
-		return prenom_pere;
-	}
-	public void setPrenom_pere(String prenom_pere) {
-		this.prenom_pere = prenom_pere;
-	}
-	public String getNom_pere() {
-		return nom_pere;
-	}
-	public void setNom_pere(String nom_pere) {
-		this.nom_pere = nom_pere;
-	}
-	public String getPrenom_mere() {
-		return prenom_mere;
-	}
-	public void setPrenom_mere(String prenom_mere) {
-		this.prenom_mere = prenom_mere;
-	}
-	public String getNom_mere() {
-		return nom_mere;
-	}
-	public void setNom_mere(String nom_mere) {
-		this.nom_mere = nom_mere;
-	}
+
+
 	public String getSexe() {
 		return sexe;
 	}
@@ -99,8 +95,56 @@ public class Residence {
 		this.dateResidence = dateResidence;
 	}
 	
-	public void save(){
-		System.out.println(this.getNom());
+	/**
+	 * @return the motif
+	 */
+	public String getMotif() {
+		return motif;
+	}
+	/**
+	 * @param motif the motif to set
+	 */
+	public void setMotif(String motif) {
+		this.motif = motif;
+	}
+	/**
+	 * @return the quartier
+	 */
+	public String getQuartier() {
+		return quartier;
+	}
+	/**
+	 * @param quartier the quartier to set
+	 */
+	public void setQuartier(String quartier) {
+		this.quartier = quartier;
+	}
+	@SuppressWarnings("unchecked")
+	public void save() throws IOException, JRException {
+		parameter.put("region", MyUtil.getUserLogged().getCentre().getCenterRegion());
+		parameter.put("depart", MyUtil.getUserLogged().getCentre().getCenterDepartement());
+		parameter.put("arrond", MyUtil.getUserLogged().getCentre().getCenterArrondissement());
+		parameter.put("centre", MyUtil.getUserLogged().getCentre().getCenterType());
+		parameter.put("nomcentre", MyUtil.getUserLogged().getCentre().getCenterName());
+		parameter.put("commune", MyUtil.getUserLogged().getCentre().getCenterCollectivite());
+		parameter.put("motif", this.getMotif());
+		parameter.put("personne", this.getPrenom()+" "+this.getNom());
+		parameter.put("dateN", Tools.getformatDate(Tools.formatDay(this.getDateNaissance())));
+		parameter.put("lieuN", this.getLieu_naissance());
+		parameter.put("residence", this.getLieu_residence());
+		parameter.put("quartier", this.getQuartier());
+		parameter.put("dateR",  Tools.getformatDate(Tools.formatDay(this.getDateResidence())));
+		parameter.put("dateC", Tools.getCurrentDateDDMMYYYY());
+		parameter.put("officier", MyUtil.getUserLogged().getUserPrenom()+" "+MyUtil.getUserLogged().getUserNom());
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		String reportSource = context.getExternalContext().getRealPath("ActeNPDF/pieces/certificatResidence.jrxml");
+
+		JasperDesign jasperDesign=JRXmlLoader.load(reportSource);
+		JasperReport jasperReport =JasperCompileManager.compileReport(jasperDesign);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, new JREmptyDataSource());
+		JasperViewer.viewReport(jasperPrint,false);
 	}
 
 }

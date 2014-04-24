@@ -60,11 +60,11 @@ public class PiecesAnnexesBean implements Serializable{
 			this.pieceTOAdd.setDate_creation(Tools.getCurrentDateTime());
 			pService.createPiece(this.pieceTOAdd);
 			//allPieces = pService.allPieces();
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le document "+this.pieceTOAdd.getLibelle()+" a Ã©tÃ© ajoutÃ©e avec succÃ¨s!", null);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le document "+this.pieceTOAdd.getLibelle()+" a été ajoutée avec succÃ¨s!", null);
             FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 		else{
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Aucun libelÃ© n'est attribuÃ© pour ce document!", null);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Aucun libelé n'est attribué pour ce document!", null);
             FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 	}
@@ -75,11 +75,11 @@ public class PiecesAnnexesBean implements Serializable{
 				this.pieceToConsult.setPrix("0");
 			pService.updatePieces(this.pieceToConsult);
 			//allPieces = pService.allPieces();
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le document "+this.pieceToConsult.getLibelle()+" a Ã©tÃ© mise ï¿½ jour!", null);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le document "+this.pieceToConsult.getLibelle()+" a été mise ï¿½ jour!", null);
             FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 		else{
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreur de la modification de la piÃ©ce "+this.pieceToConsult.getLibelle(), null);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreur de la modification de la pièce "+this.pieceToConsult.getLibelle(), null);
             FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 	}
