@@ -1,10 +1,11 @@
 package pieces;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import util.MyUtil;
@@ -22,12 +23,9 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class AttestationDeCoutume {
 
-	private String officier;
-	private String centre;
 	
 	private String nom;
 	private String prenom;
-	private String date_N;
 	private String lieu_N;
 	private String sexe;
 	private String prenom_P;
@@ -35,7 +33,6 @@ public class AttestationDeCoutume {
 	private String prenom_M;
 	private String nom_M;
 	private String coutume;
-	private String date_C;
 	
 	private Date dateN;
 	private Date dateC;
@@ -43,18 +40,7 @@ public class AttestationDeCoutume {
 	@SuppressWarnings("rawtypes")
 	private Map parameter = new HashMap();
 	
-	public String getOfficier() {
-		return officier;
-	}
-	public void setOfficier(String officier) {
-		this.officier = officier;
-	}
-	public String getCentre() {
-		return centre;
-	}
-	public void setCentre(String centre) {
-		this.centre = centre;
-	}
+	
 	public String getNom() {
 		return nom;
 	}
@@ -67,12 +53,7 @@ public class AttestationDeCoutume {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public String getDate_N() {
-		return date_N;
-	}
-	public void setDate_N(String date_N) {
-		this.date_N = date_N;
-	}
+	
 	public String getLieu_N() {
 		return lieu_N;
 	}
@@ -115,12 +96,7 @@ public class AttestationDeCoutume {
 	public void setCoutume(String coutume) {
 		this.coutume = coutume;
 	}
-	public String getDate_C() {
-		return date_C;
-	}
-	public void setDate_C(String date_C) {
-		this.date_C = date_C;
-	}
+	
 	public Date getDateN() {
 		return dateN;
 	}
@@ -135,7 +111,7 @@ public class AttestationDeCoutume {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void save() throws IOException, JRException {
+	public void save() throws IOException {
 		parameter.put("region", MyUtil.getUserLogged().getCentre().getCenterRegion());
 		parameter.put("depart", MyUtil.getUserLogged().getCentre().getCenterDepartement());
 		parameter.put("arrond", MyUtil.getUserLogged().getCentre().getCenterArrondissement());
@@ -148,16 +124,27 @@ public class AttestationDeCoutume {
 		parameter.put("pere", this.getPrenom_P()+" "+this.getNom_P());
 		parameter.put("mere", this.getPrenom_M()+" "+this.getNom_M());
 		parameter.put("coutume", this.getCoutume());
-		parameter.put("dateC", Tools.getformatDate(Tools.getCurrentDateDDMMYYYY()));
+		parameter.put("dateC", Tools.getCurrentDateDDMMYYYY());
 		parameter.put("officier", MyUtil.getUserLogged().getUserPrenom()+" "+MyUtil.getUserLogged().getUserNom());
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		String reportSource = context.getExternalContext().getRealPath("ActeNPDF/pieces/attestationCoutume.jrxml");
 
-		JasperDesign jasperDesign=JRXmlLoader.load(reportSource);
-		JasperReport jasperReport =JasperCompileManager.compileReport(jasperDesign);
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, new JREmptyDataSource());
-		JasperViewer.viewReport(jasperPrint,false);
+		JasperDesign jasperDesign;
+		
+		try {
+			jasperDesign = JRXmlLoader.load(reportSource);
+			JasperReport jasperReport =JasperCompileManager.compileReport(jasperDesign);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, new JREmptyDataSource());
+			JasperViewer.viewReport(jasperPrint,false);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Chargement effectué avec succès!", null);
+	        FacesContext.getCurrentInstance().addMessage(null, message);
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur de chargement!", null);
+	        FacesContext.getCurrentInstance().addMessage(null, message);
+			e.printStackTrace();
+		}
 	}
 }

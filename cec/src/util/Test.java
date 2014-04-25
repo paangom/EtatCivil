@@ -1,5 +1,8 @@
 package util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import models.DeclarationNaissance;
@@ -36,9 +39,16 @@ public class Test {
 	    
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date t=null;
+		try {
+			t = dateFormat.parse("Tue Apr 01 00:00:00 UTC 2014");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// TODO Auto-generated method stub
-		System.out.println(Tools.getCurrentDate().substring(6, 10));
+		System.out.println(dateFormat.format(t));
 	}
 
 }

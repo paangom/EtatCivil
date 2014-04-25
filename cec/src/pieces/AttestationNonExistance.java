@@ -1,10 +1,11 @@
  package pieces;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -34,8 +35,7 @@ public class AttestationNonExistance {
 	private String nom_P;
 	private String prenom_M;
 	private String nom_M;
-	private String officier;
-	private String centre;
+	private String sexe;
 	
 	private Date dateN;
 	
@@ -87,18 +87,6 @@ public class AttestationNonExistance {
 		this.nom_M = nom_M;
 	}
 	
-	public String getOfficier() {
-		return officier;
-	}
-	public void setOfficier(String officier) {
-		this.officier = officier;
-	}
-	public String getCentre() {
-		return centre;
-	}
-	public void setCentre(String centre) {
-		this.centre = centre;
-	}
 
 	public Date getDateN() {
 		return dateN;
@@ -132,6 +120,18 @@ public class AttestationNonExistance {
 	public void setAnnee(String annee) {
 		this.annee = annee;
 	}
+	/**
+	 * @return the sexe
+	 */
+	public String getSexe() {
+		return sexe;
+	}
+	/**
+	 * @param sexe the sexe to set
+	 */
+	public void setSexe(String sexe) {
+		this.sexe = sexe;
+	}
 	@SuppressWarnings("unchecked")
 	public void save() throws IOException, JRException {
 		parameter.put("region", MyUtil.getUserLogged().getCentre().getCenterRegion());
@@ -153,10 +153,21 @@ public class AttestationNonExistance {
 
 		String reportSource = context.getExternalContext().getRealPath("ActeNPDF/pieces/certificatNonExistance.jrxml");
 
-		JasperDesign jasperDesign=JRXmlLoader.load(reportSource);
-		JasperReport jasperReport =JasperCompileManager.compileReport(jasperDesign);
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, new JREmptyDataSource());
-		JasperViewer.viewReport(jasperPrint,false);
+
+		JasperDesign jasperDesign;
+		try {
+			jasperDesign = JRXmlLoader.load(reportSource);
+			JasperReport jasperReport =JasperCompileManager.compileReport(jasperDesign);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, new JREmptyDataSource());
+			JasperViewer.viewReport(jasperPrint,false);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Chargement effectué avec succès!", null);
+	        FacesContext.getCurrentInstance().addMessage(null, message);
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur de chargement!", null);
+	        FacesContext.getCurrentInstance().addMessage(null, message);
+			e.printStackTrace();
+		}
 	}
 
 

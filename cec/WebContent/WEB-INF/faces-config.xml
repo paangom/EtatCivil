@@ -107,7 +107,7 @@
     
     <managed-bean>
         <managed-bean-name>permis</managed-bean-name>
-        <managed-bean-class>pieces.Inhumation</managed-bean-class>
+        <managed-bean-class>pieces.Inhumations</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     

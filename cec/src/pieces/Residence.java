@@ -1,10 +1,11 @@
 package pieces;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -26,10 +27,8 @@ public class Residence {
 	
 	private String prenom;
 	private String nom;
-	private String date_naissance;
 	private String lieu_naissance;
 	private String sexe;
-	private String date_residence;
 	private String lieu_residence;
 	private String motif;
 	private String quartier;
@@ -50,12 +49,6 @@ public class Residence {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public String getDate_naissance() {
-		return date_naissance;
-	}
-	public void setDate_naissance(String date_naissance) {
-		this.date_naissance = date_naissance;
-	}
 	public String getLieu_naissance() {
 		return lieu_naissance;
 	}
@@ -70,12 +63,7 @@ public class Residence {
 	public void setSexe(String sexe) {
 		this.sexe = sexe;
 	}
-	public String getDate_residence() {
-		return date_residence;
-	}
-	public void setDate_residence(String date_residence) {
-		this.date_residence = date_residence;
-	}
+	
 	public String getLieu_residence() {
 		return lieu_residence;
 	}
@@ -120,7 +108,7 @@ public class Residence {
 		this.quartier = quartier;
 	}
 	@SuppressWarnings("unchecked")
-	public void save() throws IOException, JRException {
+	public void save() throws IOException {
 		parameter.put("region", MyUtil.getUserLogged().getCentre().getCenterRegion());
 		parameter.put("depart", MyUtil.getUserLogged().getCentre().getCenterDepartement());
 		parameter.put("arrond", MyUtil.getUserLogged().getCentre().getCenterArrondissement());
@@ -141,10 +129,20 @@ public class Residence {
 
 		String reportSource = context.getExternalContext().getRealPath("ActeNPDF/pieces/certificatResidence.jrxml");
 
-		JasperDesign jasperDesign=JRXmlLoader.load(reportSource);
-		JasperReport jasperReport =JasperCompileManager.compileReport(jasperDesign);
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, new JREmptyDataSource());
-		JasperViewer.viewReport(jasperPrint,false);
+		JasperDesign jasperDesign;
+		try {
+			jasperDesign = JRXmlLoader.load(reportSource);
+			JasperReport jasperReport =JasperCompileManager.compileReport(jasperDesign);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, new JREmptyDataSource());
+			JasperViewer.viewReport(jasperPrint,false);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Chargement effectué avec succès!", null);
+	        FacesContext.getCurrentInstance().addMessage(null, message);
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur de chargement!", null);
+	        FacesContext.getCurrentInstance().addMessage(null, message);
+			e.printStackTrace();
+		}
 	}
 
 }

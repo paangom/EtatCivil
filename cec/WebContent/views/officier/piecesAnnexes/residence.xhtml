@@ -59,40 +59,14 @@
                                         <h:outputLabel for="dateR" value="Date de résidence" style="text-align: right;" />  
                                         <p:calendar id="dateR" pattern="dd/MM/yyyy" showButtonPanel="true" effect="fadeIn" navigator="true" value="#{residence.dateResidence}" maxdate="calwidget.today()" widgetVar="calwidget" />
 										 
+										<h:outputLabel for="motifs" value="Motifs" style="text-align: right;"/>  
+                                        <p:inputText id="motifs" value="#{residence.motif}" label="Motifs"/> 
+                                        
                                     </h:panelGrid>
                                 </div>
                             </p:fieldset>
                         </h:panelGrid>
-                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
-                            <p:fieldset legend="INFORMATIONS SUR LES PARENTS">
-                                <h:panelGrid columns="2" cellpadding="4" style="width: 100%">
-                                    
-                                    <p:panel header="LE PERE">
-                                        <h:panelGrid columns="2" cellpadding="5" style="width: 100%">
-                                            <h:outputLabel for="firstnameP" value="Prénoms" style="text-align: right;" />  
-                                            <p:inputText id="firstnameP" value="#{residence.prenom_pere}"  label="Prénoms" />  
 
-                                            <h:outputLabel for="nomP" value="Nom" style="text-align: right;"/>  
-                                            <p:inputText id="nomP" value="#{residence.nom_pere}"  label="NOM"/> 
-
-                                            
-                                        </h:panelGrid>
-                                    </p:panel>
-                                    
-                                    <p:panel header="LA MERE">
-                                        <h:panelGrid columns="2" cellpadding="5" style="width: 100%">
-                                            <h:outputLabel for="firstnameM" value="Prénoms" style="text-align: right;" />  
-                                            <p:inputText id="firstnameM" value="#{residence.prenom_mere}" required="true" label="Prénoms" />  
-
-                                            <h:outputLabel for="nomM" value="Nom" style="text-align: right;"/>  
-                                            <p:inputText id="nomM" value="#{residence.nom_mere}" required="true" label="NOM"/> 
-
-                                            
-                                        </h:panelGrid>
-                                    </p:panel>
-                                </h:panelGrid>
-                            </p:fieldset>
-                        </h:panelGrid>
                         <h:panelGrid columns="1" cellspacing="5">
                             <p:commandButton value="Valider" update="growl" action="#{residence.save}" />
                             

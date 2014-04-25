@@ -6,7 +6,6 @@ public class CertificatCelibat {
 	
 	private String prenom_T1;
 	private String nom_T1;
-	private String date_NT1;
 	private String lieu_NT1;
 	private Date dateNT1;
 	private String adresse_T1;
@@ -14,7 +13,6 @@ public class CertificatCelibat {
 	
 	private String prenom_T2;
 	private String nom_T2;
-	private String date_NT2;
 	private String lieu_NT2;
 	private Date dateNT2;
 	private String adresse_T2;
@@ -22,7 +20,6 @@ public class CertificatCelibat {
 	
 	private String prenom_Epouse;
 	private String nom_Epouse;
-	private String date_NEpouse;
 	private String lieu_NEpouse;
 	private Date dateNEpouse;
 	private String domicile_Epouse;
@@ -46,12 +43,7 @@ public class CertificatCelibat {
 	public void setNom_T1(String nom_T1) {
 		this.nom_T1 = nom_T1;
 	}
-	public String getDate_NT1() {
-		return date_NT1;
-	}
-	public void setDate_NT1(String date_NT1) {
-		this.date_NT1 = date_NT1;
-	}
+	
 	public String getLieu_NT1() {
 		return lieu_NT1;
 	}
@@ -88,12 +80,7 @@ public class CertificatCelibat {
 	public void setNom_T2(String nom_T2) {
 		this.nom_T2 = nom_T2;
 	}
-	public String getDate_NT2() {
-		return date_NT2;
-	}
-	public void setDate_NT2(String date_NT2) {
-		this.date_NT2 = date_NT2;
-	}
+	
 	public String getLieu_NT2() {
 		return lieu_NT2;
 	}
@@ -130,12 +117,7 @@ public class CertificatCelibat {
 	public void setNom_Epouse(String nom_Epouse) {
 		this.nom_Epouse = nom_Epouse;
 	}
-	public String getDate_NEpouse() {
-		return date_NEpouse;
-	}
-	public void setDate_NEpouse(String date_NEpouse) {
-		this.date_NEpouse = date_NEpouse;
-	}
+	
 	public String getLieu_NEpouse() {
 		return lieu_NEpouse;
 	}
