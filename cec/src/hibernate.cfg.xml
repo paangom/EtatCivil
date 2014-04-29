@@ -24,6 +24,7 @@
 		<mapping class="models.DeclarationNaissance" />
 		<mapping class="models.DeclarationMariage" />
 		<mapping class="models.PiecesAnnexes" />
+		<mapping class="models.DelivredPieces" />
 
     </session-factory>
 </hibernate-configuration>

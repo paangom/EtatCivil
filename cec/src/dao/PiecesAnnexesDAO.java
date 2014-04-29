@@ -15,5 +15,7 @@ public interface PiecesAnnexesDAO {
 	public List<PiecesAnnexes> allPieces();
 	
 	public PiecesAnnexes findById(int id);
+	
+	public PiecesAnnexes findByCode(int code);
 
 }

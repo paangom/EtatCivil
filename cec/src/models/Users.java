@@ -99,6 +99,15 @@ public class Users  implements java.io.Serializable {
 	@OneToMany(mappedBy="validateurNaissance")
 	private List<DeclarationNaissance> validateurNaissance;
 	
+	@OneToMany(mappedBy="connected")
+	private List<Connected> connected;
+	
+	@OneToMany(mappedBy="userdelivred")
+	private List<DelivredPieces> userdelivred;
+	
+	@OneToMany(mappedBy="usermodify")
+	private List<DelivredPieces> usermodify;
+	
 
     public Users() {
     }
@@ -340,6 +349,38 @@ public class Users  implements java.io.Serializable {
 
 	public void setCni(String cni) {
 		this.cni = cni;
+	}
+
+
+	/**
+	 * @return the connected
+	 */
+	public List<Connected> getConnected() {
+		return connected;
+	}
+
+
+	/**
+	 * @param connected the connected to set
+	 */
+	public void setConnected(List<Connected> connected) {
+		this.connected = connected;
+	}
+
+
+	/**
+	 * @return the userdelivred
+	 */
+	public List<DelivredPieces> getUserdelivred() {
+		return userdelivred;
+	}
+
+
+	/**
+	 * @param userdelivred the userdelivred to set
+	 */
+	public void setUserdelivred(List<DelivredPieces> userdelivred) {
+		this.userdelivred = userdelivred;
 	}
 	
 	

@@ -7,9 +7,10 @@ body{
     height: 250px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5px;
+    margin-top: 100px;
     font-size: 16px;
     background-image: url(../imgs/auth.png);
+    background-repeat: no-repeat;
 }
 
 .ui-state-default .icon-login{
@@ -17,7 +18,7 @@ body{
 }
 
 .ui-state-default .icon-naissance{
-	background-image: url(../../imgs/icons/naissance.png);
+	background-image: url(../imgs/icons/naissance.png);
 }
 .wlc{
     margin-left: auto;

@@ -96,4 +96,15 @@ public class PiecesAnnexesDAOImp implements PiecesAnnexesDAO{
 		return c;
 	}
 
+	@Override
+	public PiecesAnnexes findByCode(int code) {
+		// TODO Auto-generated method stub
+		if (session == null)
+			session = HibernateUtil.getSessionFactory();
+		Query q = session.createQuery("from PiecesAnnexes c where c.code = :code")
+				.setInteger("code", code);
+		PiecesAnnexes c = (PiecesAnnexes) q.uniqueResult();
+		return c;
+	}
+
 }

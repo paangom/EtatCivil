@@ -9,6 +9,7 @@ package util;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 /**
@@ -27,6 +28,7 @@ public class HibernateUtil {
             // config file.
             sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
             //populateDB();
+            viderConnected();
         } catch (Throwable ex) {
             // Log the exception. 
             System.err.println("Initial SessionFactory creation failed." + ex);
@@ -38,6 +40,16 @@ public class HibernateUtil {
         return sessionFactory.openSession();
     }
     
+    public static void viderConnected(){
+    	Session session = HibernateUtil.getSessionFactory();
+		Transaction tx = session.beginTransaction();
+		String hqlDelete = "delete from Connected";
+		session.createQuery( hqlDelete )
+               .executeUpdate();
+                tx.commit();
+		session.close();
+    }
+     
 //public static void populateDB(){
 //		
 //		Centres c=new Centres("Malika", "Thiaroye", "0012", "194", "commune", "Pikine", "paangom@gmail.com", "Syscoweb SA", "774246535", "", "Dakar", "Principal");

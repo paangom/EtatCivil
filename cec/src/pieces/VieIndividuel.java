@@ -16,10 +16,15 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import services.DelivredPieceService;
+import services.PiecesAnnexesServices;
 import util.MyUtil;
 import util.Tools;
 
 public class VieIndividuel {
+	
+	private PiecesAnnexesServices pService = new PiecesAnnexesServices();
+	private DelivredPieceService dService = new DelivredPieceService();
 	
 	@SuppressWarnings("rawtypes")
 	private Map parameter = new HashMap();
@@ -96,9 +101,15 @@ public class VieIndividuel {
 			jasperDesign = JRXmlLoader.load(reportSource);
 			JasperReport jasperReport =JasperCompileManager.compileReport(jasperDesign);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, new JREmptyDataSource());
-			JasperViewer.viewReport(jasperPrint,false);
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Chargement effectué avec succès!", null);
-	        FacesContext.getCurrentInstance().addMessage(null, message);
+			if(dService.addPiece(pService.findByCode(230))){
+				JasperViewer.viewReport(jasperPrint,false);
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Chargement effectué avec succès!", null);
+		        FacesContext.getCurrentInstance().addMessage(null, message);
+			}
+			else{
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur d'ajout du document délivré!", null);
+		        FacesContext.getCurrentInstance().addMessage(null, message);
+			}
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur de chargement!", null);

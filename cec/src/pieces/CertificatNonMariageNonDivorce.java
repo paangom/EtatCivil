@@ -2,7 +2,13 @@ package pieces;
 
 import java.sql.Date;
 
+import services.DelivredPieceService;
+import services.PiecesAnnexesServices;
+
 public class CertificatNonMariageNonDivorce {
+	
+	private PiecesAnnexesServices pService = new PiecesAnnexesServices();
+	private DelivredPieceService dService = new DelivredPieceService();
 	
 	private String prenom_T1;
 	private String nom_T1;

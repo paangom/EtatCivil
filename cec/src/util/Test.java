@@ -1,54 +1,35 @@
 package util;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import models.DeclarationNaissance;
+import models.Connected;
+import models.PiecesAnnexes;
+import models.Users;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import beans.DecANBean;
-import services.ActeNaissanceServices;
+import services.DelivredPieceService;
+import services.PiecesAnnexesServices;
 
 public class Test {
 
 	private static Session session = null;
-	@SuppressWarnings("unused")
-	private static ActeNaissanceServices s=new ActeNaissanceServices();
-	public static DecANBean d=new DecANBean();
-	 @SuppressWarnings("unchecked")
-	public static boolean numeroActe(String num, String annee) {
+	public DelivredPieceService dSevice = new DelivredPieceService();
+	PiecesAnnexesServices pService = new PiecesAnnexesServices();
+	
+	public static PiecesAnnexes findByCode(int code) {
 		// TODO Auto-generated method stub
-		 boolean flag=false;
-		 List<DeclarationNaissance> list = null;
-	       if (session == null)
+		if (session == null)
 			session = HibernateUtil.getSessionFactory();
-			
-			Query q = session.createQuery("from DeclarationDeces a where a.date_jugement like :dateJ and a.num_jugement = :num")
-					.setString("dateJ", "%"+annee+"%").setString("num", num);
-			list = q.list();
-			if(list.size() > 0){
-				System.out.println("Thu Jan 01 00:59:00 UTC 1970".substring(11, 16));
-				flag=true;
-			}
-			return flag;
-		}
+		Query q = session.createQuery("from PiecesAnnexes c where c.code = :code")
+				.setInteger("code", code);
+		PiecesAnnexes c = (PiecesAnnexes) q.uniqueResult();
+		return c;
+	}
 	    
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		Date t=null;
-		try {
-			t = dateFormat.parse("Tue Apr 01 00:00:00 UTC 2014");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// TODO Auto-generated method stub
-		System.out.println(dateFormat.format(t));
+		DelivredPieceService dService = new DelivredPieceService();
+		PiecesAnnexesServices pService = new PiecesAnnexesServices();
+		System.out.println(dService.addPiece(pService.findByCode(200)));
 	}
 
 }

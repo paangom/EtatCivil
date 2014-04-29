@@ -18,17 +18,17 @@
             <ui:define name="content">
                 <div class="contenu">
                        
-                        <b><h:outputText value="BIENVENUE DANS LE CENTRE D'ETAT-CIVIL DE #{userBean.userConnect.centre.centerName}" style="font-size:25px;"/></b>
+                        <b><h:outputText value="BIENVENUE DANS LE CENTRE D'ETAT-CIVIL DE #{userBean.userConnect.centre.centerName}" style="font-size:23px;"/></b>
                         <br />
                         <br />
                         <br />
                     
                     <div class="contenu">
-                        <h:form>
+                        <h:form id="papa" prependId="false">
                         <p:growl id="growl" showDetail="true" life="6000" />
                             <h:panelGrid columns="2" cellpadding="10" style="width: 100%;"> 
 
-                                <p:panel header="A propos du Centre" footer="Visca el Barca!">  
+                                <p:panel header="A propos du Centre" style="align-text:top; height:250px">  
                                     <h:outputText value="FC Barcelona is one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,  
                                                   having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.  
                                                   They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,  
@@ -36,36 +36,65 @@
                                                   a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.  
                                                   The club is also the only European side to have played continental football in every season since its inception in 1955." />  
                                 </p:panel> 
-
-                                <p:panel header="Les agents du centre" footer="Visca el Barca!">  
-                                   <h:form prependId="false">  
+								
+                                <p:panel header="Statistique des registres" style="align-text:top; height:300px" >  
+                                     
 									    <p:growl id="growl1" showDetail="true" />  
   										<p:poll interval="3" update="pieChart" /> 
     									<p:pieChart id="pieChart" value="#{menuBean.pieModel}" legendPosition="w"  
-       										     title="Diagramme des registres" style="width:400px;height:300px" >  
+       										      style="width:350px;" >  
         									<p:ajax event="itemSelect" listener="#{menuBean.itemSelect}" update="growl1" />  
     									</p:pieChart>  
   
-									</h:form>   
-                                </p:panel> 
-                                <p:panel header="Les registre de l'année 2014" footer="Visca el Barca!">  
-                                    <!-- <p:barChart id="basic" legendPosition="ne"  
-            									title="Basic Bar Chart" min="0" max="200" style="height:300px"/> -->
-            						<h:outputText value="FC Barcelona is one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,  
-                                                  having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.  
-                                                  They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,  
-                                                  including ten UEFA competitions. They have won three UEFA Champions League titles, a record four UEFA Cup Winners' Cups,  
-                                                  a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.  
-                                                  The club is also the only European side to have played continental football in every season since its inception in 1955." />  
+									   
                                 </p:panel>
                                 
-                                <p:panel header="Les registre de l'année 2014" footer="Visca el Barca!">  
-                                    <h:outputText value="FC Barcelona is one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,  
-                                                  having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.  
-                                                  They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,  
-                                                  including ten UEFA competitions. They have won three UEFA Champions League titles, a record four UEFA Cup Winners' Cups,  
-                                                  a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.  
-                                                  The club is also the only European side to have played continental football in every season since its inception in 1955." />  
+                                <p:separator/><p:separator/> 
+                                <p:panel id="panel" header="Déclarations en instance et Pièces délivrés" style="align-text:top; height:150px" >
+                                	
+                                	<h:panelGrid columns="2" cellpadding="10" style="width: 100%;">
+	            						<h:outputText value="Déclarations de naissance " style="font-weight:bold;"/>
+	            						<p:commandButton value="#{consultBean.decN}" action="#{consultBean.listeDecN}" />
+									    
+									    <h:outputText value="Déclaration de mariage " style="font-weight:bold;"/>
+	            						<p:commandButton value="#{consultBean.decM}" action="#{consultBean.listeDecM}"/>
+									    
+									    <h:outputText value="Déclaration de décès " style="font-weight:bold;"/>
+	            						<p:commandButton value="#{consultBean.decD}" action="#{consultBean.listeDecD}"/>
+									    
+									    <h:outputText value="Pièces annexes délivrés " style="font-weight:bold;"/>
+	            						<p:commandButton value="#{consultBean.piecDel}" action="#{consultBean.listePieceDel}"/>
+									    
+									     
+								    </h:panelGrid>
+								    
+                                </p:panel>
+                                
+                                <p:panel header="Les agents connectés" style="align-text:top; height:150px"  >  
+                                    
+				                   	<div align="center">
+				                            <p:dataTable var="dec" value="#{loginBean.listc}" style="width: 400px;">  
+				
+				
+				                                <p:column headerText="Prénoms">  
+				                                    <h:outputText value="#{dec.connected.userPrenom}" />  
+				                                </p:column>
+				                                
+				                                <p:column headerText="Nom">  
+				                                    <h:outputText value="#{dec.connected.userNom}" />  
+				                                </p:column>  
+				                                
+				                                <p:column headerText="Profil">  
+				                                    <h:outputText value="#{dec.connected.userProfil}" />  
+				                                </p:column>
+				
+				                                
+				                                <p:column style="width:4%; text-align: center;" headerText="Etat">  
+				                                   <p:selectBooleanButton onLabel="On" offLabel="Off" value="#{loginBean.conneted}"/>
+				                                </p:column> 
+				                            </p:dataTable>  
+				                        </div>
+                    				
                                 </p:panel> 
                             </h:panelGrid>
                         </h:form>

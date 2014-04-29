@@ -8,9 +8,7 @@ import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import util.MyUtil;
-import util.NombreEnLettre;
-import util.Tools;
+import models.DelivredPieces;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -20,9 +18,17 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import services.DelivredPieceService;
+import services.PiecesAnnexesServices;
+import util.MyUtil;
+import util.NombreEnLettre;
+import util.Tools;
 
 public class AttestationDeCoutume {
 
+	private PiecesAnnexesServices pService = new PiecesAnnexesServices();
+	private DelivredPieceService dService = new DelivredPieceService();
+	private DelivredPieces dPiece;
 	
 	private String nom;
 	private String prenom;
@@ -137,9 +143,17 @@ public class AttestationDeCoutume {
 			jasperDesign = JRXmlLoader.load(reportSource);
 			JasperReport jasperReport =JasperCompileManager.compileReport(jasperDesign);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, new JREmptyDataSource());
+			
+			if(dService.addPiece(pService.findByCode(200))){
 			JasperViewer.viewReport(jasperPrint,false);
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Chargement effectué avec succès!", null);
 	        FacesContext.getCurrentInstance().addMessage(null, message);
+			}
+			else{
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur d'ajout du document délivré!", null);
+		        FacesContext.getCurrentInstance().addMessage(null, message);
+			}
+	        
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur de chargement!", null);
@@ -147,4 +161,19 @@ public class AttestationDeCoutume {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * @return the dPiece
+	 */
+	public DelivredPieces getdPiece() {
+		return dPiece;
+	}
+	/**
+	 * @param dPiece the dPiece to set
+	 */
+	public void setdPiece(DelivredPieces dPiece) {
+		this.dPiece = dPiece;
+	}
+	
+	
 }

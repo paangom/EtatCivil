@@ -30,6 +30,8 @@ public class PiecesAnnexesServices {
 		pieceDAO.deletePieces(id);
 	}
 	
-	
+	public PiecesAnnexes findByCode(int code){
+		return pieceDAO.findByCode(code);
+	}
 
 }

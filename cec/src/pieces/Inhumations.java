@@ -16,11 +16,16 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import services.DelivredPieceService;
+import services.PiecesAnnexesServices;
 import util.MyUtil;
 import util.NombreEnLettre;
 import util.Tools;
 
 public class Inhumations {
+	
+	private PiecesAnnexesServices pService = new PiecesAnnexesServices();
+	private DelivredPieceService dService = new DelivredPieceService();
 	
 	@SuppressWarnings("rawtypes")
 	private Map parameter = new HashMap();

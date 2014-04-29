@@ -1,12 +1,14 @@
 package models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -33,8 +35,14 @@ public class PiecesAnnexes implements Serializable{
 	@Column(name = "Date_creation", columnDefinition="varchar(20) default '' ", nullable=false)
     private String date_creation;
 	
+	@Column(name = "Code", columnDefinition="Integer(11)", nullable=false)
+    private Integer code;
+	
 	@Column(name = "Objectif", columnDefinition=" LONGTEXT")
     private String objectif;
+	
+	@OneToMany(mappedBy="piecedelivred")
+	private List<DelivredPieces> piecedelivred;
 	
 	public PiecesAnnexes(){
 		
@@ -86,6 +94,20 @@ public class PiecesAnnexes implements Serializable{
 
 	public void setObjectif(String objectif) {
 		this.objectif = objectif;
+	}
+
+	/**
+	 * @return the code
+	 */
+	public Integer getCode() {
+		return code;
+	}
+
+	/**
+	 * @param code the code to set
+	 */
+	public void setCode(Integer code) {
+		this.code = code;
 	}
 	
 	

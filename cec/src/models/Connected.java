@@ -2,11 +2,14 @@ package models;
 // Generated 24 mars 2014 10:24:07 by Hibernate Tools 3.6.0
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -25,60 +28,89 @@ public class Connected  implements java.io.Serializable {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id")
-	private Integer connectedId;
+	private Integer id;
 	
-	@Column(name = "id_User", columnDefinition="Integer(11) ", nullable=false)
-    private Integer connectedIdUser;
-	
-	@Column(name = "Adresse_Ip", columnDefinition="varchar(40) default '' ", nullable=false)
-    private String connectedIp;
+	@Column(name = "Adresse_Ip", columnDefinition="varchar(40) default '' ", nullable=false, unique = true)
+    private String adresseIp;
 	
 	@Column(name = "Temps_Connexion", columnDefinition="varchar(80) default '' ", nullable=false)
-    private Long connectedTime;
+    private Long temps_connexion;
+	
+	@ManyToOne
+	(
+			cascade={CascadeType.PERSIST, CascadeType.MERGE}
+	)
+	@JoinColumn(name="connected", nullable = false, unique = true)
+	private Users connected;
 
     public Connected() {
     }
 
-    public Connected(Integer connectedIdUser, String connectedIp, Long connectedTime) {
-       this.connectedIdUser = connectedIdUser;
-       this.connectedIp = connectedIp;
-       this.connectedTime = connectedTime;
+    public Connected(String connectedIp, Long connectedTime, Users connected) {
+       this.connected = connected;
+       this.adresseIp = connectedIp;
+       this.temps_connexion = connectedTime;
     }
    
    
-    public Integer getConnectedId() {
-        return this.connectedId;
-    }
     
-    public void setConnectedId(Integer connectedId) {
-        this.connectedId = connectedId;
-    }
 
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the adresseIp
+	 */
+	public String getAdresseIp() {
+		return adresseIp;
+	}
+
+	/**
+	 * @param adresseIp the adresseIp to set
+	 */
+	public void setAdresseIp(String adresseIp) {
+		this.adresseIp = adresseIp;
+	}
+
+	/**
+	 * @return the temps_connexion
+	 */
+	public Long getTemps_connexion() {
+		return temps_connexion;
+	}
+
+	/**
+	 * @param temps_connexion the temps_connexion to set
+	 */
+	public void setTemps_connexion(Long temps_connexion) {
+		this.temps_connexion = temps_connexion;
+	}
+
+	/**
+	 * @return the connected
+	 */
+	public Users getConnected() {
+		return connected;
+	}
+
+	/**
+	 * @param connected the connected to set
+	 */
+	public void setConnected(Users connected) {
+		this.connected = connected;
+	}
     
-    public Integer getConnectedIdUser() {
-        return this.connectedIdUser;
-    }
     
-    public void setConnectedIdUser(Integer connectedIdUser) {
-        this.connectedIdUser = connectedIdUser;
-    }
-
-
-    public String getConnectedIp() {
-        return this.connectedIp;
-    }
-    
-    public void setConnectedIp(String connectedIp) {
-        this.connectedIp = connectedIp;
-    }
-
-
-    public Long getConnectedTime() {
-        return this.connectedTime;
-    }
-    
-    public void setConnectedTime(Long connectedTime) {
-        this.connectedTime = connectedTime;
-    }
 
 }

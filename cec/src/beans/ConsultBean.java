@@ -19,6 +19,7 @@ import javax.faces.context.FacesContext;
 import models.DeclarationDeces;
 import models.DeclarationMariage;
 import models.DeclarationNaissance;
+import models.DelivredPieces;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -32,6 +33,7 @@ import services.ActeDecesServices;
 import services.ActeMariageServices;
 import services.ActeNaissanceServices;
 import services.CentreServices;
+import services.DelivredPieceService;
 import util.MyUtil;
 import util.NombreEnLettre;
 import util.Tools;
@@ -54,6 +56,7 @@ public class ConsultBean implements Serializable {
     private ActeNaissanceServices acteService = new ActeNaissanceServices();
     private ActeDecesServices deceService = new ActeDecesServices();
     private ActeMariageServices marService = new ActeMariageServices();
+    private DelivredPieceService delService = new DelivredPieceService(); 
     private CentreServices cenServ = new CentreServices();
     @SuppressWarnings("rawtypes")
 	private Map parameter = new HashMap();
@@ -71,11 +74,23 @@ public class ConsultBean implements Serializable {
     
     private List<DeclarationDeces> registreDecesCurrentYear;
     private List<DeclarationDeces> registreDecesYear = null;
+    private List<DelivredPieces> pdByUser = null;
+    private DelivredPieces pieceDel;
     
  
     private String selectedAnnees;
     public String type;
     private List<String> annees;
+    
+    private int decN;
+    private int decM;
+    private int decD;
+    
+    private int decNBU;
+    private int decMBU;
+    private int decDBU;
+    private int piecDel;
+    private int pieceDelBU;
   
     /**
      * Creates a new instance of consultBean
@@ -1650,6 +1665,243 @@ public class ConsultBean implements Serializable {
 		this.registreDecesYear = registreDecesYear;
 	}
 
+
+	/**
+	 * @return the decN
+	 */
+	public int getDecN() {
+		decN = acteService.getAllDeclaration().size();
+		return decN;
+	}
+
+
+
+	/**
+	 * @param decN the decN to set
+	 */
+	public void setDecN(int decN) {
+		this.decN = decN;
+	}
+	
+	public String listeDecN(){
+		String route = "";
+		if(MyUtil.getProfil() != null){
+			route = "/views/" + MyUtil.getProfil() + "/liste-declaration/naissance?faces-redirect=true";
+		}
+		else{
+			route = "/views/login?faces-redirect=true";
+		}
+		return route;
+	}
+	
+	
+	public String listeDecM(){
+		String route = "";
+		if(MyUtil.getProfil() != null){
+			route = "/views/" + MyUtil.getProfil() + "/liste-declaration/mariage?faces-redirect=true";
+		}
+		else{
+			route = "/views/login?faces-redirect=true";
+		}
+		return route;
+	}
+	
+	
+	public String listeDecD(){
+		String route = "";
+		if(MyUtil.getProfil() != null){
+			route = "/views/" + MyUtil.getProfil() + "/liste-declaration/deces?faces-redirect=true";
+		}
+		else{
+			route = "/views/login?faces-redirect=true";
+		}
+		return route;
+	}
+	
+	public String listePieceDel(){
+		String route = "";
+		if(MyUtil.getProfil() != null){
+			route = "/views/" + MyUtil.getProfil() + "/piecesAnnexes/pieces_delivred_by_user?faces-redirect=true";
+		}
+		else{
+			route = "/views/login?faces-redirect=true";
+		}
+		return route;
+	}
+
+	/**
+	 * @return the decD
+	 */
+	public int getDecD() {
+		decD = deceService.getAllDeclarationDece().size();
+		return decD;
+	}
+
+
+
+	/**
+	 * @param decD the decD to set
+	 */
+	public void setDecD(int decD) {
+		this.decD = decD;
+	}
+
+
+	/**
+	 * @return the decM
+	 */
+	public int getDecM() {
+		decM = marService.getAllDecMariage().size();
+		return decM;
+	}
+
+
+
+	/**
+	 * @param decM the decM to set
+	 */
+	public void setDecM(int decM) {
+		this.decM = decM;
+	}
+
+
+	/**
+	 * @return the decNBU
+	 */
+	public int getDecNBU() {
+		decNBU = acteService.getAllDeclarationByUser(MyUtil.getUserLogged()).size();
+		return decNBU;
+	}
+
+
+
+	/**
+	 * @param decNBU the decNBU to set
+	 */
+	public void setDecNBU(int decNBU) {
+		this.decNBU = decNBU;
+	}
+
+
+	/**
+	 * @return the decMBU
+	 */
+	public int getDecMBU() {
+		decMBU = marService.getAllDecMaraigeByUser(MyUtil.getUserLogged()).size();
+		return decMBU;
+	}
+
+
+
+	/**
+	 * @param decMBU the decMBU to set
+	 */
+	public void setDecMBU(int decMBU) {
+		this.decMBU = decMBU;
+	}
+
+
+	/**
+	 * @return the decDBU
+	 */
+	public int getDecDBU() {
+		decDBU = deceService.getAllDeclarationDeceByUser(MyUtil.getUserLogged()).size();
+		return decDBU;
+	}
+
+
+
+	/**
+	 * @param decDBU the decDBU to set
+	 */
+	public void setDecDBU(int decDBU) {
+		this.decDBU = decDBU;
+	}
+
+
+	/**
+	 * @return the piecDel
+	 */
+	public int getPiecDel() {
+		piecDel = delService.getAllPiecesDel().size();
+		return piecDel;
+	}
+
+
+
+	/**
+	 * @param piecDel the piecDel to set
+	 */
+	public void setPiecDel(int piecDel) {
+		this.piecDel = piecDel;
+	}
+
+
+	/**
+	 * @return the pieceDelBU
+	 */
+	public int getPieceDelBU() {
+		pieceDelBU = delService.getAllPieceBU(MyUtil.getUserLogged()).size();
+		return pieceDelBU;
+	}
+
+
+
+	/**
+	 * @param pieceDelBU the pieceDelBU to set
+	 */
+	public void setPieceDelBU(int pieceDelBU) {
+		this.pieceDelBU = pieceDelBU;
+	}
+
+
+	/**
+	 * @return the pdByUser
+	 */
+	public List<DelivredPieces> getPdByUser() {
+		pdByUser = delService.getAllPiecesDel();
+		return pdByUser;
+	}
+
+
+
+	/**
+	 * @param pdByUser the pdByUser to set
+	 */
+	public void setPdByUser(List<DelivredPieces> pdByUser) {
+		this.pdByUser = pdByUser;
+	}
+
+
+	/**
+	 * @return the pieceDel
+	 */
+	public DelivredPieces getPieceDel() {
+		return pieceDel;
+	}
+
+
+
+	/**
+	 * @param pieceDel the pieceDel to set
+	 */
+	public void setPieceDel(DelivredPieces pieceDel) {
+		this.pieceDel = pieceDel;
+	}
+
+	public void paiement(){
+		this.pieceDel.setDate_paiement(Tools.getCurrentDateTime());
+		this.pieceDel.setPaiement(true);
+		this.pieceDel.setUsermodify(MyUtil.getUserLogged());
+		if(delService.updatePiece(this.pieceDel)){
+			FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_INFO, "Dépot de paiement effecttué avec succès.", null);
+            FacesContext.getCurrentInstance().addMessage(null, messages);
+		}
+		else{
+			FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Le dépot ne s'estt pas correctement effectué.", null);
+            FacesContext.getCurrentInstance().addMessage(null, messages);
+		}
+	}
 
 	private int anneeCourant = Integer.parseInt(Tools.getCurrentDate().substring(6, 10));
 

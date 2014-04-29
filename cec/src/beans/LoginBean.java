@@ -2,12 +2,15 @@ package beans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 
+import models.Connected;
 import models.Users;
+import services.ConnectedService;
 import services.UserServices;
 import util.MyUtil;
 
@@ -21,6 +24,10 @@ public class LoginBean implements Serializable{
     private Users userConnect = null;
     private UserServices uService = new UserServices();
     private boolean isLogin;  
+    private ConnectedService cService = new ConnectedService();
+    private List<Connected> listc;
+    
+    private boolean conneted = false;
 
     /**
      * Creates a new instance of loginBean
@@ -56,28 +63,43 @@ public class LoginBean implements Serializable{
     
 
     public String login() {
-        FacesMessage msg;
         String route = "";
 
         Users u = this.uService.connectUser(this.user);
         if (u != null) {
-        	
-            isLogin = true;
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("login", u.getUserUserName());
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("profil", u.getUserProfil());
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenue", u.getUserUserName());
-            if(u.isModify())
-            	route = "/views/" + u.getUserProfil() + "/home?faces-redirect=true";
-            else
-            	route = "/views/" + u.getUserProfil() + "/update?faces-redirect=true";
-        } else {
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erreur d'authentification", "Invalide nom d'utilisateur et/ou mot de passe");
-            if (this.user == null) {
-                this.user = new Users();
-            }
-        }
+        	if(this.cService.findUser(u) == null){
+        		if(cService.addConnected(u)){
+        			conneted = true;
+        			 isLogin = true;
+        	            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("login", u.getUserUserName());
+        	            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("profil", u.getUserProfil());
+        	            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenue", u.getUserUserName());
+        	            FacesContext.getCurrentInstance().addMessage(null, message);
+        	            if(u.isModify())
+        	            	route = "/views/" + u.getUserProfil() + "/home?faces-redirect=true";
+        	            else
+        	            	route = "/views/" + u.getUserProfil() + "/update?faces-redirect=true";
+        	        } else {
+        	        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur d'authentification",  "Vous vous êtes déjà connecté. Veuillez vous déconnecter!");
+        	            FacesContext.getCurrentInstance().addMessage(null, message);
+        	        }
 
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        	        
+        		}
+        	else{
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur d'authentification", "Vous vous êtes déjà connecté. Veuillez vous déconnecter!");
+	            FacesContext.getCurrentInstance().addMessage(null, message);
+        	}
+        
+        }
+        else{
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreur d'authentification","Invalide nom d'utilisateur et/ou mot de passe");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+	            if (this.user == null) {
+	                this.user = new Users();
+	            }
+        	
+        }
         return route;
     }
 
@@ -87,8 +109,14 @@ public class LoginBean implements Serializable{
      * @return
      */
     public String logout() {
-        isLogin = false;
-        return "/login?faces-redirect=true";
+    	 Users u = this.uService.connectUser(MyUtil.getUserLogged());
+        String route = "";
+        if(cService.deleteConnected(cService.findUser(u))){
+        	isLogin = false;
+        	conneted = false;
+        	route = "/login?faces-redirect=true";
+        }
+        return route;
     }
 
     /**
@@ -175,5 +203,35 @@ public class LoginBean implements Serializable{
   	   e.printStackTrace();
   	  }
   	 }
+
+	/**
+	 * @return the listc
+	 */
+	public List<Connected> getListc() {
+		listc = cService.findAllUsers();
+		return listc;
+	}
+
+	/**
+	 * @param listc the listc to set
+	 */
+	public void setListc(List<Connected> listc) {
+		this.listc = listc;
+	}
+
+	/**
+	 * @return the conneted
+	 */
+	public boolean isConneted() {
+		return conneted;
+	}
+
+	/**
+	 * @param conneted the conneted to set
+	 */
+	public void setConneted(boolean conneted) {
+		this.conneted = conneted;
+	}
+
 
 }
