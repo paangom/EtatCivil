@@ -1,5 +1,6 @@
 package util;
 
+import java.io.File;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -535,5 +536,21 @@ public class Tools {
 			return "Déclaration normale";
 		else
 			return "Jugement";
+	}
+	
+	
+	public static boolean initCenter(String fic){
+		boolean flag = false;
+		
+		File fichier = new File("C:/Users/admin/git/cec/cec/parametre/test.txt");
+	    if (fichier.exists()) {
+	      // Si ce fichier existe déjà, on s'arrête pour ne pas le modifier.
+	      // 'System.err' est le flux d'erreur standard, qui s'affiche normalement
+	      // dans le terminal qui a servi à lancer l'exécution du programme.
+	      System.err.println("# Erreur : \"" + fichier.getName() + "\" existe déjà.");
+	      System.exit(1);
+	    }
+	    System.out.println(fichier);
+		return flag;
 	}
 }

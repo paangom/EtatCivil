@@ -7,6 +7,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
     <h:head>
+    <link rel="shortcut icon" href="../home.png" type="image/x-icon"/>
+		<link rel="icon" href="../home.png" type="image/x-icon"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
@@ -22,11 +24,7 @@
         <div id="top" class="ui-widget ui-widget-header ui-corner-all">
             <ui:insert name="top">
                 <div align="center" >
-					<h:form>
-						<p:dock position="top">  
-						    <p:menuitem value="Home" icon="../home.png" url="#"/>   
-						</p:dock>
-					</h:form>
+					
                 </div>
                 <div class="profil" align="right" >
                     <h:form>
@@ -47,7 +45,7 @@
   
                         <h2 style="margin-left: 10px;">MENU PRINCIPAL</h2>  
                         <p:menu style="width:100%;" >  
-                        <p:menuitem value ="Home" url="#{menuBean.home}"/>
+                        <p:menuitem value ="Accueil" url="#{menuBean.home}"/>
                         <p:separator/>
                         <p:submenu label="Naissance">  
                             <p:menuitem value="Nouvelle déclaration" update="messages" url="#{menuBean.declarerN}" />  
@@ -93,8 +91,14 @@
         </div>
         <div id="bottom" class="ui-widget ui-widget-header ui-corner-all">
             <ui:insert name="bottom">
+            	<h:form>
+						<p:dock>  
+						    <p:menuitem value="Home" icon="../home.png" url="#"/>   
+						</p:dock>
+					</h:form>
                 <div class="footer">
-                    CEC &copy;2014 - Designed by <a href="http://www.syscoweb.com">SYSCOWEB</a>
+                   ECS &copy;2014 - Designé par <a href="http://www.syscoweb.com">SYSCOWEB</a><br />
+                    Adresse: Cité Fadia - Villa N°217<br /> Tel: +221 33 835 24 25<br /> Cell:+221 77 422 45 77
                 </div>
             </ui:insert>
         </div>

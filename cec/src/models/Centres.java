@@ -2,6 +2,7 @@ package models;
 // Generated 24 mars 2014 10:24:07 by Hibernate Tools 3.6.0
 
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -65,16 +66,30 @@ public class Centres  implements java.io.Serializable {
 	@Column(name = "Annee", columnDefinition="varchar(5) default '' ", nullable=false)
     private String anneeRegistre;
 	
+	@Column(name = "Nom_maire", columnDefinition="varchar(40) default '' ", nullable=false)
+    private String nom_maire;
+	
+	@Column(name = "Prenom_maire", columnDefinition="varchar(60) default '' ", nullable=false)
+    private String prenom_maire;
+	
+	@Column(name = "Description", columnDefinition="LONGTEXT ", nullable=false)
+    private String description;
+	
+	@Column(name = "Date_acces", columnDefinition="varchar(20) default '' ", nullable=false)
+    private String acces;
+	
 	
 	@OneToMany(mappedBy="centre")
 	private List<Users> userList;
+	
+	private Date accesD;
 
 
 	public Centres() {
     }
 
     public Centres(String centerAddress, String centerArrondissement, String centerBp, String centerCode, String centerCollectivite, String centerDepartement, 
-    		String centerMail, String centerName, String centerPhone, String mainCenter, String centerRegion, String centerType, String anneeRegistre) {
+    		String centerMail, String centerName, String centerPhone, String mainCenter, String centerRegion, String centerType, String anneeRegistre, String nom_maire, String prenom_maire, String description, String acces) {
        this.centerAddress = centerAddress;
        this.centerArrondissement = centerArrondissement;
        this.centerBp = centerBp;
@@ -88,6 +103,10 @@ public class Centres  implements java.io.Serializable {
        this.centerRegion = centerRegion;
        this.centerType = centerType;
        this.anneeRegistre = anneeRegistre;
+       this.nom_maire = nom_maire;
+       this.prenom_maire = prenom_maire;
+       this.description = description;
+       this.acces = acces;
     }
    
 
@@ -212,6 +231,76 @@ public class Centres  implements java.io.Serializable {
 
 	public void setAnneeRegistre(String anneeRegistre) {
 		this.anneeRegistre = anneeRegistre;
+	}
+
+	/**
+	 * @return the nom_maire
+	 */
+	public String getNom_maire() {
+		return nom_maire;
+	}
+
+	/**
+	 * @param nom_maire the nom_maire to set
+	 */
+	public void setNom_maire(String nom_maire) {
+		this.nom_maire = nom_maire;
+	}
+
+	/**
+	 * @return the prenom_maire
+	 */
+	public String getPrenom_maire() {
+		return prenom_maire;
+	}
+
+	/**
+	 * @param prenom_maire the prenom_maire to set
+	 */
+	public void setPrenom_maire(String prenom_maire) {
+		this.prenom_maire = prenom_maire;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @return the accesD
+	 */
+	public Date getAccesD() {
+		return accesD;
+	}
+
+	/**
+	 * @param accesD the accesD to set
+	 */
+	public void setAccesD(Date accesD) {
+		this.accesD = accesD;
+	}
+
+	/**
+	 * @return the acces
+	 */
+	public String getAcces() {
+		return acces;
+	}
+
+	/**
+	 * @param acces the acces to set
+	 */
+	public void setAcces(String acces) {
+		this.acces = acces;
 	}
 	
 	

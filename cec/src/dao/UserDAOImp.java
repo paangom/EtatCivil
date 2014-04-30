@@ -158,4 +158,25 @@ public class UserDAOImp implements UserDAO, Serializable {
 		return u;
     }
 
+	@Override
+	public boolean viderUsers() {
+		// TODO Auto-generated method stub
+		 boolean flag;
+	        if (session == null) {
+	            session = HibernateUtil.getSessionFactory();
+	        }
+	        try {
+	        	Transaction tx = session.beginTransaction();
+	    		String hqlDelete = "truncate table Users";
+	    		session.createSQLQuery( hqlDelete )
+	                   .executeUpdate();
+	                    tx.commit();
+	            flag = true;
+	        } catch (Exception e) {
+	            flag = false;
+	            session.beginTransaction().rollback();
+	        }
+	        return flag;
+	}
+
 }

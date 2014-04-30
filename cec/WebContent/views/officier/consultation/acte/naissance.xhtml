@@ -25,7 +25,6 @@
                 <h1 align="center">Acte de naissance numéro #{consultBean.decToConsult.numero_acte} dans le registre du #{consultBean.decToConsult.date_creation} </h1>
                 <div class="panContent" align="center">
                     <h:form id="formViewDec">
-						<p:messages id="messages" showDetail="true" autoUpdate="true" />
                         <p:growl id="growl" showDetail="true" life="6000" /> 
 
                         <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
@@ -107,7 +106,7 @@
                         </h:panelGrid>
                         <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
                             <p:fieldset legend="INFORMATIONS SUR LE DECLARANT">
-                                <div align="left">
+                                <div align="center">
                                     <h:panelGrid columns="4" cellpadding="10">
                                         <h:outputText value="Déclaré par: " />  
                                         <h:outputText value="#{consultBean.decToConsult.declarant}" style="font-weight:bold;"/>  
@@ -133,8 +132,8 @@
                         </h:panelGrid>
                         <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
                             <p:fieldset legend="COMPLEMENTS">
-                                <div >
-                                    <h:panelGrid columns="4" cellpadding="15">
+                                <div align="center">
+                                    <h:panelGrid columns="4" cellpadding="10">
                                         
                                          <h:outputLabel value="Numéro de jugement" style="text-align: right;"/>  
                                             <h:outputText value="#{consultBean.decToConsult.numero_jugement}" style="font-weight:bold;" /> 
@@ -171,19 +170,20 @@
                             <p:commandButton value="Extrait" update="growl" action="#{consultBean.printExtraitNaissance}"/>
                             <p:commandButton value="Bulletin" update="growl" action="#{consultBean.printBulletinNaissance}"/>
                             <p:commandButton value="Copie littérale" update="growl" action="#{consultBean.printCopieLitteraleNaissance}"/>
-                            <p:splitButton value="Pièces annexes" action="#{buttonBean.save}" update="messages" icon="ui-icon-disk">  
-						        <p:menuitem value="Certificat d'individualité" actionListener="#{buttonBean.update}" update="messages" icon="ui-icon-arrowrefresh-1-w"/>  
-						        <p:menuitem value="Delete" actionListener="#{buttonBean.delete}" ajax="false" icon="ui-icon-close"/>  
+                            <p:splitButton value="Pièces annexes" action="#{buttonBean.save}" update="growl" icon="ui-icon-disk">  
+						        <p:menuitem value="Certificat d'individualité" actionListener="#{buttonBean.update}" update="growl" icon="ui-icon-arrowrefresh-1-w"/>  
+						        <p:menuitem value="Delete" action="#{buttonBean.delete}" ajax="false" icon="ui-icon-close"/>  
 						        <p:separator />  
-						        <p:menuitem value="Homepage" url="http://www.primefaces.org" icon="ui-icon-extlink"/>  
+						        <p:menuitem value="Homepage" url="#" icon="ui-icon-extlink"/>  
 						    </p:splitButton> 
                            
                         </h:panelGrid>
                         </div>
 						</p:fieldset>
 						</h:panelGrid>
-						<h:panelGrid columns="1" >
-                        	                             
+						<h:panelGrid columns="3" >
+							<p:commandButton value="MAJMM" title="Mise à jour des mentions marginales" update="growl" action="#{consultBean.mentionN}"/>
+                        	<p:commandButton value="Modifier" update="growl" action="#{consultBean.updateRegistreN}"/>                             
                             <p:commandButton value="Retour" action="#{consultBean.retourRegistreNaissance}" update="growl"/>
                            
                         </h:panelGrid>

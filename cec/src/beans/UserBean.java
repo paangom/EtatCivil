@@ -83,7 +83,7 @@ public class UserBean implements Serializable{
     
     
     
-    @SuppressWarnings("unused")
+    @SuppressWarnings({ "unused", "static-access" })
 	public void updateProfil() {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -102,7 +102,10 @@ public class UserBean implements Serializable{
         }
         else{
              msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erreur de de modification de votre profil",null);
-             FacesContext.getCurrentInstance().addMessage(null, msg);
+             FacesContext context1 = FacesContext.getCurrentInstance();
+	            context1.getCurrentInstance().addMessage(null, msg);
+         	
+         	context1.getExternalContext().getFlash().setKeepMessages(true);
              String url = MyUtil.basePathAdmin()+"profil/modifier_profil.xhtml";
              doRedirect(url);
             
@@ -118,11 +121,12 @@ public class UserBean implements Serializable{
         }
     }
     
-    public void btnCreateUser(){
+    @SuppressWarnings("static-access")
+	public void btnCreateUser(){
         //UserDAO userDao = new UserDAOImp();
         String msg;
         
-        this.userToCreate.setUserUserName("passer");
+        this.userToCreate.setUserUserName(this.userToCreate.getUserPrenom().toLowerCase());
         this.userToCreate.setUserPassword("passer");
         this.userToCreate.setModify(false);
         this.userToCreate.setCentre(MyUtil.getUserLogged().getCentre());
@@ -132,33 +136,77 @@ public class UserBean implements Serializable{
             msg = "L'utilisateur a été bien créé!";
             this.userToCreate = new Users();
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
         }else{
             msg = "Erreur de création de l'utilisateur";
              this.userToCreate = new Users();
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
         }
         
     }
     
-    public void btnUpdateUser(){
+    @SuppressWarnings("static-access")
+	public String saveFirstUser(){
+    	String route = "";
+    	if(this.uService.viderUsers()){
+    		if(uService.addUser(this.userToCreate)){
+                route = "/login?faces-redirect=true";
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le super utilisateur est crée. \nNom d'utilisateur :"+this.userToCreate.getUserUserName()+" \nMot de passe :"+this.userToCreate.getUserPassword(),null);
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+            }else{
+            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible de créer cet utilisateur.",null);
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+                
+            }
+    	}
+    	else{
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible d'initialiser les utilisateurs.",null);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
+    	}
+    	return route;
+    }
+    
+    @SuppressWarnings("static-access")
+	public void btnUpdateUser(){
         //this.selectedUser = (User) this.users.getRowData();
         String msg;
         if(uService.updateUser(selectedUser)){
             msg = "La modification de l'utilisateur s'est correctement passée.";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
         }else{
             msg = "Erreur de modification de l'utilisateur";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
         }
         
         
     }
     
-    public void btnDeleteUser(){
+    @SuppressWarnings("static-access")
+	public void btnDeleteUser(){
         //UserDAO userDao = new UserDAOImp();
         String msg;
         //this.selectedUser.setId(3);
@@ -169,7 +217,10 @@ public class UserBean implements Serializable{
         }
         
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
-        FacesContext.getCurrentInstance().addMessage(null, message);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getCurrentInstance().addMessage(null, message);
+    	
+    	context.getExternalContext().getFlash().setKeepMessages(true);
     }
     
 }

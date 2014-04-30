@@ -53,6 +53,7 @@ public class PiecesAnnexesBean implements Serializable{
 		this.allPieces = allPieces;
 	}
 	
+	@SuppressWarnings("static-access")
 	public void savePieces(){
 		if(this.pieceTOAdd.getLibelle() != null){
 			if(this.pieceTOAdd.getPrix() == null)
@@ -60,34 +61,51 @@ public class PiecesAnnexesBean implements Serializable{
 			this.pieceTOAdd.setDate_creation(Tools.getCurrentDateTime());
 			pService.createPiece(this.pieceTOAdd);
 			//allPieces = pService.allPieces();
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le document "+this.pieceTOAdd.getLibelle()+" a été ajoutée avec succÃ¨s!", null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le document "+this.pieceTOAdd.getLibelle()+" a été ajoutée avec succès!", null);
+			FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
 		}
 		else{
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Aucun libelé n'est attribué pour ce document!", null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+			FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
 		}
 	}
 	
+	@SuppressWarnings("static-access")
 	public void updatePieces(){
 		if(this.pieceToConsult.getLibelle() != null){
 			if(this.pieceToConsult.getPrix() == null)
 				this.pieceToConsult.setPrix("0");
 			pService.updatePieces(this.pieceToConsult);
 			//allPieces = pService.allPieces();
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le document "+this.pieceToConsult.getLibelle()+" a été mise ï¿½ jour!", null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le document "+this.pieceToConsult.getLibelle()+" a été mise à jour!", null);
+			FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
 		}
 		else{
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreur de la modification de la pièce "+this.pieceToConsult.getLibelle(), null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+			FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
 		}
 	}
 	
+	@SuppressWarnings("static-access")
 	public void deletePieces(){
 		pService.deletePieces(this.pieceToConsult.getId());
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La piï¿½ce "+this.pieceToConsult.getLibelle()+" a ï¿½tï¿½ supprimï¿½e avec succï¿½s!", null);
-        FacesContext.getCurrentInstance().addMessage(null, message);
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le document "+this.pieceToConsult.getLibelle()+" a été supprimé avec succès!", null);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.getCurrentInstance().addMessage(null, message);
+    	
+    	context.getExternalContext().getFlash().setKeepMessages(true);
 	}
 
 }

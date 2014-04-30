@@ -29,7 +29,10 @@ public class MyUtil {
     }
     
     public static String getProfil(){
-        return getUserLogged().getUserProfil();
+    	if(getUserLogged() != null)
+    		return getUserLogged().getUserProfil();
+    	else
+    		return null;
     }
     
     public static int getUserId() {
@@ -57,6 +60,10 @@ public class MyUtil {
         return baseUrl;
     }
     
+    public static String pathLogin(){
+    	return "/login?faces-redirect=true";
+    }
+    
     public static String pathDeclaration() {
         return basePath()+"declaration/";
     }
@@ -75,6 +82,10 @@ public class MyUtil {
     
     public static String pathModificationActe() {
         return basePath()+"modification/acte/";
+    }
+    
+    public static String pathMAJMM() {
+        return basePath()+"modification/mentions/";
     }
     
     public static String pathRegistre() {

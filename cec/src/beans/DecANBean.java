@@ -80,21 +80,28 @@ public class DecANBean implements Serializable {
     }
 
     
-    public String saveDeclaration() {
+    @SuppressWarnings("static-access")
+	public String saveDeclaration() {
         String route = "";
         if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationNaissance(Tools.formatDay(this.decToAdd.getDate_naissanceE())))){
         	if("".equals(this.decToAdd.getNumero_jugement()) || "".equals(this.decToAdd.getDate_j()) || "".equals(this.decToAdd.getTribunal())){
-        		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
-                FacesContext.getCurrentInstance().addMessage(null, messages);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if(acteService.verifyNumeroJugement(this.decToAdd.getNumero_jugement(), Tools.formatDay(this.decToAdd.getDate_j()).substring(6, 10))){
         		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjà attribué pour cette année.", null);
                 FacesContext.getCurrentInstance().addMessage(null, messages);
         	}
         	else if((this.decToAdd.getDeclarant().equalsIgnoreCase("Autre")) && ("".equals(this.decToAdd.getDomicile_declarant()) || "".equals(this.decToAdd.getPrenom_declarant()) || "".equals(this.decToAdd.getNom_declarant()) || "".equals(this.decToAdd.getProfession_declarant()) || "".equals(this.decToAdd.getAdresse_declarant()) || "".equals(this.decToAdd.getNum_identification_declarant()))){
-        		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
-                FacesContext.getCurrentInstance().addMessage(null, messages);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else{
         		this.decToAdd.setDate_naissance_enfant(Tools.formatDay(this.decToAdd.getDate_naissanceE()));
@@ -109,21 +116,30 @@ public class DecANBean implements Serializable {
                 this.decToAdd.setCreateurNaissance(MyUtil.getUserLogged());
                 
                 if (acteService.addDeclaration(decToAdd)) {
-                    FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_INFO, "Déclaration sauvegardée avec succès!", null);
-                    FacesContext.getCurrentInstance().addMessage(null, messages);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Déclaration sauvegardée avec succès!", null);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
                     route = "/views/" + MyUtil.getProfil() + "/liste-declaration/naissance?faces-redirect=true";
                     
                 } else {
 
-                    FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreur dans le sauvegarde de la déclaration!", null);
-                    FacesContext.getCurrentInstance().addMessage(null, messages);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreur dans le sauvegarde de la déclaration!", null);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
                 }
         	}
         	
         }
         else if((this.decToAdd.getDeclarant().equalsIgnoreCase("Autre")) && ("".equals(this.decToAdd.getDomicile_declarant()) || "".equals(this.decToAdd.getPrenom_declarant()) || "".equals(this.decToAdd.getNom_declarant()) || "".equals(this.decToAdd.getProfession_declarant()) || "".equals(this.decToAdd.getAdresse_declarant()) || "".equals(this.decToAdd.getNum_identification_declarant()))){
-        	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
         else{
         	this.decToAdd.setDate_naissance_enfant(Tools.formatDay(this.decToAdd.getDate_naissanceE()));
@@ -138,19 +154,25 @@ public class DecANBean implements Serializable {
             
             if (acteService.addDeclaration(decToAdd)) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Déclaration sauvegardée avec succès!", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
                 route = "/views/" + MyUtil.getProfil() + "/liste-declaration/naissance?faces-redirect=true";
                 
             } else {
 
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreur dans le sauvegarde de la déclaration!", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
             }
 
         }
         }
         else
-        	route = "login?faces--redirect=true";
+        	route = MyUtil.pathLogin();
         
         return route;
     }
@@ -160,14 +182,14 @@ public class DecANBean implements Serializable {
     	if(MyUtil.getProfil() != null)
     		return  "/views/"+MyUtil.getProfil().toLowerCase()+"/liste-declaration/naissance?faces-redirect=true";
     	else
-        	return "login?faces--redirect=true";
+        	return MyUtil.pathLogin();
     }
 
     public String addDec() {
         if(MyUtil.getProfil() != null)
         	return  "/views/"+MyUtil.getProfil().toLowerCase()+"/declaration/naissance?faces-redirect=true";
         else
-        	return "login?faces--redirect=true";
+        	return MyUtil.pathLogin();
     }
 
    

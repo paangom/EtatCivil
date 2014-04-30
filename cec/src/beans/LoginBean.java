@@ -62,7 +62,8 @@ public class LoginBean implements Serializable{
     
     
 
-    public String login() {
+    @SuppressWarnings("static-access")
+	public String login() {
         String route = "";
 
         Users u = this.uService.connectUser(this.user);
@@ -73,28 +74,45 @@ public class LoginBean implements Serializable{
         			 isLogin = true;
         	            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("login", u.getUserUserName());
         	            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("profil", u.getUserProfil());
-        	            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenue", u.getUserUserName());
-        	            FacesContext.getCurrentInstance().addMessage(null, message);
-        	            if(u.isModify())
+        	            
+        	            if(u.isModify()){
+        	            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenue", u.getUserPrenom()+" "+u.getUserNom());
+        	            	FacesContext context = FacesContext.getCurrentInstance();
+            	            context.getCurrentInstance().addMessage(null, message);
+        	            	
+        	            	context.getExternalContext().getFlash().setKeepMessages(true);
         	            	route = "/views/" + u.getUserProfil() + "/home?faces-redirect=true";
-        	            else
+        	            }
+        	            else{
         	            	route = "/views/" + u.getUserProfil() + "/update?faces-redirect=true";
+        	            }
         	        } else {
         	        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur d'authentification",  "Vous vous êtes déjà connecté. Veuillez vous déconnecter!");
-        	            FacesContext.getCurrentInstance().addMessage(null, message);
+        	        	FacesContext context = FacesContext.getCurrentInstance();
+        	            context.getCurrentInstance().addMessage(null, message);
+    	            	
+    	            	context.getExternalContext().getFlash().setKeepMessages(true);
         	        }
 
         	        
-        		}
+        	}
         	else{
         		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur d'authentification", "Vous vous êtes déjà connecté. Veuillez vous déconnecter!");
-	            FacesContext.getCurrentInstance().addMessage(null, message);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         
+        }else if(this.user.getUserUserName().equals("admin") && this.user.getUserPassword().equals("admin")){
+        	
         }
         else{
         	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreur d'authentification","Invalide nom d'utilisateur et/ou mot de passe");
-            FacesContext.getCurrentInstance().addMessage(null, message);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
 	            if (this.user == null) {
 	                this.user = new Users();
 	            }
@@ -109,12 +127,11 @@ public class LoginBean implements Serializable{
      * @return
      */
     public String logout() {
-    	 Users u = this.uService.connectUser(MyUtil.getUserLogged());
         String route = "";
-        if(cService.deleteConnected(cService.findUser(u))){
+        if(cService.deleteConnected(cService.findUser(MyUtil.getUserLogged()))){
         	isLogin = false;
         	conneted = false;
-        	route = "/login?faces-redirect=true";
+        	route = MyUtil.pathLogin();
         }
         return route;
     }
@@ -126,7 +143,8 @@ public class LoginBean implements Serializable{
      * @param event
      */
 
-    public String verifyLoginOfficier(){
+    @SuppressWarnings("static-access")
+	public String verifyLoginOfficier(){
     	String route = "";
     	this.user.setUserId(this.userConnect.getUserId());
     	this.user.setCni(this.userConnect.getCni());
@@ -142,12 +160,18 @@ public class LoginBean implements Serializable{
     	
     	if(uService.findByUsername(this.user.getUserUserName()) != null){
     		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Votre nouveau login est: "+user.getUserUserName()+" et votre mot de passe est: "+user.getUserPassword(), null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+    		FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
     	else{
     		
     		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Les paramètres de connexions ont été modifié avec succès!", null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+    		FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
     		uService.updateUser(user);
     		route = "/views/officier/home?faces-redirect=true";
     	}
@@ -155,7 +179,8 @@ public class LoginBean implements Serializable{
     }
     
     
-    public String verifyLoginAgent(){
+    @SuppressWarnings("static-access")
+	public String verifyLoginAgent(){
     	String route = "";
     	this.user.setUserId(this.userConnect.getUserId());
     	this.user.setCni(this.userConnect.getCni());
@@ -171,12 +196,18 @@ public class LoginBean implements Serializable{
     	
     	if(uService.findByUsername(this.user.getUserUserName()) != null){
     		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cet utilisateur existe déjà!", null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+    		FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
     	else{
     		
     		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre nouveau login est: "+user.getUserUserName()+" et votre mot de passe est: "+user.getUserPassword(), null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+    		FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
     		uService.updateUser(user);
     		route = "/views/agent/home?faces-redirect=true";
     	}

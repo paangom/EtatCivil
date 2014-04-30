@@ -40,7 +40,6 @@ public class UserServices implements Serializable {
     }
     
     public boolean updateUser(Users u){
-    	System.out.println(u.getUserId()+"service");
         return uDAO.update(u);
     }
     
@@ -50,5 +49,9 @@ public class UserServices implements Serializable {
     
     public Users findByUsername(String uname){
         return uDAO.findByUserName(uname);
+    }
+    
+    public boolean viderUsers(){
+    	return uDAO.viderUsers();
     }
 }

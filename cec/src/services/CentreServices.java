@@ -45,4 +45,8 @@ public class CentreServices {
     public boolean verifyCentre(){
         return cenDAO.verifyCentre();
     }
+    
+    public boolean viderCentre(){
+    	return cenDAO.viderCentre();
+    }
 }

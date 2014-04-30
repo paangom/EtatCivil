@@ -26,8 +26,7 @@
                 </div>
                 <h1 align="center">DECLARATION DE NAISSANCE</h1>
                 <div class="panContent" align="center">
-                    <h:form id="formAddDec">
-						<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
+                    <h:form id="formAddDec"> 
                         <p:growl id="growl" showDetail="true" life="6000" /> 
 
                         <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
@@ -175,10 +174,8 @@
                                 </div>
                             </p:fieldset>
                         </h:panelGrid >
-                        <h:panelGrid columns="2" cellspacing="5">
+                        <h:panelGrid columns="1" cellspacing="5">
                             <p:commandButton value="Enregistrer" update="growl" action="#{decANBean.saveDeclaration}" />
-                            <p:commandButton value="Annuler" update="growl" action="#{decANBean.cancel}"   
-                                             oncomplete="handleLoginRequest(xhr, status, args)"/>
                         </h:panelGrid>
                     </h:form>
                 </div>

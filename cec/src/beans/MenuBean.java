@@ -66,7 +66,8 @@ public class MenuBean implements Serializable{
     private String individuel;
     private String individuelFammile;
     private String inhumation;
-	private PieChartModel pieModel;
+    
+    private PieChartModel pieModel;
 	private ActeDecesServices dServices = new ActeDecesServices();
 	private ActeMariageServices mService = new ActeMariageServices();
 	private ActeNaissanceServices nService = new ActeNaissanceServices();
@@ -113,79 +114,134 @@ public class MenuBean implements Serializable{
     }
 
     public String getDeclarerN() {
-        return declarerN;
+    	if(MyUtil.getProfil() != null)
+    		return declarerN;
+    	else
+    		return MyUtil.pathLogin();
     }
 
     public String getListeDA() {
-        return listeDA;
+    	if(MyUtil.getProfil() != null)
+    		return listeDA;
+    	else return MyUtil.pathLogin();
     }
 
     public String getDeclarerM() {
-        return declarerM;
+    	if(MyUtil.getProfil() != null)
+    		return declarerM;
+    	else
+    		return MyUtil.pathLogin();
     }
 
     public String getListeDM() {
-        return listeDM;
+    	if(MyUtil.getProfil() != null)
+    		return listeDM;
+    	else return MyUtil.pathLogin();
     }
 
     public String getDeclarerD() {
-        return declarerD;
+    	if(MyUtil.getProfil() != null)
+    		return declarerD;
+    	else
+    		return MyUtil.pathLogin();
     }
 
     public String getListeDD() {
-        return listeDD;
+    	if(MyUtil.getProfil() != null)
+    		return listeDD;
+    	else
+    		return MyUtil.pathLogin();
     }
 
     public String getHome() {
-        return home;
+    	if(MyUtil.getProfil() != null)
+    		return home;
+    	else
+    		return MyUtil.pathLogin();
     }
 
     public String getInfoCentre() {
-        return infoCentre;
+    	if(MyUtil.getProfil() != null)
+    		return infoCentre;
+    	else
+    		return MyUtil.pathLogin();
     }
 
     public String getUpdateInfoCentre() {
-        return updateInfoCentre;
+    	if(MyUtil.getProfil() != null)
+    		return updateInfoCentre;
+    	else
+    		return MyUtil.pathLogin();
     }
 
     public String getUserList() {
-        return userList;
+    	if(MyUtil.getProfil() != null)
+    		return userList;
+    	else
+    		return MyUtil.pathLogin();
     }
     
     public String userList() {
-        return MyUtil.basePath()+"gerer_utilisateur/liste_utilisateur?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return MyUtil.basePath()+"gerer_utilisateur/liste_utilisateur?faces-redirect=true";
+    	else
+    		return MyUtil.pathLogin();
     }
     
     public String updateInfoCentre() {
-        return MyUtil.basePathAdmin()+"centre/modifier_information?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return MyUtil.basePathAdmin()+"centre/modifier_information?faces-redirect=true";
+    	else
+    		return MyUtil.pathLogin();
     }
     
     public String getRegistreNaissance(){
-        return MyUtil.basePath()+"registre/naissance.xhtml";   
+    	if(MyUtil.getProfil() != null)
+    		return MyUtil.basePath()+"registre/naissance.xhtml";
+    	else
+    		return MyUtil.pathLogin();
     }
     
     public String getRegistreMariage(){
-        return MyUtil.basePath()+"registre/mariage.xhtml";   
+    	if(MyUtil.getProfil() != null)
+    		return MyUtil.basePath()+"registre/mariage.xhtml";   
+    	else
+    		return MyUtil.pathLogin();
     }
     
     public String getRegistreDeces(){
-        return MyUtil.basePath()+"registre/dece.xhtml";   
+    	if(MyUtil.getProfil() != null)
+    		return MyUtil.basePath()+"registre/dece.xhtml";
+    	else
+    		return MyUtil.pathLogin();
     }
 
     public String getInfoProfil() {
-        return infoProfil;
+    	if(MyUtil.getProfil() != null)
+    		return infoProfil;
+    	else
+    		return MyUtil.pathLogin();
     }
 
     public String getUpdateInfoProfil() {
-        return updateInfoProfil;
+    	if(MyUtil.getProfil() != null)
+    		return updateInfoProfil;
+    	else
+    		return MyUtil.pathLogin();
     }
     
     public String updateInfoProfil() {
-        return MyUtil.basePathAdmin()+"profil/modifier_profil?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return MyUtil.basePathAdmin()+"profil/modifier_profil?faces-redirect=true";
+    	else
+    		return MyUtil.pathLogin();
     }
     
     public String infoProfil() {
-        return MyUtil.basePathAdmin()+"profil/information?faces-redirect=true";
+    	if(MyUtil.getProfil() != null)
+    		return MyUtil.basePathAdmin()+"profil/information?faces-redirect=true";
+    	else
+    		return MyUtil.pathLogin();
     }
 
     
@@ -195,9 +251,10 @@ public class MenuBean implements Serializable{
      * @return  
      */
     public String declarerNaissance(){
-        
-       return MyUtil.pathDeclaration()+"naissance";
-      
+       if(MyUtil.getProfil() != null)
+    	   return MyUtil.pathDeclaration()+"naissance";
+       else
+    	   return MyUtil.pathLogin();
     }
     
     /**
@@ -205,9 +262,10 @@ public class MenuBean implements Serializable{
      * @return 
      */
     public String listeDeclarationNaissance(){
-        
-        return MyUtil.pathDeclaration()+"liste-declaration/naissance";
-       
+        if(MyUtil.getProfil() != null)
+        	return MyUtil.pathDeclaration()+"liste-declaration/naissance";
+        else
+        	return MyUtil.pathLogin();
     }
     
     /**
@@ -215,7 +273,10 @@ public class MenuBean implements Serializable{
      * @return 
      */
     public String declarerMariage(){
-        return MyUtil.pathDeclaration()+"mariage";
+    	if(MyUtil.getProfil() != null)
+    		return MyUtil.pathDeclaration()+"mariage";
+    	else
+    		return MyUtil.pathLogin();
     }
     
     /**
@@ -260,7 +321,10 @@ public class MenuBean implements Serializable{
     }
 
 	public String getListPieces() {
-		return listPieces;
+		if(MyUtil.getProfil() != null)
+			return listPieces;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	public void setListPieces(String listPieces) {
@@ -272,7 +336,10 @@ public class MenuBean implements Serializable{
 	}
 
 	public String getNonInscription() {
-		return nonInscription;
+		if(MyUtil.getProfil() != null)
+			return nonInscription;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	public void setNonInscription(String nonInscription) {
@@ -280,7 +347,10 @@ public class MenuBean implements Serializable{
 	}
 
 	public String getAttestationdecoutume() {
-		return attestationdecoutume;
+		if(MyUtil.getProfil() != null)
+			return attestationdecoutume;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	public void setAttestationdecoutume(String attestationdecoutume) {
@@ -288,7 +358,10 @@ public class MenuBean implements Serializable{
 	}
 
 	public String getNonExistance() {
-		return nonExistance;
+		if(MyUtil.getProfil() != null)
+			return nonExistance;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	public void setNonExistance(String nonExistance) {
@@ -296,7 +369,10 @@ public class MenuBean implements Serializable{
 	}
 
 	public String getResidence() {
-		return residence;
+		if(MyUtil.getProfil() != null)
+			return residence;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	public void setResidence(String residence) {
@@ -304,7 +380,10 @@ public class MenuBean implements Serializable{
 	}
 
 	public String getCelibat() {
-		return celibat;
+		if(MyUtil.getProfil() != null)
+			return celibat;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	public void setCelibat(String celibat) {
@@ -312,7 +391,10 @@ public class MenuBean implements Serializable{
 	}
 
 	public String getIndividualite() {
-		return individualite;
+		if(MyUtil.getProfil() != null)
+			return individualite;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	public void setIndividualite(String individualite) {
@@ -320,7 +402,10 @@ public class MenuBean implements Serializable{
 	}
 
 	public String getNonDivorceNonSeparation() {
-		return nonDivorceNonSeparation;
+		if(MyUtil.getProfil() != null)
+			return nonDivorceNonSeparation;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	public void setNonDivorceNonSeparation(String nonDivorceNonSeparation) {
@@ -328,7 +413,10 @@ public class MenuBean implements Serializable{
 	}
 
 	public String getNonMariageNondivorce() {
-		return nonMariageNondivorce;
+		if(MyUtil.getProfil() != null)
+			return nonMariageNondivorce;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	public void setNonMariageNondivorce(String nonMariageNondivorce) {
@@ -339,7 +427,10 @@ public class MenuBean implements Serializable{
 	 * @return the nonMariageNonRemariage
 	 */
 	public String getNonMariageNonRemariage() {
-		return nonMariageNonRemariage;
+		if(MyUtil.getProfil() != null)
+			return nonMariageNonRemariage;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	/**
@@ -353,7 +444,10 @@ public class MenuBean implements Serializable{
 	 * @return the nonInscriptionMariage
 	 */
 	public String getNonInscriptionMariage() {
-		return nonInscriptionMariage;
+		if(MyUtil.getProfil() != null)
+			return nonInscriptionMariage;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	/**
@@ -367,7 +461,10 @@ public class MenuBean implements Serializable{
 	 * @return the collectif
 	 */
 	public String getCollectif() {
-		return collectif;
+		if(MyUtil.getProfil() != null)
+			return collectif;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	/**
@@ -381,7 +478,10 @@ public class MenuBean implements Serializable{
 	 * @return the collectitFamille
 	 */
 	public String getCollectitFamille() {
-		return collectitFamille;
+		if(MyUtil.getProfil() != null)
+			return collectitFamille;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	/**
@@ -395,7 +495,10 @@ public class MenuBean implements Serializable{
 	 * @return the individuelFammile
 	 */
 	public String getIndividuelFammile() {
-		return individuelFammile;
+		if(MyUtil.getProfil() != null)
+			return individuelFammile;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	/**
@@ -409,7 +512,10 @@ public class MenuBean implements Serializable{
 	 * @return the individuel
 	 */
 	public String getIndividuel() {
-		return individuel;
+		if(MyUtil.getProfil() != null)
+			return individuel;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	/**
@@ -423,7 +529,10 @@ public class MenuBean implements Serializable{
 	 * @return the inhumation
 	 */
 	public String getInhumation() {
-		return inhumation;
+		if(MyUtil.getProfil() != null)
+			return inhumation;
+		else
+			return MyUtil.pathLogin();
 	}
 
 	/**
@@ -438,15 +547,15 @@ public class MenuBean implements Serializable{
 	 * @return the pieModel
 	 */
 	public PieChartModel getPieModel() {
-		
+
 		Number n = nService.getAllActe().size();
 		Number m = mService.getRegistreMariage().size();
 		Number d = dServices.getRegistreDece().size();
-		
+
 		pieModel.getData().put("Naissance", n);
 		pieModel.getData().put("Mariage", m);
 		pieModel.getData().put("Décès", d);
-		
+
 		return pieModel;
 	}
 
@@ -456,7 +565,7 @@ public class MenuBean implements Serializable{
 	public void setPieModel(PieChartModel pieModel) {
 		this.pieModel = pieModel;
 	}
-	
+
 	private void createPieModel() {  
         pieModel = new PieChartModel();  
   
@@ -468,12 +577,17 @@ public class MenuBean implements Serializable{
         t =  dServices.getRegistreDece().size();
         pieModel.set("Décès", t);
     }
-	
-	 public void itemSelect(ItemSelectEvent event) {  
+
+	 @SuppressWarnings("static-access")
+	public void itemSelect(ItemSelectEvent event) {  
 	        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Item selected",  
 	                        "Item Index: " + event.getItemIndex() + ", Series Index:" + event.getSeriesIndex());  
-	  
-	        FacesContext.getCurrentInstance().addMessage(null, msg);  
+
+	        FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, msg);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);  
 	}  
+	
 
 }

@@ -10,11 +10,12 @@ public class AppBean {
 	}
 	
 	public String getBaseUrl(){
-        return MyUtil.baseUrl();
+		return MyUtil.baseUrl();
     }
 
 	public String getBasePath(){
-        return MyUtil.basePath();
+		return MyUtil.basePath();
+		
     }
   
 }

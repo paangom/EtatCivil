@@ -26,16 +26,15 @@
                 </div>
                 <h1 align="center">DECLARATION DE NAISSANCE</h1>
                 <div class="panContent" align="center">
-                    <h:form id="formAddDec">
-						<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
+                    <h:form id="formAddDec"> 
                         <p:growl id="growl" showDetail="true" life="6000" /> 
 
                         <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
                             <p:fieldset legend="INFORMATIONS SUR L'ENFANT">
                                 <div align="center">
                                     <h:panelGrid columns="4" cellpadding="6" style="width: 80%;"> 
-                                        <h:outputLabel for="firstname" value="Prénom" style="text-align: right;" />  
-                                        <p:inputText id="firstname" value="#{decANBean.decToAdd.prenom_enfant}" required="true" label="Prenom" />  
+                                        <h:outputLabel for="firstname" value="Prénoms" style="text-align: right;" />  
+                                        <p:inputText id="firstname" value="#{decANBean.decToAdd.prenom_enfant}" required="true" label="Prénoms" />  
 
                                         <h:outputLabel for="nom" value="Nom" style="text-align: right;"/>  
                                         <p:inputText id="nom" value="#{decANBean.decToAdd.nom_enfant}" required="true" label="NOM"/> 
@@ -62,12 +61,12 @@
                             </p:fieldset>
                         </h:panelGrid>
                         <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
-                            <p:fieldset legend="INFORMATIONS SUR LES PARENT">
+                            <p:fieldset legend="INFORMATIONS SUR LES PARENTS">
                                 <h:panelGrid columns="2" cellpadding="4" style="width: 100%">
                                     <p:panel header="LA MERE">
                                         <h:panelGrid columns="2" cellpadding="5" style="width: 100%">
-                                            <h:outputLabel for="firstnameM" value="Prénom" style="text-align: right;" />  
-                                            <p:inputText id="firstnameM" value="#{decANBean.decToAdd.prenom_mere}" required="true" label="Prenom" />  
+                                            <h:outputLabel for="firstnameM" value="Prénoms" style="text-align: right;" />  
+                                            <p:inputText id="firstnameM" value="#{decANBean.decToAdd.prenom_mere}" required="true" label="Prénoms" />  
 
                                             <h:outputLabel for="nomM" value="Nom" style="text-align: right;"/>  
                                             <p:inputText id="nomM" value="#{decANBean.decToAdd.nom_mere}" required="true" label="NOM"/> 
@@ -87,8 +86,8 @@
                                     </p:panel>
                                     <p:panel header="LE PERE">
                                         <h:panelGrid columns="2" cellpadding="5" style="width: 100%">
-                                            <h:outputLabel for="firstnameP" value="Prénom" style="text-align: right;" />  
-                                            <p:inputText id="firstnameP" value="#{decANBean.decToAdd.prenom_pere}"  label="Prenom" />  
+                                            <h:outputLabel for="firstnameP" value="Prénoms" style="text-align: right;" />  
+                                            <p:inputText id="firstnameP" value="#{decANBean.decToAdd.prenom_pere}"  label="Prénoms" />  
 
                                             <h:outputLabel for="nomP" value="Nom" style="text-align: right;"/>  
                                             <p:inputText id="nomP" value="#{decANBean.decToAdd.nom_pere}"  label="NOM"/> 
@@ -124,8 +123,8 @@
                                         <h:outputLabel for="domicileD" value="Domicile" style="text-align: right;" />  
                                         <p:inputText id="domicileD" value="#{decANBean.decToAdd.domicile_declarant}"  label="Domicile" />  
                                         
-                                        <h:outputLabel for="firstnameD" value="Prénom" style="text-align: right;" />  
-                                        <p:inputText id="firstnameD" value="#{decANBean.decToAdd.prenom_declarant}"  label="Prenom" />  
+                                        <h:outputLabel for="firstnameD" value="Prénoms" style="text-align: right;" />  
+                                        <p:inputText id="firstnameD" value="#{decANBean.decToAdd.prenom_declarant}"  label="Prénoms" />  
 
                                         <h:outputLabel for="nomD" value="Nom" style="text-align: right;"/>  
                                         <p:inputText id="nomD" value="#{decANBean.decToAdd.nom_declarant}"  label="NOM"/> 
@@ -175,10 +174,8 @@
                                 </div>
                             </p:fieldset>
                         </h:panelGrid >
-                        <h:panelGrid columns="2" cellspacing="5">
+                        <h:panelGrid columns="1" cellspacing="5">
                             <p:commandButton value="Enregistrer" update="growl" action="#{decANBean.saveDeclaration}" />
-                            <p:commandButton value="Annuler" update="growl" action="#{decANBean.cancel}"   
-                                             oncomplete="handleLoginRequest(xhr, status, args)"/>
                         </h:panelGrid>
                     </h:form>
                 </div>

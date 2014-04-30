@@ -62,17 +62,24 @@ public class DecAMBean {
     
     
     
-    public String saveDeclarationMariage(){
+    @SuppressWarnings("static-access")
+	public String saveDeclarationMariage(){
         String route = "";
         if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationMariage(Tools.formatDay(this.decToAdd.getDateMariage())))){
         	if("".equals(this.decToAdd.getNumero_Jugement()) || "".equals(this.decToAdd.getDateJugement()) || "".equals(this.decToAdd.getTribunal())){
         		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if(mariageServ.verifyNumeroJugement(this.decToAdd.getNumero_Jugement(), this.decToAdd.getDateJugement().toString().substring(6, 10))){
         		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjé attribué pour cette année.", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else{
         		this.decToAdd.setDate_creation(Tools.getCurrentDateTime());
@@ -91,7 +98,10 @@ public class DecAMBean {
                 
                 if (mariageServ.saveDeclarationMariage(decToAdd)) {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Déclaration sauvegardée avec succès!", null);
-                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
                     
                     	route = "/views/" + MyUtil.getProfil() + "/liste-declaration/mariage?faces-redirect=true";
                     
@@ -100,7 +110,10 @@ public class DecAMBean {
                 else {
 
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur dans le sauvegarde de la déclaration!", null);
-                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
                 
                 }
         	}
@@ -122,7 +135,10 @@ public class DecAMBean {
             
             if (mariageServ.saveDeclarationMariage(decToAdd)) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Déclaration sauvegardée avec succès!", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
                 
                 	route="/views/" + MyUtil.getProfil() + "/liste-declaration/mariage?faces-redirect=true";
                 
@@ -131,13 +147,16 @@ public class DecAMBean {
             else {
 
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur dans le sauvegarde de la déclaration!", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
             
             }
         }
         }
         else
-        	route = "login?faces--redirect=true";
+        	route = MyUtil.pathLogin();
         
         return route;
     }

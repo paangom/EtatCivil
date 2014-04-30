@@ -131,4 +131,25 @@ public class CentreDAOImp implements CentreDAO {
 			return false;
     }
 
+	@Override
+	public boolean viderCentre() {
+		// TODO Auto-generated method stub
+		boolean flag;
+        if (session == null) {
+            session = HibernateUtil.getSessionFactory();
+        }
+        try {
+        	Transaction tx = session.beginTransaction();
+    		String hqlDelete = "truncate table Centres";
+    		session.createSQLQuery( hqlDelete )
+                   .executeUpdate();
+                    tx.commit();
+            flag = true;
+        } catch (Exception e) {
+            flag = false;
+            session.beginTransaction().rollback();
+        }
+        return flag;
+	}
+
 }

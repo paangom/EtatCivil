@@ -77,6 +77,9 @@ public class ConsultBean implements Serializable {
     private List<DelivredPieces> pdByUser = null;
     private DelivredPieces pieceDel;
     
+    private String mention;
+    private String mentionN;
+    private String mentionD;
  
     private String selectedAnnees;
     public String type;
@@ -140,45 +143,68 @@ public class ConsultBean implements Serializable {
         if(MyUtil.getProfil() != null)
         	return MyUtil.pathConsultationDeclaration()+"naissance?faces-redirect=true";
         else
-        	return MyUtil.basePath() + "views/login?faces-redirect=true";
+        	return MyUtil.pathLogin();
     }
+    
+    public String updateRegistreN(){
+        if(MyUtil.getProfil() != null)
+        	return MyUtil.pathModificationActe()+"naissance?faces-redirect=true";
+        else
+        	return MyUtil.pathLogin();
+    }
+    
+    public String updateRegistreM(){
+        if(MyUtil.getProfil() != null)
+        	return MyUtil.pathModificationActe()+"mariage?faces-redirect=true";
+        else
+        	return MyUtil.pathLogin();
+    }
+    
+    public String updateRegistreD(){
+        if(MyUtil.getProfil() != null)
+        	return MyUtil.pathModificationActe()+"deces?faces-redirect=true";
+        else
+        	return MyUtil.pathLogin();
+    }
+    
     
     public String viewDecclarationDeces(){
         if(MyUtil.getProfil() != null)
         	return MyUtil.pathConsultationDeclaration()+"deces?faces-redirect=true";
         else
-        	return MyUtil.basePath() + "views/login?faces-redirect=true";
+        	return MyUtil.pathLogin();
     }
     
     public String viewDeclarationMariage(){
     	if(MyUtil.getProfil() != null)
     		return MyUtil.pathConsultationDeclaration()+"mariage?faces-redirect=true";
     	else
-    		return MyUtil.basePath() + "views/login?faces-redirect=true";
+    		return MyUtil.pathLogin();
     }
     
     public String viewActeNaissance(){
         if(MyUtil.getProfil() != null)
         	return MyUtil.pathConsultationActe()+"naissance?faces-redirect=true";
         else
-        	return MyUtil.basePath() + "views/login?faces-redirect=true";
+        	return MyUtil.pathLogin();
     }
     
     public String viewActeDeces(){
         if(MyUtil.getProfil() != null)
         	return MyUtil.pathConsultationActe()+"deces?faces-redirect=true";
         else
-        	return MyUtil.basePath() + "views/login?faces-redirect=true";
+        	return MyUtil.pathLogin();
     }
     
     public String viewActeMariage(){
         if(MyUtil.getProfil() != null)
         	return MyUtil.pathConsultationActe()+"mariage?faces-redirect=true";
         else
-        	return MyUtil.basePath() + "views/login?faces-redirect=true";
+        	return MyUtil.pathLogin();
     }
     
-    public String validateDeclarationNaissance() {
+    @SuppressWarnings("static-access")
+	public String validateDeclarationNaissance() {
         String route = "";
         if(MyUtil.getProfil() != null){
         this.decToConsult.setEtat("Valider");
@@ -188,21 +214,28 @@ public class ConsultBean implements Serializable {
         if (acteService.updateDeclarationNaissance(this.decToConsult)) {
             route =   MyUtil.basePath() + "registre/naissance?faces-redirect=true";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La déclaration a été bien validée avec succès!", null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
         }
         else{
             route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/consultation/declaration/naissance?faces-redirect=true";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas été validée!", null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
         }
         }
         else
-        	route  = MyUtil.basePath() + "views/login?faces-redirect=true";
+        	route  = MyUtil.pathLogin();
         
         return  route;
     }
     
-    public String validateDeclarationDeces() {
+    @SuppressWarnings("static-access")
+	public String validateDeclarationDeces() {
         String route = "";
         if(MyUtil.getProfil() != null){
         this.decDCToConsult.setEtat("Valider");
@@ -211,23 +244,30 @@ public class ConsultBean implements Serializable {
         this.decDCToConsult.setValidateurDeces(MyUtil.getUserLogged());
         if (deceService.updateDeclarationDeces(decDCToConsult)) {
         	
-        	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_INFO, "La déclaration de décès a été bien validé!", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La déclaration de décès a été bien validé!", null);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
             route =   MyUtil.basePath() + "registre/dece?faces-redirect=true";
         }
         else{
-        	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être valider!", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être valider!", null);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
         	route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/consultation/declaration/deces?faces-redirect=true";
         
         }
         }
         else
-        	route = MyUtil.basePath() + "views/login?faces-redirect=true";
+        	route = MyUtil.pathLogin();
         return route;
     }
     
-    public String validateDeclarationMariage() {
+    @SuppressWarnings("static-access")
+	public String validateDeclarationMariage() {
         String route = "";
         if(MyUtil.getProfil() != null){
         this.decMarToConsult.setEtat("Valider");
@@ -235,107 +275,144 @@ public class ConsultBean implements Serializable {
         this.decMarToConsult.setDate_modification(Tools.getCurrentDateTime());
         this.decMarToConsult.setValidateurMariage(MyUtil.getUserLogged());
         if (marService.updateDeclarationMariage(this.decMarToConsult)) {
-        	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_INFO, "La déclaration de mariage est validée avec succès!", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La déclaration de mariage est validée avec succès!", null);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
             route =   MyUtil.basePath() + "registre/mariage?faces-redirect=true";
         }
         else{
-        	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être valider!", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être valider!", null);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
         	route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/consultation/declaration/mariage?faces-redirect=true";
         }
         }
         else
-        	route = MyUtil.basePath() + "views/login?faces-redirect=true";
+        	route = MyUtil.pathLogin();
         return route;
     }
 
-    public String rejectDeclarationNaissance() {
+    @SuppressWarnings("static-access")
+	public String rejectDeclarationNaissance() {
     	String route = "";
     	if(MyUtil.getProfil() != null){
         this.decToConsult.setEtat("Rejeter");
         this.decToConsult.setValidateurNaissance(MyUtil.getUserLogged());
         this.decToConsult.setDate_modification(Tools.getCurrentDateTime());
         if (acteService.updateDeclarationNaissance(this.decToConsult)) {
-        	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "La déclaration de naissance est bien rejetée!", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "La déclaration de naissance est bien rejetée!", null);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
             route =  MyUtil.basePath() + "views/" + MyUtil.getProfil() + "/liste-declaration/naissance?faces-redirect=true";
         }
         else{
-        	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être rejeter!", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être rejeter!", null);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
             route =  MyUtil.basePath() + "views/" + MyUtil.getProfil() + "/consultation/declaration/naissance?faces-redirect=true";
         }
     	}
     	else
-    		route =  MyUtil.basePath() + "views/login?faces-redirect=true";
+    		route =  MyUtil.pathLogin();
         //context.addCallbackParam("route", route);
         return route;
     }
     
-    public String rejectDeclarationDece() {
+    @SuppressWarnings("static-access")
+	public String rejectDeclarationDece() {
         String route = "";
         if(MyUtil.getProfil() != null){
         this.decDCToConsult.setEtat("Rejeter");
         this.decDCToConsult.setDate_modification(Tools.getCurrentDateTime());
         this.decDCToConsult.setModificateurDeces(MyUtil.getUserLogged());
         if (deceService.updateDeclarationDeces(decDCToConsult)) {
-        	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "La déclaration de décès est bien rejetée!", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "La déclaration de décès est bien rejetée!", null);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
             route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/liste-declaration/deces?faces-redirect=true";
         }
         else{
-        	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être rejeter!", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être rejeter!", null);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
             route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/consultation/declaration/deces?faces-redirect=true";
         }
         }
         else
-        	route = MyUtil.basePath() + "views/login?faces-redirect=true";
+        	route = MyUtil.pathLogin();
         //context.addCallbackParam("route", route);
         return route;
     }
     
-    public String rejectDeclarationMariage() {
+    @SuppressWarnings("static-access")
+	public String rejectDeclarationMariage() {
     	String route = "";
     	if(MyUtil.getProfil() != null){
         this.decMarToConsult.setEtat("Rejeter");
         this.decMarToConsult.setDate_modification(Tools.getCurrentDateTime());
         this.decMarToConsult.setModificateurMariage(MyUtil.getUserLogged());
         if (marService.updateDeclarationMariage(this.decMarToConsult)) {
-        	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "La déclaration mariage est bien rejetée!", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "La déclaration mariage est bien rejetée!", null);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
             route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/liste-declaration/mariage?faces-redirect=true";
         }
         else{
-        	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être rejeter!", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être rejeter!", null);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
             route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/consultation/declaration/mariage?faces-redirect=true";
         }
     	}
     	else
-    		route = MyUtil.basePath() + "views/login?faces-redirect=true";
+    		route = MyUtil.pathLogin();
             
         return route;
     }
     
     //Liste des méthodes pour effectuer les modifications des déclarations
     
-    public String updateDeclarationNaissance() {
+    @SuppressWarnings("static-access")
+	public String updateDeclarationNaissance() {
         String route = "";
         if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationNaissance(Tools.formatDay(this.decToConsult.getDate_naissanceE())))){
         	if("".equals(this.decToConsult.getNumero_jugement()) || "".equals(this.decToConsult.getDate_j()) || "".equals(this.decToConsult.getTribunal())){
-        		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
-                FacesContext.getCurrentInstance().addMessage(null, messages);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if(acteService.verifyNumeroJugement(this.decToConsult.getNumero_jugement(), Tools.formatDay(this.decToConsult.getDate_j()).substring(6, 10), this.decToConsult.getId())){
-        		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjà  attribué pour cette année.", null);
-                FacesContext.getCurrentInstance().addMessage(null, messages);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjà  attribué pour cette année.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decToConsult.getDeclarant().equalsIgnoreCase("Autre")) && ("".equals(this.decToConsult.getDomicile_declarant()) || "".equals(this.decToConsult.getPrenom_declarant()) || "".equals(this.decToConsult.getNom_declarant()) || "".equals(this.decToConsult.getProfession_declarant()) || "".equals(this.decToConsult.getAdresse_declarant()) || "".equals(this.decToConsult.getNum_identification_declarant()))){
-        		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
-                FacesContext.getCurrentInstance().addMessage(null, messages);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else{
         		this.decToConsult.setDate_naissance_enfant(Tools.formatDay(this.decToConsult.getDate_naissanceE()));
@@ -350,22 +427,28 @@ public class ConsultBean implements Serializable {
                 if (acteService.updateActe(decToConsult)) {
                 	route = "/views/" + MyUtil.getProfil() + "/consultation/declaration/naissance?faces-redirect=true";
                 	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La modification a été effectuée avec succès.", null);
-                    FacesContext.getCurrentInstance().addMessage(null, message);
+                	FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
                 }
-                else if((this.decToConsult.getDeclarant().equalsIgnoreCase("Autre")) && ("".equals(this.decToConsult.getDomicile_declarant()) || "".equals(this.decToConsult.getPrenom_declarant()) || "".equals(this.decToConsult.getNom_declarant()) || "".equals(this.decToConsult.getProfession_declarant()) || "".equals(this.decToConsult.getAdresse_declarant()) || "".equals(this.decToConsult.getNum_identification_declarant()))){
-            		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
-                    FacesContext.getCurrentInstance().addMessage(null, messages);
-            	}
+                
                 else{
                 	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible de modifier la déclaration. Vérifiez toutes les informations saisies.", null);
-                    FacesContext.getCurrentInstance().addMessage(null, message);
+                	FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
                 }
                         	}
         	
         }
         else if((this.decToConsult.getDeclarant().equalsIgnoreCase("Autre")) && ("".equals(this.decToConsult.getDomicile_declarant()) || "".equals(this.decToConsult.getPrenom_declarant()) || "".equals(this.decToConsult.getNom_declarant()) || "".equals(this.decToConsult.getProfession_declarant()) || "".equals(this.decToConsult.getAdresse_declarant()) || "".equals(this.decToConsult.getNum_identification_declarant()))){
-        	FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
         else{
         	this.decToConsult.setDate_naissance_enfant(Tools.formatDay(this.decToConsult.getDate_naissanceE()));
@@ -378,31 +461,44 @@ public class ConsultBean implements Serializable {
             if (acteService.updateActe(decToConsult)) {
             	route = "/views/" + MyUtil.getProfil() + "/consultation/declaration/naissance?faces-redirect=true";
             	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La modification a été effectuée avec succès.", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+            	FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
             }
             else{
             	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible de modifier la déclaration. Vérifiez toutes les informations saisies.", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+            	FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
             }
             
         }
         }
         else
-        	route = MyUtil.basePath() + "views/login?faces-redirect=true";
+        	route = MyUtil.pathLogin();
         return route;
     }
     
-    public String updateDeclarationMariage() {
+    @SuppressWarnings("static-access")
+	public String updateDeclarationMariage() {
         String route = "";
         if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationMariage(Tools.formatDay(this.decMarToConsult.getDateMariage())))){
         	if("".equals(this.decMarToConsult.getNumero_Jugement()) || "".equals(this.decMarToConsult.getDateJugement()) || "".equals(this.decMarToConsult.getTribunal())){
         		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if(marService.verifyNumeroJugement(this.decMarToConsult.getNumero_Jugement(), this.decMarToConsult.getDateJugement().toString().substring(6, 10), this.decMarToConsult.getId())){
         		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjà  attribué pour cette année.", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else{
                 this.decMarToConsult.setDate_Mariage(Tools.formatDay(this.decMarToConsult.getDateMariage()));
@@ -417,14 +513,20 @@ public class ConsultBean implements Serializable {
                 
                 if (marService.updateDeclarationMariage(decMarToConsult)) {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Les modifications ont été effectué avec succès.", null);
-                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
                     route="/views/" + MyUtil.getProfil() + "/liste-declaration/mariage?faces-redirect=true";
 
                 } 
                 else {
 
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les modifications n'ont pas été effecuté normalement.", null);
-                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
                 
                 }
         	}
@@ -442,47 +544,69 @@ public class ConsultBean implements Serializable {
             
             if (marService.updateDeclarationMariage(decMarToConsult)) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Les modifications ont été effectué avec succès.", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
                 route="/views/" + MyUtil.getProfil() + "/liste-declaration/mariage?faces-redirect=true";
 
             } 
             else {
 
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les modifications n'ont pas été effecuté normalement.", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
             
             }
         }
         }
         else
-        	route = MyUtil.basePath() + "views/login?faces-redirect=true";
+        	route = MyUtil.pathLogin();
                 
         return route;
     }
     
-    public String updateDeclarationDeces() {
+    @SuppressWarnings("static-access")
+	public String updateDeclarationDeces() {
         String route = "";
         if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationDeces(Tools.formatDay(this.decDCToConsult.getDate_d())))){
         	if("".equals(this.decDCToConsult.getNum_jugement()) || "".equals(this.decDCToConsult.getDate_j()) || "".equals(this.decDCToConsult.getTribunal())){
         		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if(deceService.verifyNumeroJugement(this.decDCToConsult.getNum_jugement(), Tools.formatDay(this.decDCToConsult.getDate_j()).substring(6, 10), this.decDCToConsult.getId())){
         		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjé attribué pour cette année.", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Autre")) && ("".equals(this.decDCToConsult.getAdresse_declarant()) || "".equals(this.decDCToConsult.getPrenom_declarant()) || "".equals(this.decDCToConsult.getNom_declarant()) || "".equals(this.decDCToConsult.getProfession_declarant()) || "".equals(this.decDCToConsult.getNum_identification_declarant()))){
-        		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
-                FacesContext.getCurrentInstance().addMessage(null, messages);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Pére")) && ("".equals(this.decDCToConsult.getPrenom_pere()) || "".equals(this.decDCToConsult.getNom_pere()) || "".equals(this.decDCToConsult.getDomicile_pere()) || "".equals(this.decDCToConsult.getProfession_pere()))){
-        		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du pére.", null);
-                FacesContext.getCurrentInstance().addMessage(null, messages);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du pére.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Mére")) && ("".equals(this.decDCToConsult.getPrenom_mere()) || "".equals(this.decDCToConsult.getNom_mere()) || "".equals(this.decDCToConsult.getDomicile_mere()) || "".equals(this.decDCToConsult.getProfession_mere()))){
-        		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations de la mére.", null);
-                FacesContext.getCurrentInstance().addMessage(null, messages);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations de la mére.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else{
         		this.decDCToConsult.setDate_deces(Tools.formatDay(this.decDCToConsult.getDate_d()));
@@ -494,29 +618,44 @@ public class ConsultBean implements Serializable {
                 if (deceService.updateDeclarationDeces(decDCToConsult)) {
                 	
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La modification a été effectué avec succés!", null);
-                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
                     route="/views/" + MyUtil.getProfil() + "/liste-declaration/deces?faces-redirect=true";
 
                 } else {
                 	
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La modification n'a pas été effectué!", null);
-                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
                 }
         	}
         	
         }
 
     	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Autre")) && ("".equals(this.decDCToConsult.getAdresse_declarant()) || "".equals(this.decDCToConsult.getPrenom_declarant()) || "".equals(this.decDCToConsult.getNom_declarant()) || "".equals(this.decDCToConsult.getProfession_declarant()) || "".equals(this.decDCToConsult.getNum_identification_declarant()))){
-    		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+    		FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
     	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Pére")) && ("".equals(this.decDCToConsult.getPrenom_pere()) || "".equals(this.decDCToConsult.getNom_pere()) || "".equals(this.decDCToConsult.getDomicile_pere()) || "".equals(this.decDCToConsult.getProfession_pere()))){
-    		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du pére.", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du pére.", null);
+    		FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
     	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Mére")) && ("".equals(this.decDCToConsult.getPrenom_mere()) || "".equals(this.decDCToConsult.getNom_mere()) || "".equals(this.decDCToConsult.getDomicile_mere()) || "".equals(this.decDCToConsult.getProfession_mere()))){
-    		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations de la mére.", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations de la mére.", null);
+    		FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
         else{
         	this.decDCToConsult.setDate_deces(Tools.formatDay(this.decDCToConsult.getDate_d()));
@@ -528,18 +667,24 @@ public class ConsultBean implements Serializable {
             if (deceService.updateDeclarationDeces(decDCToConsult)) {
             	
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La modification a été effectué avec succés!", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
                 route="/views/" + MyUtil.getProfil() + "/liste-declaration/deces?faces-redirect=true";
 
             } else {
             	
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La modification n'a pas été effectué!", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
             }
         }
         }
         else
-        	route = MyUtil.basePath() + "views/login?faces-redirect=true";
+        	route = MyUtil.pathLogin();
         return route;
     }
     
@@ -547,21 +692,21 @@ public class ConsultBean implements Serializable {
     	if(MyUtil.getProfil() != null)
     		return  MyUtil.pathModificationDeclaration()+"naissance?faces-redirect=true";
     	else
-    		return MyUtil.basePath() + "views/login?faces-redirect=true";
+    		return MyUtil.pathLogin();
     }
     
     public String updateDecMariage(){
     	if(MyUtil.getProfil() != null)
     		return  MyUtil.pathModificationDeclaration()+"mariage?faces-redirect=true";
     	else
-    		return MyUtil.basePath() + "views/login?faces-redirect=true";
+    		return MyUtil.pathLogin();
     }
     
     public String updateDecDeces(){
     	if(MyUtil.getProfil() != null)
     		return  MyUtil.pathModificationDeclaration()+"deces?faces-redirect=true";
     	else
-    		return MyUtil.basePath() + "views/login?faces-redirect=true";
+    		return MyUtil.pathLogin();
     }
     
     //Fin de la liste des méthodes
@@ -572,21 +717,21 @@ public class ConsultBean implements Serializable {
     	if(MyUtil.getProfil() != null)
     		return "/views/" + MyUtil.getProfil() + "/registre/naissance?faces-redirect=true";
     	else
-    		return MyUtil.basePath() + "views/login?faces-redirect=true";
+    		return MyUtil.pathLogin();
     }
     
     public String retourRegistreMariage(){
     	if(MyUtil.getProfil() != null)
     		return "/views/" + MyUtil.getProfil() + "/registre/mariage?faces-redirect=true";
     	else
-    		return MyUtil.basePath() + "views/login?faces-redirect=true";
+    		return MyUtil.pathLogin();
     }
     
     public String retourRegistreDeces(){
     	if(MyUtil.getProfil() != null)
     		return "/views/" + MyUtil.getProfil() + "/registre/dece?faces-redirect=true";
     	else
-    		return MyUtil.basePath() + "views/login?faces-redirect=true";
+    		return MyUtil.pathLogin();
     }
     
     
@@ -594,21 +739,21 @@ public class ConsultBean implements Serializable {
     	if(MyUtil.getProfil() != null)
     		return "/views/" + MyUtil.getProfil() + "/liste-declaration/naissance?faces-redirect=true";
     	else
-    		return MyUtil.basePath() + "views/login?faces-redirect=true";
+    		return MyUtil.pathLogin();
     }
     
     public String retourDeclarationMariage(){
     	if(MyUtil.getProfil() != null)
     		return "/views/" + MyUtil.getProfil() + "/liste-declaration/mariage?faces-redirect=true";
     	else
-    		return MyUtil.basePath() + "views/login?faces-redirect=true";
+    		return MyUtil.pathLogin();
     }
     
     public String retourDeclarationDeces(){
     	if(MyUtil.getProfil() != null)
     		return "/views/" + MyUtil.getProfil() + "/liste-declaration/deces?faces-redirect=true";
     	else
-    		return MyUtil.basePath() + "views/login?faces-redirect=true";
+    		return MyUtil.pathLogin();
     }
     
     
@@ -1482,7 +1627,7 @@ public class ConsultBean implements Serializable {
 		   return "/views/" + MyUtil.getProfil() + "/registre/naissance-for-year?faces-redirect=true";
 		}
 		else
-			return MyUtil.basePath() + "views/login?faces-redirect=true";
+			return MyUtil.pathLogin();
 	   }
 	
 	
@@ -1498,7 +1643,7 @@ public class ConsultBean implements Serializable {
 		   return "/views/" + MyUtil.getProfil() + "/registre/mariage-for-year?faces-redirect=true";
 		}
 		else
-			return MyUtil.basePath() + "views/login?faces-redirect=true";
+			return MyUtil.pathLogin();
 	   }
 	
 	
@@ -1514,7 +1659,7 @@ public class ConsultBean implements Serializable {
 	   return "/views/" + MyUtil.getProfil() + "/registre/dece-for-year?faces-redirect=true";
 		}
 		else
-			return MyUtil.basePath() + "views/login?faces-redirect=true";
+			return MyUtil.pathLogin();
    }
 	   
 
@@ -1889,21 +2034,366 @@ public class ConsultBean implements Serializable {
 		this.pieceDel = pieceDel;
 	}
 
+	@SuppressWarnings("static-access")
 	public void paiement(){
 		this.pieceDel.setDate_paiement(Tools.getCurrentDateTime());
 		this.pieceDel.setPaiement(true);
 		this.pieceDel.setUsermodify(MyUtil.getUserLogged());
 		if(delService.updatePiece(this.pieceDel)){
-			FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_INFO, "Dépot de paiement effecttué avec succès.", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Dépot de paiement effecttué avec succès.", null);
+			FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
 		}
 		else{
-			FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Le dépot ne s'estt pas correctement effectué.", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Le dépot ne s'estt pas correctement effectué.", null);
+			FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
 		}
 	}
 
 	private int anneeCourant = Integer.parseInt(Tools.getCurrentDate().substring(6, 10));
 
 
+	
+	@SuppressWarnings("static-access")
+	public String updateRegistreNaissance(){
+		String route = "";
+		System.out.println(this.decToConsult.getDate_j());
+		if(MyUtil.getProfil() != null){
+		if(acteService.verifyNumeroJugement(this.decToConsult.getNumero_jugement(), Tools.formatDay(this.decToConsult.getDate_j()).substring(6, 10))){
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjà  attribué pour cette année.", null);
+    		FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
+    	}
+    	else if((this.decToConsult.getDeclarant().equalsIgnoreCase("Autre")) && ("".equals(this.decToConsult.getDomicile_declarant()) || "".equals(this.decToConsult.getPrenom_declarant()) || "".equals(this.decToConsult.getNom_declarant()) || "".equals(this.decToConsult.getProfession_declarant()) || "".equals(this.decToConsult.getAdresse_declarant()) || "".equals(this.decToConsult.getNum_identification_declarant()))){
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+    		FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
+    	}
+    	else{
+    		this.decToConsult.setDate_naissance_enfant(Tools.formatDay(this.decToConsult.getDate_naissanceE()));
+            this.decToConsult.setDate_naissance_mere(Tools.formatDay(this.decToConsult.getDate_naissanceM()));
+            this.decToConsult.setDate_naissance_pere(Tools.formatDay(this.decToConsult.getDate_naissanceP()));
+            this.decToConsult.setDate_jugement(Tools.formatDay(this.decToConsult.getDate_j()));
+            
+            this.decToConsult.setHeure_naissance_enfant(this.decToConsult.getHeure_naissanceE().toString().substring(11, 16));
+            this.decToConsult.setType_declaration("Jugement");
+            this.decToConsult.setDate_modification(Tools.getCurrentDateTime());
+            this.decToConsult.setModificateurNaissance(MyUtil.getUserLogged());
+            
+            if (acteService.updateActe(decToConsult)) {
+            	
+            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La modification a été effectuée avec succès.", null);
+            	FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+            	route = "/views/" + MyUtil.getProfil() + "/consultation/acte/naissance?faces-redirect=true";
+            }
+            
+            else{
+            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible de modifier la déclaration. Vérifiez toutes les informations saisies.", null);
+            	FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+            }
+        }
+	}
+		else
+			route = MyUtil.pathLogin();
+		return route;
+	}
+	
+	@SuppressWarnings("static-access")
+	public String updateRegistreMariage(){
+		String route = "";
+		if(MyUtil.getProfil() != null){
+			
+			if(marService.verifyNumeroJugement(this.decMarToConsult.getNumero_Jugement(), this.decMarToConsult.getDateJugement().toString().substring(6, 10))){
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjà  attribué pour cette année.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+        	}
+        	else{
+                this.decMarToConsult.setDate_Mariage(Tools.formatDay(this.decMarToConsult.getDateMariage()));
+                this.decMarToConsult.setDate_Jugement(Tools.formatDay(this.decMarToConsult.getDateJugement()));
+                this.decMarToConsult.setDate_Naissance_Epouse(Tools.formatDay(this.decMarToConsult.getDateNaissanceEpouse()));
+                this.decMarToConsult.setDate_Naissance_Epoux(Tools.formatDay(this.decMarToConsult.getDateNaissanceMereEpoux()));
+                this.decMarToConsult.setDate_Naissance_Mere_Epouse(Tools.formatDay(this.decMarToConsult.getDateNaissanceMereEpouse()));
+                this.decMarToConsult.setDate_Naissance_Mere_Epoux(Tools.formatDay(this.decMarToConsult.getDateNaissanceMereEpoux()));
+                this.decMarToConsult.setDate_Naissance_Pere_Epoux(Tools.formatDay(this.decMarToConsult.getDateNaissancePereEpoux()));
+                this.decMarToConsult.setDate_Naissance_Pere_Epouse(Tools.formatDay(this.decMarToConsult.getDateNaissancePereEpouse()));
+                this.decMarToConsult.setHeure_Mariage(this.decMarToConsult.getHeureMariage().toString().substring(11, 16));
+                this.decMarToConsult.setType_Declaration("Jugement");
+                this.decMarToConsult.setDate_modification(Tools.getCurrentDateTime());
+                this.decMarToConsult.setModificateurMariage(MyUtil.getUserLogged());
+                
+                if (marService.updateDeclarationMariage(decMarToConsult)) {
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Les modifications ont été effectué avec succès.", null);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
+                    route="/views/" + MyUtil.getProfil() + "/consultation/acte/mariage?faces-redirect=true";
+
+                } 
+                else {
+
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les modifications n'ont pas été effecuté normalement.", null);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
+                
+                }
+        	}
+			
+		}
+		else
+			route = MyUtil.pathLogin();
+		return route;
+	}
+	
+	
+	@SuppressWarnings("static-access")
+	public String updateRegistreDeces(){
+		String route = "";
+		if(MyUtil.getProfil() != null){
+			
+			if(deceService.verifyNumeroJugement(this.decDCToConsult.getNum_jugement(), Tools.formatDay(this.decDCToConsult.getDate_j()).substring(6, 10))){
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjé attribué pour cette année.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+        	}
+        	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Autre")) && ("".equals(this.decDCToConsult.getAdresse_declarant()) || "".equals(this.decDCToConsult.getPrenom_declarant()) || "".equals(this.decDCToConsult.getNom_declarant()) || "".equals(this.decDCToConsult.getProfession_declarant()) || "".equals(this.decDCToConsult.getNum_identification_declarant()))){
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+        	}
+        	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Pére")) && ("".equals(this.decDCToConsult.getPrenom_pere()) || "".equals(this.decDCToConsult.getNom_pere()) || "".equals(this.decDCToConsult.getDomicile_pere()) || "".equals(this.decDCToConsult.getProfession_pere()))){
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du pére.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+        	}
+        	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Mére")) && ("".equals(this.decDCToConsult.getPrenom_mere()) || "".equals(this.decDCToConsult.getNom_mere()) || "".equals(this.decDCToConsult.getDomicile_mere()) || "".equals(this.decDCToConsult.getProfession_mere()))){
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations de la mére.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+        	}
+        	else{
+        		this.decDCToConsult.setDate_deces(Tools.formatDay(this.decDCToConsult.getDate_d()));
+                this.decDCToConsult.setDate_naissance_defunt(Tools.formatDay(this.decDCToConsult.getDate_naissanceDefunt()));
+                this.decDCToConsult.setDate_jugement(Tools.formatDay(this.decDCToConsult.getDate_j()));
+                this.decDCToConsult.setHeure_deces(this.decDCToConsult.getHeure_d().toString().substring(11, 16));
+                this.decDCToConsult.setDate_modification(Tools.getCurrentDateTime());
+                this.decDCToConsult.setType_declaration("Jugement");
+                this.decDCToConsult.setModificateurDeces(MyUtil.getUserLogged());
+                
+                if (deceService.updateDeclarationDeces(decDCToConsult)) {
+                	
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La modification a été effectué avec succés!", null);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
+                    route="/views/" + MyUtil.getProfil() + "/consultation/acte/deces?faces-redirect=true";
+
+                } else {
+                	
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La modification n'a pas été effectué!", null);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
+                }
+        	}
+			
+		}
+		else
+			route = MyUtil.pathLogin();
+		return route;
+	}
+	
+	@SuppressWarnings("static-access")
+	public String mAJMMN(){
+		String route = "";
+		if(MyUtil.getProfil() != null){
+			this.decToConsult.setMention_marginale(this.decToConsult.getMention_marginale()+" \n "+this.getMentionN());
+			if (acteService.updateActe(this.decToConsult)) {
+            	
+            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Mise à jour de la mention marginale effectuée avec succés!", null);
+            	FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+            	route = "/views/" + MyUtil.getProfil() + "/consultation/acte/naissance?faces-redirect=true";
+            }
+            
+            else{
+            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mise à jour de la mention marginale non effectuée!", null);
+            	FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+            }
+		}
+		else{
+			
+		}
+		return route;
+	}
+	
+	@SuppressWarnings("static-access")
+	public String mAJMMM(){
+		String route = "";
+		if(MyUtil.getProfil() != null){
+			this.decMarToConsult.setMentions_Marginales(this.decMarToConsult.getMentions_Marginales()+" \n "+this.getMention());
+			
+			if (marService.updateDeclarationMariage(decMarToConsult)) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Mise à jour de la mention marginale effectuée avec succés!", null);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+                route="/views/" + MyUtil.getProfil() + "/consultation/acte/mariage?faces-redirect=true";
+
+            } 
+            else {
+
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mise à jour de la mention marginale non effectuée!", null);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+            
+            }
+		}
+		else{
+			
+		}
+		return route;
+	}
+	
+	@SuppressWarnings("static-access")
+	public String mAJMMD(){
+		String route = "";
+		if(MyUtil.getProfil() != null){
+			this.decDCToConsult.setMention_marginale(this.decDCToConsult.getMention_marginale()+" \n "+this.getMentionD());
+			if (deceService.updateDeclarationDeces(decDCToConsult)) {
+            	
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Mise à jour de la mention marginale effectuée avec succés!", null);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+                route="/views/" + MyUtil.getProfil() + "/consultation/acte/deces?faces-redirect=true";
+
+            } else {
+            	
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mise à jour de la mention marginale non effectuée!", null);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+            }
+		}
+		else{
+			
+		}
+		return route;
+	}
+
+
+
+	/**
+	 * @return the mention
+	 */
+	public String getMention() {
+		return mention;
+	}
+
+
+
+	/**
+	 * @param mention the mention to set
+	 */
+	public void setMention(String mention) {
+		this.mention = mention;
+	}
+
+
+
+	/**
+	 * @return the mentionN
+	 */
+	public String getMentionN() {
+		return mentionN;
+	}
+
+
+
+	/**
+	 * @param mentionN the mentionN to set
+	 */
+	public void setMentionN(String mentionN) {
+		this.mentionN = mentionN;
+	}
+
+
+
+	/**
+	 * @return the mentionD
+	 */
+	public String getMentionD() {
+		return mentionD;
+	}
+
+
+
+	/**
+	 * @param mentionD the mentionD to set
+	 */
+	public void setMentionD(String mentionD) {
+		this.mentionD = mentionD;
+	}
+	
+	public String mentionN(){
+		if(MyUtil.getProfil() != null)
+			return MyUtil.pathMAJMM()+"naissance?faces-redirect=true";
+		else
+			return MyUtil.pathLogin();
+	}
+	
+	public String mentionM(){
+		if(MyUtil.getProfil() != null)
+			return MyUtil.pathMAJMM()+"mariage?faces-redirect=true";
+		else
+			return MyUtil.pathLogin();
+	}
+	
+	public String mentionD(){
+		if(MyUtil.getProfil() != null)
+			return MyUtil.pathMAJMM()+"deces?faces-redirect=true";
+		else
+			return MyUtil.pathLogin();
+	}
 }

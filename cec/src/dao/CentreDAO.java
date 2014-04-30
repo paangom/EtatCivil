@@ -29,4 +29,6 @@ public interface CentreDAO {
     public Centres getCentre();
 
     public boolean verifyCentre();
+    
+    public boolean viderCentre();
 }

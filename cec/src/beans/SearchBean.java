@@ -75,9 +75,10 @@ public class SearchBean implements Serializable{
     
     
     
-    public String recherche(){
+    @SuppressWarnings("static-access")
+	public String recherche(){
         String router = "";
-        
+        if(MyUtil.getProfil() != null){
         if("Naissance".equals(search.getType())){
         	
             this.setResultN(naissServ.searchAN(search));
@@ -93,9 +94,14 @@ public class SearchBean implements Serializable{
         }
         else{
         	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Veuillez choisir le type d'acte à rechercher.", null);
-            FacesContext.getCurrentInstance().addMessage(null, message);
+        	FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
         }
         return router;
+        }
+        else return MyUtil.pathLogin();
     }
 
     

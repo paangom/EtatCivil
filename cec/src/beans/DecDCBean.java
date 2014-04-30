@@ -63,29 +63,45 @@ public class DecDCBean implements Serializable{
     }
     
     
-    public String saveDeclarationDeces(){
+    @SuppressWarnings("static-access")
+	public String saveDeclarationDeces(){
         String route = "";
         if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationDeces(Tools.formatDay(this.decToAdd.getDate_d())))){
         	if("".equals(this.decToAdd.getNum_jugement()) || "".equals(this.decToAdd.getDate_j()) || "".equals(this.decToAdd.getTribunal())){
         		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if(dcServ.verifyNumeroJugement(this.decToAdd.getNum_jugement(), Tools.formatDay(this.decToAdd.getDate_j()).substring(6, 10))){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjé attribué pour cette année.", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjà attribué pour cette année.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decToAdd.getDegre_parente().equalsIgnoreCase("Autre")) && ("".equals(this.decToAdd.getAdresse_declarant()) || "".equals(this.decToAdd.getPrenom_declarant()) || "".equals(this.decToAdd.getNom_declarant()) || "".equals(this.decToAdd.getProfession_declarant()) || "".equals(this.decToAdd.getNum_identification_declarant()))){
-        		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
-                FacesContext.getCurrentInstance().addMessage(null, messages);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decToAdd.getDegre_parente().equalsIgnoreCase("Pére")) && ("".equals(this.decToAdd.getPrenom_pere()) || "".equals(this.decToAdd.getNom_pere()) || "".equals(this.decToAdd.getDomicile_pere()) || "".equals(this.decToAdd.getProfession_pere()))){
-        		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du pére.", null);
-                FacesContext.getCurrentInstance().addMessage(null, messages);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du pére.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decToAdd.getDegre_parente().equalsIgnoreCase("Mére")) && ("".equals(this.decToAdd.getPrenom_mere()) || "".equals(this.decToAdd.getNom_mere()) || "".equals(this.decToAdd.getDomicile_mere()) || "".equals(this.decToAdd.getProfession_mere()))){
-        		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations de la mére.", null);
-                FacesContext.getCurrentInstance().addMessage(null, messages);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations de la mére.", null);
+        		FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else{
         		this.decToAdd.setDate_deces(Tools.formatDay(this.decToAdd.getDate_d()));
@@ -101,29 +117,44 @@ public class DecDCBean implements Serializable{
                 if (dcServ.saveDeclarationDC(decToAdd)) {
                 	
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Déclaration sauvegardée avec succés!", null);
-                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
                     route="/views/" + MyUtil.getProfil() + "/liste-declaration/deces?faces-redirect=true";
 
                 } else {
                 	
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur dans le sauvegarde de la déclaration!", null);
-                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    FacesContext context = FacesContext.getCurrentInstance();
+    	            context.getCurrentInstance().addMessage(null, message);
+	            	
+	            	context.getExternalContext().getFlash().setKeepMessages(true);
                 }
         	}
         	
         }
 
     	else if((this.decToAdd.getDegre_parente().equalsIgnoreCase("Autre")) && ("".equals(this.decToAdd.getAdresse_declarant()) || "".equals(this.decToAdd.getPrenom_declarant()) || "".equals(this.decToAdd.getNom_declarant()) || "".equals(this.decToAdd.getProfession_declarant()) || "".equals(this.decToAdd.getNum_identification_declarant()))){
-    		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+    		FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
     	else if((this.decToAdd.getDegre_parente().equalsIgnoreCase("Père")) && ("".equals(this.decToAdd.getPrenom_pere()) || "".equals(this.decToAdd.getNom_pere()) || "".equals(this.decToAdd.getDomicile_pere()) || "".equals(this.decToAdd.getProfession_pere()))){
-    		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du pére.", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du pére.", null);
+    		FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
     	else if((this.decToAdd.getDegre_parente().equalsIgnoreCase("Mère")) && ("".equals(this.decToAdd.getPrenom_mere()) || "".equals(this.decToAdd.getNom_mere()) || "".equals(this.decToAdd.getDomicile_mere()) || "".equals(this.decToAdd.getProfession_mere()))){
-    		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations de la mére.", null);
-            FacesContext.getCurrentInstance().addMessage(null, messages);
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations de la mére.", null);
+    		FacesContext context = FacesContext.getCurrentInstance();
+            context.getCurrentInstance().addMessage(null, message);
+        	
+        	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
         else{
         	this.decToAdd.setDate_deces(Tools.formatDay(this.decToAdd.getDate_d()));
@@ -139,18 +170,24 @@ public class DecDCBean implements Serializable{
             if (dcServ.saveDeclarationDC(decToAdd)) {
             	
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Déclaration sauvegardée avec succés!", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
                 route="/views/" + MyUtil.getProfil() + "/liste-declaration/deces?faces-redirect=true";
 
             } else {
             	
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur dans le sauvegarde de la déclaration!", null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
             }
         }
         }
         else
-        	route = "login?faces--redirect=true";
+        	route =MyUtil.pathLogin();
 
         return route; 
         

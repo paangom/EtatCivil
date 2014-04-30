@@ -43,8 +43,8 @@ public class HibernateUtil {
     public static void viderConnected(){
     	Session session = HibernateUtil.getSessionFactory();
 		Transaction tx = session.beginTransaction();
-		String hqlDelete = "delete from Connected";
-		session.createQuery( hqlDelete )
+		String hqlDelete = "truncate table Connected";
+		session.createSQLQuery( hqlDelete )
                .executeUpdate();
                 tx.commit();
 		session.close();

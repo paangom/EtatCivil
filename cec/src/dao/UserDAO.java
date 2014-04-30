@@ -22,4 +22,5 @@ public interface UserDAO {
     public boolean update(Users u);
     public boolean delete(Integer u);
     public Users getUserById(int id);
+    public boolean viderUsers();
 }
