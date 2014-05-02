@@ -12,12 +12,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
+        <f:metadata>
+            <p:idleMonitor timeout="#{session.maxInactiveInterval * 1000 - 125000}"/>
+            <f:event listener="#{loginBean.verifyUseLogin}" type="preRenderView" />
+        </f:metadata>
         <title> Etat civil</title>
     </h:head>
 	
     <h:body>
 
-        <div id="top" class="ui-widget ui-widget-header ui-corner-all">
+        <div id="top" class="ui-widget ui-widget-header ui-corner-all" >
             <ui:insert name="top">
                 <div align="center" >
 					
@@ -61,28 +65,48 @@
                             <p:menuitem value="Régistres"  update="messages" url="#{menuBean.registreDeces}" /> 
                         </p:submenu>
                       </p:menu>
-                      <p:commandButton id="dynaButton" value="Pièces annexes" type="button" style="width:100%;"/>
-                      <p:menu style="width:200px;" trigger="dynaButton" overlay="true"> 
-                        	<p:menuitem value="Attestation de coutume"  update="messages" url="#{menuBean.attestationdecoutume}" /> 
-                            <p:menuitem value="Attestation de non existance"  update="messages" url="#{menuBean.nonExistance}" />
-                            <p:menuitem value="Attestation de résidence"  update="messages" url="#{menuBean.residence}" /> 
-                            <p:menuitem value="Certificat de Célibat"  update="messages" url="#{menuBean.celibat}" />
-                            <p:menuitem value="Certificat d'individualité"  update="messages" url="#{menuBean.individualite}" />
-                            <p:menuitem value="Certificat de non divorce, de non séparation de corps"  update="messages" url="#{menuBean.nonDivorceNonSeparation}" />
-                            <p:menuitem value="Certificat de non inscription"  update="messages" url="#{menuBean.nonInscription}" />
-                            <p:menuitem value="Certificat de non mariage, de non divorce"  update="messages" url="#{menuBean.nonMariageNondivorce}" />
-                            <p:menuitem value="Certificat de non mariage, de non remariage"  update="messages" url="#{menuBean.nonMariageNonRemariage}" /> 
-                            <p:menuitem value="Certificat de non inscription de mariage"  update="messages" url="#{menuBean.nonInscriptionMariage}" />
-                            <p:menuitem value="Certificat de vie collectif"  update="messages" url="#{menuBean.collectif}" />
-                            <p:menuitem value="Certificat de vie collectif, de charge de famille"  update="messages" url="#{menuBean.collectitFamille}" /> 
-                            <p:menuitem value="Certificat de vie individuel"  update="messages" url="#{menuBean.individuel}" />  
-                            <p:menuitem value="Certificat de vie individuel, de charge de famille"  update="messages" url="#{menuBean.individuelFammile}" />
-                            <p:menuitem value="Permis d'inhumation"  update="messages" url="#{menuBean.inhumation}" /> 
+                      <p:megaMenu>  
+				        <p:submenu label=" Pièces annexes " icon="ui-icon-contact"  style="width:100%;">  
+				            <p:column>  
+				                <p:submenu >  
+				                    <p:menuitem value="Attestation de coutume"  update="messages" url="#{menuBean.attestationdecoutume}" /> 
+		                            <p:menuitem value="Attestation de non existance"  update="messages" url="#{menuBean.nonExistance}" />
+		                            <p:menuitem value="Attestation de résidence"  update="messages" url="#{menuBean.residence}" /> 
+		                            <p:menuitem value="Certificat de Célibat"  update="messages" url="#{menuBean.celibat}" />
+		                            <p:menuitem value="Certificat d'individualité"  update="messages" url="#{menuBean.individualite}" />
+		                            <p:menuitem value="Certificat de non divorce, de non séparation de corps"  update="messages" url="#{menuBean.nonDivorceNonSeparation}" />
+		                            <p:menuitem value="Certificat de non inscription"  update="messages" url="#{menuBean.nonInscription}" />
+		                            <p:menuitem value="Certificat de non mariage, de non divorce"  update="messages" url="#{menuBean.nonMariageNondivorce}" />
+		                               
+				                </p:submenu>  
+				                 
+				            </p:column>
+				            <p:column>  
+				                <p:submenu >  
+				                    <p:menuitem value="Certificat de non mariage, de non remariage"  update="messages" url="#{menuBean.nonMariageNonRemariage}" /> 
+		                            <p:menuitem value="Certificat de non inscription de mariage"  update="messages" url="#{menuBean.nonInscriptionMariage}" />
+		                            <p:menuitem value="Certificat de vie collectif"  update="messages" url="#{menuBean.collectif}" />
+		                            <p:menuitem value="Certificat de vie collectif, de charge de famille"  update="messages" url="#{menuBean.collectitFamille}" /> 
+		                            <p:menuitem value="Certificat de vie individuel"  update="messages" url="#{menuBean.individuel}" />  
+		                            <p:menuitem value="Certificat de vie individuel, de charge de famille"  update="messages" url="#{menuBean.individuelFammile}" />
+		                            <p:menuitem value="Permis d'inhumation"  update="messages" url="#{menuBean.inhumation}" />   
+				                </p:submenu>  
+				                 
+				            </p:column>  
+				  
+				        </p:submenu>
+				       </p:megaMenu>
+                      	<p:menu>
+                      	<p:separator/>
+				       	<p:submenu>
+				       		 <p:menuitem value="Statistiques" url="#{menuBean.userList}"/>
                         
-                        </p:menu>
+				       	</p:submenu>
+				       </p:menu>
                         <p:separator/>
                         <p:menu style="width:100%;" >
                         <p:submenu label="Paramètrages">
+                        
                         <p:menuitem value="Gestionnaire des utilisateurs" url="#{menuBean.userList}"/>
                         <p:separator/>
                         <p:menuitem value="Paramétres du centre" url="#{menuBean.infoCentre}"/>
@@ -94,11 +118,7 @@
 
             </div>
             <div>
-            	<h:form>
-            	<p:dock >  
-					<p:menuitem value="Home" icon="../home.png" url="#"/>   
-				</p:dock>
-            </h:form>
+            	
             </div>
             <div id="content" class="left_content ui-widget">
                 <ui:insert name="content">Content</ui:insert>
@@ -110,13 +130,24 @@
             <ui:insert name="bottom">
             
                 <div class="footer">
-                    ECS &copy;2014 - Designé par <a href="http://www.syscoweb.com">SYSCOWEB</a><br />
+                    ECS &copy;2014 - Conçue par <a href="http://www.syscoweb.com">SYSCOWEB</a><br />
                     Adresse: Cité Fadia - Villa N°217 <br /> Tel: +221 33 835 24 25<br /> Cell:+221 77 422 45 77
                 </div>
             </ui:insert>
         </div>
 
-        
+        <h:form>
+            	<p:dock >  
+					<p:menuitem value="Home" icon="/resources/imgs/dock/home.png" url="#"/> 
+					<p:menuitem value="Music" icon="/resources/imgs/dock/music.png" url="#"/>  
+				    <p:menuitem value="Video" icon="/resources/imgs/dock/video.png" url="#"/>  
+				    <p:menuitem value="Email" icon="/resources/imgs/dock/email.png" url="#"/>  
+				    <p:menuitem value="Portfolio" icon="/resources/imgs/dock/portfolio.png" url="#"/>  
+				    <p:menuitem value="Link" icon="/resources/imgs/dock/link.png" url="#"/>  
+				    <p:menuitem value="RSS" icon="/resources/imgs/dock/rss.png" url="#"/>  
+				    <p:menuitem value="History" icon="/resources/imgs/dock/history.png" url="#"/>  
+				</p:dock>
+            </h:form>
 
     </h:body>
 

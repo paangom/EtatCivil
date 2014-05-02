@@ -158,13 +158,13 @@ public class UserBean implements Serializable{
     	if(this.uService.viderUsers()){
     		if(uService.addUser(this.userToCreate)){
                 route = "/login?faces-redirect=true";
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le super utilisateur est crée. \nNom d'utilisateur :"+this.userToCreate.getUserUserName()+" \nMot de passe :"+this.userToCreate.getUserPassword(),null);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Information", "Le super utilisateur est crée. \nNom d'utilisateur :"+this.userToCreate.getUserUserName()+" \nMot de passe :"+this.userToCreate.getUserPassword());
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
             }else{
-            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible de créer cet utilisateur.",null);
+            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Impossible de créer cet utilisateur.");
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getCurrentInstance().addMessage(null, message);
             	
@@ -173,7 +173,7 @@ public class UserBean implements Serializable{
             }
     	}
     	else{
-    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible d'initialiser les utilisateurs.",null);
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Impossible d'initialiser les utilisateurs.");
             FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -188,14 +188,14 @@ public class UserBean implements Serializable{
         String msg;
         if(uService.updateUser(selectedUser)){
             msg = "La modification de l'utilisateur s'est correctement passée.";
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", msg);
             FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
         	context.getExternalContext().getFlash().setKeepMessages(true);
         }else{
             msg = "Erreur de modification de l'utilisateur";
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", msg);
             FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -216,7 +216,7 @@ public class UserBean implements Serializable{
             msg = "Erreur de suppression de l'utilisateur";
         }
         
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", msg);
         FacesContext context = FacesContext.getCurrentInstance();
         context.getCurrentInstance().addMessage(null, message);
     	

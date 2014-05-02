@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Déclaration d'acte de Décès</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+
+    <body>
+
+        <ui:composition template="./../../../template.xhtml">
+
+            <ui:define name="content">
+                
+                <div class="breadcrumb">
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Home" url="#{menuBean.home}"/>
+                            <p:menuitem value="Déclaration d'Acte de Décès"/>
+                        </p:breadCrumb>
+                    </h:form>
+                </div>
+                <h1 align="center">MISE A JOUR DE LA MENTION MARGINALE DE L'ACTE DE DECES N° #{consultBean.decDCToConsult.numero_acte}</h1>
+                <div class="panContent" align="center">
+                    <h:form id="formAddDec">
+                        <p:growl id="growl" showDetail="true" life="6000" /> 
+
+                        
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="MENTIONS MARGINALES">
+                                <div align="center">
+                                    <h:panelGrid columns="1" cellpadding="5">
+                                      	<div align="center">
+                                    		<p:inputTextarea value="#{consultBean.mentionD}"  rows="15" cols="160" style="width: 100%; " label="Mention marginale" />  
+                                		</div>
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid >
+                        <h:panelGrid columns="1" cellspacing="5">
+                            <p:commandButton value="Mise à jour" update="growl" action="#{consultBean.mAJMMD}"
+                                             oncomplete="handleLoginRequest(xhr, status, args)"/>
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed) {
+                    jQuery('#formAddDec').effect("shake", {times: 6}, 100);
+                }
+                else {
+                    location.href = args.route;
+                }
+            }
+        </script> 
+
+    </body>
+</html>

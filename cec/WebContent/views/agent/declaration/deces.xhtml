@@ -34,16 +34,16 @@
                                 <div align="center">
                                     <h:panelGrid columns="4" cellpadding="6" style="width: 80%;">
                                         <h:outputLabel for="datedc" value="Date du décès" style="text-align: right;" />  
-                                        <p:calendar id="datedc" effect="fadeIn" navigator="true" value="#{decDCBean.decToAdd.date_d}" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true"/>
+                                        <p:calendar id="datedc" effect="fadeIn" navigator="true" value="#{decDCBean.decToAdd.date_d}" maxdate="calwidget.today()" widgetVar="calwidget" required="true" requiredMessage="Veuillez saisir la date du décès" pattern="dd/MM/yyyy" showButtonPanel="true"/>
 
                                         <h:outputLabel for="heuredc" value="Heure du décès" style="text-align: right;" />  
-                                        <p:calendar id="heuredc"  pattern="HH:mm" timeOnly="true" value="#{decDCBean.decToAdd.heure_d}" />
+                                        <p:calendar id="heuredc"  pattern="HH:mm" timeOnly="true" value="#{decDCBean.decToAdd.heure_d}" required="true" requiredMessage="Veuillez saisir l'heure du décès"/>
 
                                         <h:outputLabel for="lieudc" value="Lieu du décès" style="text-align: right;" />  
-                                        <p:inputText id="lieudc"  required="true" label="Lieu du décès" value="#{decDCBean.decToAdd.lieu_deces}" />
+                                        <p:inputText id="lieudc"  required="true" label="Lieu du décès" value="#{decDCBean.decToAdd.lieu_deces}" requiredMessage="Veuillez saisr le lieu du décès"/>
 
                                         <h:outputLabel for="fs" value="Formation sanitaire" style="text-align: right;" />  
-                                        <p:inputText id="fs"  required="true" label="Formation sanitaire" value="#{decDCBean.decToAdd.formation_sanitaire}" />
+                                        <p:inputText id="fs"  required="true" label="Formation sanitaire" value="#{decDCBean.decToAdd.formation_sanitaire}" requiredMessage="Veuillez saisir la formation sanitaire du décès"/>
                                         
                                         <h:outputLabel for="pd" value="Pays de décès" style="text-align: right;" />  
                                         <p:inputText id="pd" value="#{decDCBean.decToAdd.pays_deces}" />
@@ -57,27 +57,27 @@
                                 <div align="center">
                                     <h:panelGrid columns="4" cellpadding="6" style="width: 80%;"> 
                                         <h:outputLabel for="firstname" value="Prénoms" style="text-align: right;" />  
-                                        <p:inputText id="firstname"  required="true" label="Prenoms" value="#{decDCBean.decToAdd.prenom_defunt}" />  
+                                        <p:inputText id="firstname"  required="true" label="Prenoms" value="#{decDCBean.decToAdd.prenom_defunt}" requiredMessage="Veuillez saisir le prénoms du défunt"/>  
 
                                         <h:outputLabel for="nom" value="Nom" style="text-align: right;"/>  
-                                        <p:inputText id="nom"  required="true" label="Nom" value="#{decDCBean.decToAdd.nom_defunt}"/> 
+                                        <p:inputText id="nom"  required="true" label="Nom" value="#{decDCBean.decToAdd.nom_defunt}" requiredMessage="Veuillez saisir le nom du défunt"/> 
 
                                         <h:outputLabel for="dateN" value="Date de naissance" style="text-align: right;" />  
-                                        <p:calendar id="dateN" effect="fadeIn" navigator="true" value="#{decDCBean.decToAdd.date_naissanceDefunt}" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true">
+                                        <p:calendar id="dateN" effect="fadeIn" navigator="true" value="#{decDCBean.decToAdd.date_naissanceDefunt}" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true" required="true" requiredMessage="Veuillez saisir la date de naissance du défunt">
                                             <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy" />
                                         </p:calendar>
                                         
                                         <h:outputLabel for="type" value="Sexe" style="text-align: right;" />  
-                                        <p:selectOneRadio id="type" value="#{decDCBean.decToAdd.sexe_defunt}">  
+                                        <p:selectOneRadio id="type" value="#{decDCBean.decToAdd.sexe_defunt}" required="true" requiredMessage="Veuillez choisir le sexe du défunt">  
                                             <f:selectItem itemLabel="Féminin" itemValue="Féminin" />  
                                             <f:selectItem itemLabel="Masculin" itemValue="Masculin" />  
                                         </p:selectOneRadio>
 
                                         <h:outputLabel for="lieuN" value="Lieu de naissance" style="text-align: right;"/>  
-                                        <p:inputText id="lieuN" required="true" label="Lieu de naissance" value="#{decDCBean.decToAdd.lieu_naissance_defunt}"/> 
+                                        <p:inputText id="lieuN" required="true" label="Lieu de naissance" value="#{decDCBean.decToAdd.lieu_naissance_defunt}" requiredMessage="Veuillez saisr le lieu denaissance du défunt"/> 
 
                                         <h:outputLabel for="professiondc" value="Profession" style="text-align: right;"/>  
-                                        <p:inputText id="professiondc"  required="true" label="Profession" value="#{decDCBean.decToAdd.profession_defunt}"/> 
+                                        <p:inputText id="professiondc" label="Profession" value="#{decDCBean.decToAdd.profession_defunt}"/> 
 
                                         <h:outputLabel for="mariedTO" value="Précédemment marié à" style="text-align: right;"/>  
                                         <p:inputText id="mariedTO"  label="Précédemment marié à" value="#{decDCBean.decToAdd.marie_a}"/> 
@@ -145,10 +145,10 @@
 
                                     	<h:outputText value="Degré de parenté"  rendered="true"/>  
                                         <p:selectOneMenu value="#{decDCBean.decToAdd.degre_parente}">  
-                                            <f:selectItem itemLabel="Déclaré par qui?" itemValue="" />  
-                                            <f:selectItem itemLabel="Père" itemValue="Père" />  
-                                            <f:selectItem itemLabel="Mère" itemValue="Mère" />  
-                                            <f:selectItem itemLabel="Autre" itemValue="Autre" />  
+                                            <f:selectItem itemLabel="Déclaré par:" itemValue="" />  
+                                            <f:selectItem itemLabel="Son père" itemValue="Père" />  
+                                            <f:selectItem itemLabel="Sa mère" itemValue="Mère" />  
+                                            <f:selectItem itemLabel="Un autre" itemValue="Autre" />  
                                         </p:selectOneMenu>
                                     </h:panelGrid>
                                 </div>

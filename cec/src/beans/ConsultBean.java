@@ -94,6 +94,7 @@ public class ConsultBean implements Serializable {
     private int decDBU;
     private int piecDel;
     private int pieceDelBU;
+    private int population;
   
     /**
      * Creates a new instance of consultBean
@@ -213,7 +214,7 @@ public class ConsultBean implements Serializable {
         this.decToConsult.setDate_modification(Tools.getCurrentDateTime());
         if (acteService.updateDeclarationNaissance(this.decToConsult)) {
             route =   MyUtil.basePath() + "registre/naissance?faces-redirect=true";
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La déclaration a été bien validée avec succès!", null);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "La déclaration a été bien validée avec succès!");
             FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -221,7 +222,7 @@ public class ConsultBean implements Serializable {
         }
         else{
             route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/consultation/declaration/naissance?faces-redirect=true";
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas été validée!", null);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "La déclaration n'a pas été validée!");
             FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -244,7 +245,7 @@ public class ConsultBean implements Serializable {
         this.decDCToConsult.setValidateurDeces(MyUtil.getUserLogged());
         if (deceService.updateDeclarationDeces(decDCToConsult)) {
         	
-        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La déclaration de décès a été bien validé!", null);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "La déclaration de décès a été bien validé!");
         	FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -252,7 +253,7 @@ public class ConsultBean implements Serializable {
             route =   MyUtil.basePath() + "registre/dece?faces-redirect=true";
         }
         else{
-        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être valider!", null);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "La déclaration n'a pas pu être valider!");
         	FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -275,7 +276,7 @@ public class ConsultBean implements Serializable {
         this.decMarToConsult.setDate_modification(Tools.getCurrentDateTime());
         this.decMarToConsult.setValidateurMariage(MyUtil.getUserLogged());
         if (marService.updateDeclarationMariage(this.decMarToConsult)) {
-        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La déclaration de mariage est validée avec succès!", null);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "La déclaration de mariage est validée avec succès!");
         	FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -283,7 +284,7 @@ public class ConsultBean implements Serializable {
             route =   MyUtil.basePath() + "registre/mariage?faces-redirect=true";
         }
         else{
-        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être valider!", null);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "La déclaration n'a pas pu être valider!");
         	FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -304,7 +305,7 @@ public class ConsultBean implements Serializable {
         this.decToConsult.setValidateurNaissance(MyUtil.getUserLogged());
         this.decToConsult.setDate_modification(Tools.getCurrentDateTime());
         if (acteService.updateDeclarationNaissance(this.decToConsult)) {
-        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "La déclaration de naissance est bien rejetée!", null);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "La déclaration de naissance est bien rejetée!");
         	FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -312,7 +313,7 @@ public class ConsultBean implements Serializable {
             route =  MyUtil.basePath() + "views/" + MyUtil.getProfil() + "/liste-declaration/naissance?faces-redirect=true";
         }
         else{
-        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être rejeter!", null);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "La déclaration n'a pas pu être rejeter!");
         	FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -334,7 +335,7 @@ public class ConsultBean implements Serializable {
         this.decDCToConsult.setDate_modification(Tools.getCurrentDateTime());
         this.decDCToConsult.setModificateurDeces(MyUtil.getUserLogged());
         if (deceService.updateDeclarationDeces(decDCToConsult)) {
-        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "La déclaration de décès est bien rejetée!", null);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "La déclaration de décès est bien rejetée!");
         	FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -342,7 +343,7 @@ public class ConsultBean implements Serializable {
             route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/liste-declaration/deces?faces-redirect=true";
         }
         else{
-        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être rejeter!", null);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "La déclaration n'a pas pu être rejeter!");
         	FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -364,7 +365,7 @@ public class ConsultBean implements Serializable {
         this.decMarToConsult.setDate_modification(Tools.getCurrentDateTime());
         this.decMarToConsult.setModificateurMariage(MyUtil.getUserLogged());
         if (marService.updateDeclarationMariage(this.decMarToConsult)) {
-        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "La déclaration mariage est bien rejetée!", null);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "La déclaration mariage est bien rejetée!");
         	FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -372,7 +373,7 @@ public class ConsultBean implements Serializable {
             route =  MyUtil.basePathLogin() + "views/" + MyUtil.getProfil() + "/liste-declaration/mariage?faces-redirect=true";
         }
         else{
-        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La déclaration n'a pas pu être rejeter!", null);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "La déclaration n'a pas pu être rejeter!");
         	FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -394,21 +395,21 @@ public class ConsultBean implements Serializable {
         if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationNaissance(Tools.formatDay(this.decToConsult.getDate_naissanceE())))){
         	if("".equals(this.decToConsult.getNumero_jugement()) || "".equals(this.decToConsult.getDate_j()) || "".equals(this.decToConsult.getTribunal())){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Cette déclaration est un jugement. Remplir les champs correspondants!");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if(acteService.verifyNumeroJugement(this.decToConsult.getNumero_jugement(), Tools.formatDay(this.decToConsult.getDate_j()).substring(6, 10), this.decToConsult.getId())){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjà  attribué pour cette année.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Ce numéro de jugement est déjà  attribué pour cette année.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decToConsult.getDeclarant().equalsIgnoreCase("Autre")) && ("".equals(this.decToConsult.getDomicile_declarant()) || "".equals(this.decToConsult.getPrenom_declarant()) || "".equals(this.decToConsult.getNom_declarant()) || "".equals(this.decToConsult.getProfession_declarant()) || "".equals(this.decToConsult.getAdresse_declarant()) || "".equals(this.decToConsult.getNum_identification_declarant()))){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations du déclarant.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -426,7 +427,7 @@ public class ConsultBean implements Serializable {
                 
                 if (acteService.updateActe(decToConsult)) {
                 	route = "/views/" + MyUtil.getProfil() + "/consultation/declaration/naissance?faces-redirect=true";
-                	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La modification a été effectuée avec succès.", null);
+                	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "La modification a été effectuée avec succès.");
                 	FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -434,7 +435,7 @@ public class ConsultBean implements Serializable {
                 }
                 
                 else{
-                	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible de modifier la déclaration. Vérifiez toutes les informations saisies.", null);
+                	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Impossible de modifier la déclaration. Vérifiez toutes les informations saisies.");
                 	FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -444,7 +445,7 @@ public class ConsultBean implements Serializable {
         	
         }
         else if((this.decToConsult.getDeclarant().equalsIgnoreCase("Autre")) && ("".equals(this.decToConsult.getDomicile_declarant()) || "".equals(this.decToConsult.getPrenom_declarant()) || "".equals(this.decToConsult.getNom_declarant()) || "".equals(this.decToConsult.getProfession_declarant()) || "".equals(this.decToConsult.getAdresse_declarant()) || "".equals(this.decToConsult.getNum_identification_declarant()))){
-        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations du déclarant.");
         	FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -460,14 +461,14 @@ public class ConsultBean implements Serializable {
             
             if (acteService.updateActe(decToConsult)) {
             	route = "/views/" + MyUtil.getProfil() + "/consultation/declaration/naissance?faces-redirect=true";
-            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La modification a été effectuée avec succès.", null);
+            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "La modification a été effectuée avec succès.");
             	FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
             }
             else{
-            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible de modifier la déclaration. Vérifiez toutes les informations saisies.", null);
+            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Impossible de modifier la déclaration. Vérifiez toutes les informations saisies.");
             	FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -487,14 +488,14 @@ public class ConsultBean implements Serializable {
         if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationMariage(Tools.formatDay(this.decMarToConsult.getDateMariage())))){
         	if("".equals(this.decMarToConsult.getNumero_Jugement()) || "".equals(this.decMarToConsult.getDateJugement()) || "".equals(this.decMarToConsult.getTribunal())){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Cette déclaration est un jugement. Remplir les champs correspondants!");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if(marService.verifyNumeroJugement(this.decMarToConsult.getNumero_Jugement(), this.decMarToConsult.getDateJugement().toString().substring(6, 10), this.decMarToConsult.getId())){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjà  attribué pour cette année.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Ce numéro de jugement est déjà  attribué pour cette année.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -512,7 +513,7 @@ public class ConsultBean implements Serializable {
                 this.decMarToConsult.setHeure_Mariage(this.decMarToConsult.getHeureMariage().toString().substring(11, 16));
                 
                 if (marService.updateDeclarationMariage(decMarToConsult)) {
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Les modifications ont été effectué avec succès.", null);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Les modifications ont été effectué avec succès.");
                     FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -522,7 +523,7 @@ public class ConsultBean implements Serializable {
                 } 
                 else {
 
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les modifications n'ont pas été effecuté normalement.", null);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Les modifications n'ont pas été effecuté normalement.");
                     FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -543,7 +544,7 @@ public class ConsultBean implements Serializable {
             this.decMarToConsult.setHeure_Mariage(this.decMarToConsult.getHeureMariage().toString().substring(11, 16));
             
             if (marService.updateDeclarationMariage(decMarToConsult)) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Les modifications ont été effectué avec succès.", null);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Les modifications ont été effectué avec succès.");
                 FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -553,7 +554,7 @@ public class ConsultBean implements Serializable {
             } 
             else {
 
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les modifications n'ont pas été effecuté normalement.", null);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Les modifications n'ont pas été effecuté normalement.");
                 FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -574,35 +575,35 @@ public class ConsultBean implements Serializable {
         if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationDeces(Tools.formatDay(this.decDCToConsult.getDate_d())))){
         	if("".equals(this.decDCToConsult.getNum_jugement()) || "".equals(this.decDCToConsult.getDate_j()) || "".equals(this.decDCToConsult.getTribunal())){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Cette déclaration est un jugement. Remplir les champs correspondants!");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if(deceService.verifyNumeroJugement(this.decDCToConsult.getNum_jugement(), Tools.formatDay(this.decDCToConsult.getDate_j()).substring(6, 10), this.decDCToConsult.getId())){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjé attribué pour cette année.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Ce numéro de jugement est déjé attribué pour cette année.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Autre")) && ("".equals(this.decDCToConsult.getAdresse_declarant()) || "".equals(this.decDCToConsult.getPrenom_declarant()) || "".equals(this.decDCToConsult.getNom_declarant()) || "".equals(this.decDCToConsult.getProfession_declarant()) || "".equals(this.decDCToConsult.getNum_identification_declarant()))){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations du déclarant.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Pére")) && ("".equals(this.decDCToConsult.getPrenom_pere()) || "".equals(this.decDCToConsult.getNom_pere()) || "".equals(this.decDCToConsult.getDomicile_pere()) || "".equals(this.decDCToConsult.getProfession_pere()))){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du pére.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations du pére.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Mére")) && ("".equals(this.decDCToConsult.getPrenom_mere()) || "".equals(this.decDCToConsult.getNom_mere()) || "".equals(this.decDCToConsult.getDomicile_mere()) || "".equals(this.decDCToConsult.getProfession_mere()))){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations de la mére.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations de la mére.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -617,7 +618,7 @@ public class ConsultBean implements Serializable {
                 
                 if (deceService.updateDeclarationDeces(decDCToConsult)) {
                 	
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La modification a été effectué avec succés!", null);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "La modification a été effectué avec succés!");
                     FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -626,7 +627,7 @@ public class ConsultBean implements Serializable {
 
                 } else {
                 	
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La modification n'a pas été effectué!", null);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "La modification n'a pas été effectué!");
                     FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -637,21 +638,21 @@ public class ConsultBean implements Serializable {
         }
 
     	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Autre")) && ("".equals(this.decDCToConsult.getAdresse_declarant()) || "".equals(this.decDCToConsult.getPrenom_declarant()) || "".equals(this.decDCToConsult.getNom_declarant()) || "".equals(this.decDCToConsult.getProfession_declarant()) || "".equals(this.decDCToConsult.getNum_identification_declarant()))){
-    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations du déclarant.");
     		FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
         	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
     	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Pére")) && ("".equals(this.decDCToConsult.getPrenom_pere()) || "".equals(this.decDCToConsult.getNom_pere()) || "".equals(this.decDCToConsult.getDomicile_pere()) || "".equals(this.decDCToConsult.getProfession_pere()))){
-    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du pére.", null);
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations du pére.");
     		FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
         	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
     	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Mére")) && ("".equals(this.decDCToConsult.getPrenom_mere()) || "".equals(this.decDCToConsult.getNom_mere()) || "".equals(this.decDCToConsult.getDomicile_mere()) || "".equals(this.decDCToConsult.getProfession_mere()))){
-    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations de la mére.", null);
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations de la mére.");
     		FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -666,7 +667,7 @@ public class ConsultBean implements Serializable {
             
             if (deceService.updateDeclarationDeces(decDCToConsult)) {
             	
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La modification a été effectué avec succés!", null);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "La modification a été effectué avec succés!");
                 FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -675,7 +676,7 @@ public class ConsultBean implements Serializable {
 
             } else {
             	
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La modification n'a pas été effectué!", null);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "La modification n'a pas été effectué!");
                 FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -2040,14 +2041,14 @@ public class ConsultBean implements Serializable {
 		this.pieceDel.setPaiement(true);
 		this.pieceDel.setUsermodify(MyUtil.getUserLogged());
 		if(delService.updatePiece(this.pieceDel)){
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Dépot de paiement effecttué avec succès.", null);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Dépot de paiement effecttué avec succès.");
 			FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
         	context.getExternalContext().getFlash().setKeepMessages(true);
 		}
 		else{
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Le dépot ne s'estt pas correctement effectué.", null);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Le dépot ne s'estt pas correctement effectué.");
 			FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -2065,14 +2066,14 @@ public class ConsultBean implements Serializable {
 		System.out.println(this.decToConsult.getDate_j());
 		if(MyUtil.getProfil() != null){
 		if(acteService.verifyNumeroJugement(this.decToConsult.getNumero_jugement(), Tools.formatDay(this.decToConsult.getDate_j()).substring(6, 10))){
-    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjà  attribué pour cette année.", null);
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Ce numéro de jugement est déjà  attribué pour cette année.");
     		FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
         	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
     	else if((this.decToConsult.getDeclarant().equalsIgnoreCase("Autre")) && ("".equals(this.decToConsult.getDomicile_declarant()) || "".equals(this.decToConsult.getPrenom_declarant()) || "".equals(this.decToConsult.getNom_declarant()) || "".equals(this.decToConsult.getProfession_declarant()) || "".equals(this.decToConsult.getAdresse_declarant()) || "".equals(this.decToConsult.getNum_identification_declarant()))){
-    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations du déclarant.");
     		FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -2091,7 +2092,7 @@ public class ConsultBean implements Serializable {
             
             if (acteService.updateActe(decToConsult)) {
             	
-            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La modification a été effectuée avec succès.", null);
+            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "La modification a été effectuée avec succès.");
             	FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -2100,7 +2101,7 @@ public class ConsultBean implements Serializable {
             }
             
             else{
-            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible de modifier la déclaration. Vérifiez toutes les informations saisies.", null);
+            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Impossible de modifier la déclaration. Vérifiez toutes les informations saisies.");
             	FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -2119,7 +2120,7 @@ public class ConsultBean implements Serializable {
 		if(MyUtil.getProfil() != null){
 			
 			if(marService.verifyNumeroJugement(this.decMarToConsult.getNumero_Jugement(), this.decMarToConsult.getDateJugement().toString().substring(6, 10))){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjà  attribué pour cette année.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Ce numéro de jugement est déjà  attribué pour cette année.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -2140,7 +2141,7 @@ public class ConsultBean implements Serializable {
                 this.decMarToConsult.setModificateurMariage(MyUtil.getUserLogged());
                 
                 if (marService.updateDeclarationMariage(decMarToConsult)) {
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Les modifications ont été effectué avec succès.", null);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Les modifications ont été effectué avec succès.");
                     FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -2150,7 +2151,7 @@ public class ConsultBean implements Serializable {
                 } 
                 else {
 
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les modifications n'ont pas été effecuté normalement.", null);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Les modifications n'ont pas été effecuté normalement.");
                     FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -2172,28 +2173,28 @@ public class ConsultBean implements Serializable {
 		if(MyUtil.getProfil() != null){
 			
 			if(deceService.verifyNumeroJugement(this.decDCToConsult.getNum_jugement(), Tools.formatDay(this.decDCToConsult.getDate_j()).substring(6, 10))){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjé attribué pour cette année.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Ce numéro de jugement est déjé attribué pour cette année.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Autre")) && ("".equals(this.decDCToConsult.getAdresse_declarant()) || "".equals(this.decDCToConsult.getPrenom_declarant()) || "".equals(this.decDCToConsult.getNom_declarant()) || "".equals(this.decDCToConsult.getProfession_declarant()) || "".equals(this.decDCToConsult.getNum_identification_declarant()))){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations du déclarant.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Pére")) && ("".equals(this.decDCToConsult.getPrenom_pere()) || "".equals(this.decDCToConsult.getNom_pere()) || "".equals(this.decDCToConsult.getDomicile_pere()) || "".equals(this.decDCToConsult.getProfession_pere()))){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du pére.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations du pére.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if((this.decDCToConsult.getDegre_parente().equalsIgnoreCase("Mére")) && ("".equals(this.decDCToConsult.getPrenom_mere()) || "".equals(this.decDCToConsult.getNom_mere()) || "".equals(this.decDCToConsult.getDomicile_mere()) || "".equals(this.decDCToConsult.getProfession_mere()))){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations de la mére.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations de la mére.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -2210,7 +2211,7 @@ public class ConsultBean implements Serializable {
                 
                 if (deceService.updateDeclarationDeces(decDCToConsult)) {
                 	
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La modification a été effectué avec succés!", null);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "La modification a été effectué avec succés!");
                     FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -2219,7 +2220,7 @@ public class ConsultBean implements Serializable {
 
                 } else {
                 	
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La modification n'a pas été effectué!", null);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "La modification n'a pas été effectué!");
                     FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -2240,7 +2241,7 @@ public class ConsultBean implements Serializable {
 			this.decToConsult.setMention_marginale(this.decToConsult.getMention_marginale()+" \n "+this.getMentionN());
 			if (acteService.updateActe(this.decToConsult)) {
             	
-            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Mise à jour de la mention marginale effectuée avec succés!", null);
+            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Mise à jour de la mention marginale effectuée avec succés!");
             	FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -2249,7 +2250,7 @@ public class ConsultBean implements Serializable {
             }
             
             else{
-            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mise à jour de la mention marginale non effectuée!", null);
+            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Mise à jour de la mention marginale non effectuée!");
             	FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -2269,7 +2270,7 @@ public class ConsultBean implements Serializable {
 			this.decMarToConsult.setMentions_Marginales(this.decMarToConsult.getMentions_Marginales()+" \n "+this.getMention());
 			
 			if (marService.updateDeclarationMariage(decMarToConsult)) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Mise à jour de la mention marginale effectuée avec succés!", null);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Mise à jour de la mention marginale effectuée avec succés!");
                 FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -2279,7 +2280,7 @@ public class ConsultBean implements Serializable {
             } 
             else {
 
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mise à jour de la mention marginale non effectuée!", null);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Mise à jour de la mention marginale non effectuée!");
                 FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -2300,7 +2301,7 @@ public class ConsultBean implements Serializable {
 			this.decDCToConsult.setMention_marginale(this.decDCToConsult.getMention_marginale()+" \n "+this.getMentionD());
 			if (deceService.updateDeclarationDeces(decDCToConsult)) {
             	
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Mise à jour de la mention marginale effectuée avec succés!", null);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Mise à jour de la mention marginale effectuée avec succés!");
                 FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -2309,7 +2310,7 @@ public class ConsultBean implements Serializable {
 
             } else {
             	
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mise à jour de la mention marginale non effectuée!", null);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Mise à jour de la mention marginale non effectuée!");
                 FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -2395,5 +2396,24 @@ public class ConsultBean implements Serializable {
 			return MyUtil.pathMAJMM()+"deces?faces-redirect=true";
 		else
 			return MyUtil.pathLogin();
+	}
+
+
+
+	/**
+	 * @return the population
+	 */
+	public int getPopulation() {
+		population = (acteService.getAllActe().size()) - (deceService.getRegistreDece().size());
+		return population;
+	}
+
+
+
+	/**
+	 * @param population the population to set
+	 */
+	public void setPopulation(int population) {
+		this.population = population;
 	}
 }

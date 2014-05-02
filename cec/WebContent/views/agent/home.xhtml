@@ -21,21 +21,34 @@
                     <div class="contenu">
                         <h:form>
                         <p:growl id="growl" showDetail="true" life="6000" />
-                            <h:panelGrid columns="1" cellpadding="10" style="width: 100%;"> 
+                            <h:panelGrid columns="2" cellpadding="10" style="width: 100%;"> 
                                 
+                                <p:panel header="A propos du Centre" style="align-text:top; height:300px">  
+                                    <h:outputText value="#{userBean.userConnect.centre.description}" />  
+                                </p:panel>
                                
-                               
-                                <p:panel header="Statistique des registres" style="align-text:top; height:350px">  
-                                   <h:form prependId="false">  
+                                <p:panel header="Mairie de #{userBean.userConnect.centre.centerName}" style="align-text:top; height:300px" >  
+                                     
 									    <p:growl id="growl1" showDetail="true" />  
-  										<p:poll interval="3" update="pieChart" /> 
-    									<p:pieChart id="pieChart" value="#{menuBean.pieModel}" legendPosition="w"  
-       										      style="width:400px;" >  
-        									<p:ajax event="itemSelect" listener="#{menuBean.itemSelect}" update="growl1" />  
-    									</p:pieChart>  
+  										<h:panelGrid columns="2" cellpadding="8">
+	                                        <h:outputLabel for="region" value="REGION : " style="text-align: right;" />  
+	                                        <h:outputText id="region" value="#{userBean.userConnect.centre.centerRegion}" style="font-weight:bold;"/>
+	
+	                                        <h:outputLabel for="departement" value="DEPARTEMENT" style="text-align: right;" />  
+	                                        <h:outputText id="departement" value="#{userBean.userConnect.centre.centerDepartement}" style="font-weight:bold;"/>
+	
+	                                        <h:outputLabel for="mairie" value="MAIRE : " style="text-align: right;" />  
+	                                        <h:outputText id="mairie" value="#{userBean.userConnect.centre.prenom_maire} #{userBean.userConnect.centre.nom_maire}" style="font-weight:bold;"/>
+	
+	                                        <h:outputLabel for="mandat" value="MANDAT : " style="text-align: right;" />  
+	                                        <h:outputText id="mandat" value="XXXX-XXXX" style="font-weight:bold;"/>
+	                                        
+	                                        <h:outputLabel for="population" value="POPULATION : " style="text-align: right;" />  
+	                                        <h:outputText id="population" value="#{consultBean.population} habitants" style="font-weight:bold;"/>
+	                                    </h:panelGrid>  
   
-									</h:form>   
-                                </p:panel> 
+									   
+                                </p:panel>
                                 <p:panel header="Les registre de l'année 2014" style="align-text:top; height:350px">  
                                     <h:form>
                                 	<h:panelGrid columns="2" cellpadding="10" style="width: 100%;">

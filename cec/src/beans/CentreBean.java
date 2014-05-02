@@ -49,35 +49,36 @@ public class CentreBean {
         
        	}
        	else
-       		return MyUtil.basePath() + "views/login?faces-redirect=true";
+       		return "/views/login?faces-redirect=true";
    }
    
    @SuppressWarnings("static-access")
 public String saveCentre(){
 	   String route = "";
-//	   if(this.cenServ.viderCentre()){
-//		   if(cenServ.createCenter(this.centreToAdd)){
-//			   
-//			   FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Initialisation du centre effectué avec succès",null);
-//               FacesContext context = FacesContext.getCurrentInstance();
-//               context.getCurrentInstance().addMessage(null, message);
-//		   }
-//		   else{
-//			   FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible de créer le centre. Veuillez vérifier les informations.",null);
-//               FacesContext context = FacesContext.getCurrentInstance();
-//               context.getCurrentInstance().addMessage(null, message);
-//           	
-//           	context.getExternalContext().getFlash().setKeepMessages(true);
-//		   }
-//	   }
-//	   else{
-//		   FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible d'initialiser le centre.",null);
-//           FacesContext context = FacesContext.getCurrentInstance();
-//           context.getCurrentInstance().addMessage(null, message);
-//       	
-//       	context.getExternalContext().getFlash().setKeepMessages(true);
-//	   }
-	   route = "/views/install/root?faces-redirect=true";
+	   if(this.cenServ.viderCentre()){
+		   if(cenServ.createCenter(this.centreToAdd)){
+			   
+			   FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Initialisation du centre effectué avec succès");
+               FacesContext context = FacesContext.getCurrentInstance();
+               context.getCurrentInstance().addMessage(null, message);
+               route = "/views/install/root?faces-redirect=true";
+		   }
+		   else{
+			   FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Impossible de créer le centre. Veuillez vérifier les informations.");
+               FacesContext context = FacesContext.getCurrentInstance();
+               context.getCurrentInstance().addMessage(null, message);
+           	
+           	context.getExternalContext().getFlash().setKeepMessages(true);
+		   }
+	   }
+	   else{
+		   FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Impossible d'initialiser le centre.");
+           FacesContext context = FacesContext.getCurrentInstance();
+           context.getCurrentInstance().addMessage(null, message);
+       	
+       	context.getExternalContext().getFlash().setKeepMessages(true);
+	   }
+	   
 	   return route;
 	   
    }

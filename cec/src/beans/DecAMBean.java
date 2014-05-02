@@ -68,14 +68,14 @@ public class DecAMBean {
         if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationMariage(Tools.formatDay(this.decToAdd.getDateMariage())))){
         	if("".equals(this.decToAdd.getNumero_Jugement()) || "".equals(this.decToAdd.getDateJugement()) || "".equals(this.decToAdd.getTribunal())){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Cette déclaration est un jugement. Remplir les champs correspondants!");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if(mariageServ.verifyNumeroJugement(this.decToAdd.getNumero_Jugement(), this.decToAdd.getDateJugement().toString().substring(6, 10))){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjé attribué pour cette année.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Ce numéro de jugement est déjé attribué pour cette année.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -97,7 +97,7 @@ public class DecAMBean {
                 this.decToAdd.setType_Declaration(Tools.typeDeclarationMariage(Tools.formatDay(this.decToAdd.getDateMariage())));
                 
                 if (mariageServ.saveDeclarationMariage(decToAdd)) {
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Déclaration sauvegardée avec succès!", null);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Déclaration sauvegardée avec succès!");
                     FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -109,7 +109,7 @@ public class DecAMBean {
                 } 
                 else {
 
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur dans le sauvegarde de la déclaration!", null);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Erreur dans le sauvegarde de la déclaration!");
                     FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -134,7 +134,7 @@ public class DecAMBean {
             this.decToAdd.setType_Declaration(Tools.typeDeclarationMariage(Tools.formatDay(this.decToAdd.getDateMariage())));
             
             if (mariageServ.saveDeclarationMariage(decToAdd)) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Déclaration sauvegardée avec succès!", null);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Déclaration sauvegardée avec succès!");
                 FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -146,7 +146,7 @@ public class DecAMBean {
             } 
             else {
 
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur dans le sauvegarde de la déclaration!", null);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Erreur dans le sauvegarde de la déclaration!");
                 FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	

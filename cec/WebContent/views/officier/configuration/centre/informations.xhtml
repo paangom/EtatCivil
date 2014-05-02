@@ -78,6 +78,17 @@
 
                                         <h:outputLabel for="tel" value="NUMERO TELEPHONE" style="text-align: right;"/>  
                                         <h:outputText id="tel" value="#{centreRBean.centreToConsult.centerPhone}" style="font-weight: bold"/> 
+                                        
+                                        <p:separator/><p:separator/>
+                                        
+                                        <h:outputLabel for="nomm" value="PRENOMS DU MAIRE" style="text-align: right;"/>  
+                                        <h:outputText id="nomm"  value="#{centreRBean.centreToConsult.prenom_maire}" style="font-weight: bold"/> 
+
+                                        <h:outputLabel for="prenom" value="NOM DU MAIRE" style="text-align: right;"/>  
+                                        <h:outputText id="prenom" value="#{centreRBean.centreToConsult.nom_maire}" style="font-weight: bold"/> 
+
+                                        <h:outputLabel for="dateA" value="DATE D'ACCESSION A LA MAIRIE" style="text-align: right;"/>  
+                                        <h:outputText id="dateA" value="#{centreRBean.centreToConsult.acces}" style="font-weight: bold"/> 
                                     </h:panelGrid>
                                 </div>
                             </p:fieldset>

@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Liste des déclarations d'Acte de Naissance</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+    <body>
+        <ui:composition template="./../../adminTemplate.xhtml">
+
+             <ui:define name="content">
+                
+                <div class="breadcrumb">
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Home" url="#{menuBean.home}"/>
+                        </p:breadCrumb>
+                    </h:form>
+                </div>
+                <h1 align="center">LES PIECES ANNEXES DELIVRES PAR UTILISATEURS</h1>
+                <div class="panContent">
+                    <h:form id="form">
+                        <p:growl id="growl" showDetail="true" life="6000" /> 
+
+                        <div align="center">
+                            <p:dataTable var="dec" value="#{consultBean.pdByUser}" stickyHeader="true" paginator="true" rows="10" emptyMessage="Aucun pièce délivré" 
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                         rowsPerPageTemplate="5,10,15" style="width: 98%;">  
+
+
+                                <p:column headerText="Prénoms">  
+                                    <h:outputText value="#{dec.userdelivred.userPrenom}" />  
+                                </p:column>  
+
+                                <p:column headerText="Nom">  
+                                    <h:outputText value="#{dec.userdelivred.userNom}" />  
+                                </p:column>
+                                
+                                <p:column headerText="Profil" style="width:10%;">  
+                                    <h:outputText value="#{dec.userdelivred.userProfil}" />  
+                                </p:column>
+                                
+                                <p:column headerText="Document délivré">  
+                                    <h:outputText value="#{dec.piecedelivred.libelle}" />  
+                                </p:column>
+                                
+                                <p:column headerText="Prix" style="width:10%;">  
+                                    <h:outputText value="#{dec.piecedelivred.prix} F CFA" />  
+                                </p:column>
+                                
+                                <p:column headerText="Date délivré">  
+                                    <h:outputText value="#{dec.date_delivre}" />  
+                                </p:column>
+                                
+                                <p:column style="width:6%; text-align: center;">  
+                                    <p:commandButton id="selectButton" update=":form:growl"  icon="ui-icon-search" title="Paiement" action="#{consultBean.paiement}" 
+                                                     oncomplete="handleLoginRequest(xhr, status, args)">
+                                        <f:setPropertyActionListener value="#{dec}" target="#{consultBean.pieceDel}"/>
+                                    </p:commandButton>  
+                                </p:column>
+ 
+                            </p:dataTable>    
+                        </div>
+                    </h:form> 
+                </div>
+            </ui:define>
+
+        </ui:composition>
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+
+                location.href = args.route;
+            }
+
+        </script> 
+    </body>
+</html>

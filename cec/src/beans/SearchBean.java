@@ -93,7 +93,7 @@ public class SearchBean implements Serializable{
             router = MyUtil.basePath()+"rechercheAD?faces-redirect=true";
         }
         else{
-        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Veuillez choisir le type d'acte à rechercher.", null);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Veuillez choisir le type d'acte à rechercher.");
         	FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	

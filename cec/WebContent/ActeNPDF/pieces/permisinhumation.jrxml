@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="permisinhumation" language="groovy" pageWidth="595" pageHeight="421" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="region" class="java.lang.String"/>
+	<parameter name="depart" class="java.lang.String"/>
+	<parameter name="arrond" class="java.lang.String"/>
+	<parameter name="centre" class="java.lang.String"/>
+	<parameter name="cimetiere" class="java.lang.String"/>
+	<parameter name="defunt" class="java.lang.String"/>
+	<parameter name="deces" class="java.lang.String"/>
+	<parameter name="dateC" class="java.lang.String"/>
+	<parameter name="nomCentre" class="java.lang.String"/>
+	<parameter name="officier" class="java.lang.String"/>
+	<parameter name="numActe" class="java.lang.String"/>
+	<parameter name="annee" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="381" splitType="Stretch">
+			<staticText>
+				<reportElement x="339" y="0" width="216" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPUBLIQUE DU SENEGAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="0" width="339" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["REGION DE "+$P{region}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="339" y="20" width="216" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Un Peuple - Un But - Une Foi]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="20" width="339" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["DEPARTEMENT DE "+$P{depart}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="40" width="339" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["COMMUNE D'ARRONDISSEMENT DE "+$P{arrond}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="60" width="339" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{centre}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="104" width="555" height="30"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PERMIS D'INHUMATION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="162" width="555" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Acte n°...................du registre de....................]]></text>
+			</staticText>
+			<line>
+				<reportElement x="424" y="40" width="65" height="1"/>
+			</line>
+			<line>
+				<reportElement x="73" y="80" width="65" height="1"/>
+			</line>
+			<line>
+				<reportElement x="239" y="133" width="65" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="212" width="555" height="24"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Conformément à l'article 77 du code civil, le gardien du cimetière...............................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="236" width="555" height="24"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[est autorisé à laisser inhumé les restes de:....................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="260" width="555" height="24"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[décédé le.......................................................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="302" width="316" height="24"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Fait à................................................le..........................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="326" width="316" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[L'Officier d'Etat-Civil]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="314" y="211" width="228" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{cimetiere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="204" y="235" width="338" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{defunt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="260" width="491" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{deces}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="273" y="301" width="130" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nomCentre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="302" width="118" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{dateC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="344" width="316" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{officier}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="38" y="156" width="54" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{numActe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="156" width="56" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{annee}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

@@ -86,18 +86,18 @@ public class DecANBean implements Serializable {
         if(MyUtil.getProfil() != null){
         if("Jugement".equalsIgnoreCase(Tools.typeDeclarationNaissance(Tools.formatDay(this.decToAdd.getDate_naissanceE())))){
         	if("".equals(this.decToAdd.getNumero_jugement()) || "".equals(this.decToAdd.getDate_j()) || "".equals(this.decToAdd.getTribunal())){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette déclaration est un jugement. Remplir les champs correspondants!", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Cette déclaration est un jugement. Remplir les champs correspondants!");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
             	context.getExternalContext().getFlash().setKeepMessages(true);
         	}
         	else if(acteService.verifyNumeroJugement(this.decToAdd.getNumero_jugement(), Tools.formatDay(this.decToAdd.getDate_j()).substring(6, 10))){
-        		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce numéro de jugement est déjà attribué pour cette année.", null);
+        		FacesMessage messages = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Ce numéro de jugement est déjà attribué pour cette année.");
                 FacesContext.getCurrentInstance().addMessage(null, messages);
         	}
         	else if((this.decToAdd.getDeclarant().equalsIgnoreCase("Autre")) && ("".equals(this.decToAdd.getDomicile_declarant()) || "".equals(this.decToAdd.getPrenom_declarant()) || "".equals(this.decToAdd.getNom_declarant()) || "".equals(this.decToAdd.getProfession_declarant()) || "".equals(this.decToAdd.getAdresse_declarant()) || "".equals(this.decToAdd.getNum_identification_declarant()))){
-        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+        		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations du déclarant.");
         		FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -116,7 +116,7 @@ public class DecANBean implements Serializable {
                 this.decToAdd.setCreateurNaissance(MyUtil.getUserLogged());
                 
                 if (acteService.addDeclaration(decToAdd)) {
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Déclaration sauvegardée avec succès!", null);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Déclaration sauvegardée avec succès!");
                     FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -125,7 +125,7 @@ public class DecANBean implements Serializable {
                     
                 } else {
 
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreur dans le sauvegarde de la déclaration!", null);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Erreur dans le sauvegarde de la déclaration!");
                     FacesContext context = FacesContext.getCurrentInstance();
     	            context.getCurrentInstance().addMessage(null, message);
 	            	
@@ -135,7 +135,7 @@ public class DecANBean implements Serializable {
         	
         }
         else if((this.decToAdd.getDeclarant().equalsIgnoreCase("Autre")) && ("".equals(this.decToAdd.getDomicile_declarant()) || "".equals(this.decToAdd.getPrenom_declarant()) || "".equals(this.decToAdd.getNom_declarant()) || "".equals(this.decToAdd.getProfession_declarant()) || "".equals(this.decToAdd.getAdresse_declarant()) || "".equals(this.decToAdd.getNum_identification_declarant()))){
-        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Veuillez saisir les informations du déclarant.", null);
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Veuillez saisir les informations du déclarant.");
         	FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -153,7 +153,7 @@ public class DecANBean implements Serializable {
             this.decToAdd.setCreateurNaissance(MyUtil.getUserLogged());
             
             if (acteService.addDeclaration(decToAdd)) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Déclaration sauvegardée avec succès!", null);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Déclaration sauvegardée avec succès!");
                 FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	
@@ -162,7 +162,7 @@ public class DecANBean implements Serializable {
                 
             } else {
 
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreur dans le sauvegarde de la déclaration!", null);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Erreur dans le sauvegarde de la déclaration!");
                 FacesContext context = FacesContext.getCurrentInstance();
 	            context.getCurrentInstance().addMessage(null, message);
             	

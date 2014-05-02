@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Pièces annexes</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+                      <ui:define name="content">
+                
+                <div class="breadcrumb">
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Accueil" url="#{menuBean.home}"/>
+                        </p:breadCrumb>
+                    </h:form>
+                </div>
+                <h1 align="center">ATTESTATION DE NON EXISTENCE</h1>
+                <div class="panContent" align="center">
+                    <h:form id="formAddDec"> 
+                        <p:growl id="growl" showDetail="true" life="6000" /> 
+						
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="REGISTRES">
+                                <div align="center">
+                                    <h:panelGrid columns="4" cellpadding="6" style="width: 80%;"> 
+                                        <h:outputLabel for="num" value="Numéro registre" style="text-align: right;" />  
+                                        <p:inputText id="num" value="#{nonExistence.numero}" required="true" label="Numéro registre" />  
+
+                                        <h:outputLabel for="annee" value="Année registre" style="text-align: right;"/>  
+                                        <p:inputText id="annee" value="#{nonExistence.annee}" required="true" label="Année registre"/> 
+                                        
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        
+                        
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="L'INTERESSE(E)">
+                                <div align="center">
+                                    <h:panelGrid columns="4" cellpadding="6" style="width: 80%;"> 
+                                        <h:outputLabel for="firstname" value="Prénoms" style="text-align: right;" />  
+                                        <p:inputText id="firstname" value="#{nonExistence.prenom}" required="true" label="Prénoms" />  
+
+                                        <h:outputLabel for="nom" value="Nom" style="text-align: right;"/>  
+                                        <p:inputText id="nom" value="#{nonExistence.nom}" required="true" label="NOM"/> 
+
+                                        <h:outputLabel for="dateN" value="Date de naissance" style="text-align: right;" />  
+                                        <p:calendar id="dateN" pattern="dd/MM/yyyy" showButtonPanel="true" effect="fadeIn" navigator="true" value="#{nonExistence.dateN}" maxdate="calwidget.today()" widgetVar="calwidget" />
+										
+										<h:outputLabel for="sexe" value="Sexe" style="text-align: right;" />  
+                                        <p:selectOneRadio id="sexe" value="#{nonExistence.sexe}" >  
+                                            <f:selectItem itemLabel="Masculin " itemValue="Masculin" />  
+                                            <f:selectItem itemLabel="Féminin " itemValue="Féminin" />  
+                                        </p:selectOneRadio> 
+
+                                        <h:outputLabel for="lieuN" value="Lieu de naissance" style="text-align: right;"/>  
+                                        <p:inputText id="lieuN" value="#{nonExistence.lieu_N}" required="true" label="Lieu de naissance"/> 
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="INFORMATIONS SUR LES PARENTS">
+                                <h:panelGrid columns="2" cellpadding="4" style="width: 100%">
+                                    
+                                    <p:panel header="LE PERE">
+                                        <h:panelGrid columns="2" cellpadding="5" style="width: 100%">
+                                            <h:outputLabel for="firstnameP" value="Prénoms" style="text-align: right;" />  
+                                            <p:inputText id="firstnameP" value="#{nonExistence.prenom_P}"  label="Prénoms" />  
+
+                                            <h:outputLabel for="nomP" value="Nom" style="text-align: right;"/>  
+                                            <p:inputText id="nomP" value="#{nonExistence.nom_P}"  label="NOM"/> 
+
+                                            
+                                        </h:panelGrid>
+                                    </p:panel>
+                                    
+                                    <p:panel header="LA MERE">
+                                        <h:panelGrid columns="2" cellpadding="5" style="width: 100%">
+                                            <h:outputLabel for="firstnameM" value="Prénoms" style="text-align: right;" />  
+                                            <p:inputText id="firstnameM" value="#{nonExistence.prenom_M}" required="true" label="Prénoms" />  
+
+                                            <h:outputLabel for="nomM" value="Nom" style="text-align: right;"/>  
+                                            <p:inputText id="nomM" value="#{nonExistence.nom_M}" required="true" label="NOM"/> 
+
+                                            
+                                        </h:panelGrid>
+                                    </p:panel>
+                                </h:panelGrid>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1" cellspacing="5">
+                            <p:commandButton value="Valider" update="growl" action="#{residence.save}" />
+                            
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed) {
+                    jQuery('#formAddDec').effect("shake", {times: 6}, 100);
+                }
+                else {
+                    location.href = args.route;
+                }
+            }
+        </script> 
+    </body>
+</html>

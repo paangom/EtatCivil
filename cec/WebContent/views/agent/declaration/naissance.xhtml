@@ -34,28 +34,28 @@
                                 <div align="center">
                                     <h:panelGrid columns="4" cellpadding="6" style="width: 80%;"> 
                                         <h:outputLabel for="firstname" value="Prénoms" style="text-align: right;" />  
-                                        <p:inputText id="firstname" value="#{decANBean.decToAdd.prenom_enfant}" required="true" label="Prénoms" />  
+                                        <p:inputText id="firstname" value="#{decANBean.decToAdd.prenom_enfant}" required="true" requiredMessage="Veuillez saisir le prénom de l'enfant" label="Prénoms" />  
 
                                         <h:outputLabel for="nom" value="Nom" style="text-align: right;"/>  
-                                        <p:inputText id="nom" value="#{decANBean.decToAdd.nom_enfant}" required="true" label="NOM"/> 
+                                        <p:inputText id="nom" value="#{decANBean.decToAdd.nom_enfant}" required="true" label="Nom" requiredMessage="Veuillez saisir le nom de l'enfant"/> 
 
                                         <h:outputLabel for="dateN" value="Date de naissance" style="text-align: right;" />  
-                                        <p:calendar id="dateN" pattern="dd/MM/yyyy" showButtonPanel="true" effect="fadeIn" navigator="true" value="#{decANBean.decToAdd.date_naissanceE}" maxdate="calwidget.today()" widgetVar="calwidget" />
+                                        <p:calendar id="dateN" pattern="dd/MM/yyyy" showButtonPanel="true" effect="fadeIn" navigator="true" value="#{decANBean.decToAdd.date_naissanceE}" required="true" requiredMessage="Veuillez saisir la date de naissance de l'enfant" maxdate="calwidget.today()" widgetVar="calwidget" />
 
                                         <h:outputLabel for="heureN" value="Heure de naissance" style="text-align: right;" />  
-                                        <p:calendar id="heureN" value="#{decANBean.decToAdd.heure_naissanceE}" pattern="HH:mm" timeOnly="true" />
+                                        <p:calendar id="heureN" value="#{decANBean.decToAdd.heure_naissanceE}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="veuillez saisir l'heure de naissance de l'enfant"/>
 
                                         <h:outputLabel for="lieuN" value="Lieu de naissance" style="text-align: right;"/>  
-                                        <p:inputText id="lieuN" value="#{decANBean.decToAdd.lieu_naissance_enfant}" required="true" label="Lieu de naissance"/> 
+                                        <p:inputText id="lieuN" value="#{decANBean.decToAdd.lieu_naissance_enfant}" required="true" label="Lieu de naissance" requiredMessage="Veuillez saisir le lieu de naissance de l'enfant"/> 
 
                                         <h:outputLabel for="sexe" value="Sexe" style="text-align: right;" />  
-                                        <p:selectOneRadio id="sexe" value="#{decANBean.decToAdd.sexe}" >  
+                                        <p:selectOneRadio id="sexe" value="#{decANBean.decToAdd.sexe}" required="true" requiredMessage="Veuillez choisir le sexe de l'enfant">  
                                             <f:selectItem itemLabel="Masculin " itemValue="Masculin" />  
                                             <f:selectItem itemLabel="Féminin " itemValue="Féminin" />  
                                         </p:selectOneRadio> 
 
                                         <h:outputLabel for="formationS" value="Formation sanitaire" style="text-align: right;"/>  
-                                        <p:inputText id="formationS" value="#{decANBean.decToAdd.formation_sanitaire}" required="true" label="Formation sanitaire"/> 
+                                        <p:inputText id="formationS" value="#{decANBean.decToAdd.formation_sanitaire}" required="true" label="Formation sanitaire" requiredMessage="Veuillez saisir la formation sanitaire"/> 
                                     </h:panelGrid>
                                 </div>
                             </p:fieldset>
@@ -66,22 +66,22 @@
                                     <p:panel header="LA MERE">
                                         <h:panelGrid columns="2" cellpadding="5" style="width: 100%">
                                             <h:outputLabel for="firstnameM" value="Prénoms" style="text-align: right;" />  
-                                            <p:inputText id="firstnameM" value="#{decANBean.decToAdd.prenom_mere}" required="true" label="Prénoms" />  
+                                            <p:inputText id="firstnameM" value="#{decANBean.decToAdd.prenom_mere}" required="true" requiredMessage="Veuillez saisir le prénom de la mère" label="Prénoms" />  
 
                                             <h:outputLabel for="nomM" value="Nom" style="text-align: right;"/>  
-                                            <p:inputText id="nomM" value="#{decANBean.decToAdd.nom_mere}" required="true" label="NOM"/> 
+                                            <p:inputText id="nomM" value="#{decANBean.decToAdd.nom_mere}" required="true" label="Nom" requiredMessage="Veuillez saisir le nom de la mère"/> 
 
                                             <h:outputLabel for="dateNM" value="Date de naissance" style="text-align: right;" />  
-                                            <p:calendar id="dateNM" pattern="dd/MM/yyyy" showButtonPanel="true" effect="fadeIn" navigator="true" value="#{decANBean.decToAdd.date_naissanceM}" />
+                                            <p:calendar id="dateNM" pattern="dd/MM/yyyy" showButtonPanel="true" effect="fadeIn" required="true" requiredMessage="Veuillez saisir la date de naissance de la mère" navigator="true" value="#{decANBean.decToAdd.date_naissanceM}" />
 
                                             <h:outputLabel for="lieuNM" value="Lieu de naissance" style="text-align: right;"/>  
-                                            <p:inputText id="lieuNM" value="#{decANBean.decToAdd.lieu_naissance_mere}" required="true" label="Lieu de naissance"/> 
+                                            <p:inputText id="lieuNM" value="#{decANBean.decToAdd.lieu_naissance_mere}" required="true" label="Lieu de naissance" requiredMessage="Veuillez saisir le lieu de naissance de la mère"/> 
 
                                             <h:outputLabel for="adresseM" value="Adresse" style="text-align: right;" />  
-                                            <p:inputText id="adresseM" value="#{decANBean.decToAdd.domicile_mere}" required="true" label="Adresse" />  
+                                            <p:inputText id="adresseM" value="#{decANBean.decToAdd.domicile_mere}" required="true" label="Adresse" requiredMessage="Veuillez saisir l'adresse de la mère"/>  
 
                                             <h:outputLabel for="professionM" value="Profession" style="text-align: right;"/>  
-                                            <p:inputText id="professionM" value="#{decANBean.decToAdd.profession_mere}" required="true" label="Profession"/> 
+                                            <p:inputText id="professionM" value="#{decANBean.decToAdd.profession_mere}" label="Profession" /> 
                                         </h:panelGrid>
                                     </p:panel>
                                     <p:panel header="LE PERE">
@@ -115,9 +115,9 @@
                                         <h:outputText value="Déclarant: " />  
                                         <p:selectOneMenu value="#{decANBean.decToAdd.declarant}" >
                                         	<f:selectItem itemLabel="Déclaré(e) par:" itemValue="" />  
-                                            <f:selectItem itemLabel="Pére" itemValue="Pére" />  
-                                            <f:selectItem itemLabel="Mére" itemValue="Mére" />  
-                                            <f:selectItem itemLabel="Autre" itemValue="Autre" />  
+                                            <f:selectItem itemLabel="Son pére" itemValue="Pére" />  
+                                            <f:selectItem itemLabel="Sa mére" itemValue="Mére" />  
+                                            <f:selectItem itemLabel="Un autre" itemValue="Autre" />  
                                         </p:selectOneMenu>
                                         
                                         <h:outputLabel for="domicileD" value="Domicile" style="text-align: right;" />  

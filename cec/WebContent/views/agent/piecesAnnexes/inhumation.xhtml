@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Pièces annexes</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+                      <ui:define name="content">
+                
+                <div class="breadcrumb">
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Accueil" url="#{menuBean.home}"/>
+                        </p:breadCrumb>
+                    </h:form>
+                </div>
+                <h1 align="center">PERMIS D'INHUMATION</h1>
+                <div class="panContent" align="center">
+                    <h:form id="formAddDec">
+						<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
+                        <p:growl id="growl" showDetail="true" life="6000" /> 
+
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="INFORMATIONS SUR L'ENFANT">
+                                <div align="center">
+                                    <h:panelGrid columns="4" cellpadding="6" style="width: 80%;"> 
+                                        <h:outputLabel for="firstname" value="Prénoms" style="text-align: right;" />  
+                                        <p:inputText id="firstname" value="#{permis.prenom}" required="true" label="Prénoms" />  
+
+                                        <h:outputLabel for="nom" value="Nom" style="text-align: right;"/>  
+                                        <p:inputText id="nom" value="#{permis.nom}" required="true" label="Nom"/> 
+                                        
+                                        <h:outputLabel for="sexe" value="Sexe" style="text-align: right;" />  
+                                        <p:selectOneRadio id="sexe" value="#{permis.sexe}" >  
+                                            <f:selectItem itemLabel="Masculin " itemValue="Masculin" />  
+                                            <f:selectItem itemLabel="Féminin " itemValue="Féminin" />  
+                                        </p:selectOneRadio> 
+                                        
+                                        <h:outputLabel for="dateD" value="Date de décès" style="text-align: right;" />  
+                                        <p:calendar id="dateD" pattern="dd/MM/yyyy" showButtonPanel="true" effect="fadeIn" navigator="true" value="#{permis.dateD}" maxdate="calwidget.today()" widgetVar="calwidget" />
+
+										<h:outputLabel for="lieuD" value="Formation sanitaire" style="text-align: right;"/>  
+                                        <p:inputText id="lieuD" value="#{permis.fs}" required="true" label="Formation sanitaire"/> 
+                                        
+                                        <h:outputLabel for="cim" value="Cimetière" style="text-align: right;"/>  
+                                        <p:inputText id="cim" value="#{permis.cimetiere}" required="true" label="Cimetère"/> 
+
+                                       
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="1" cellspacing="5">
+                            <p:commandButton value="Enregistrer" update="growl" action="#{permis.saveI}" />
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed) {
+                    jQuery('#formAddDec').effect("shake", {times: 6}, 100);
+                }
+                else {
+                    location.href = args.route;
+                }
+            }
+        </script> 
+    </body>
+</html>

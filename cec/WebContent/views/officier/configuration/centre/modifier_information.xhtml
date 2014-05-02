@@ -84,14 +84,37 @@
 
                                         <h:outputLabel for="tel" value="NUMERO TELEPHONE" style="text-align: right;"/>  
                                         <p:inputText id="tel"  required="true" label="TEL" value="#{centreBean.centreToUpdate.centerPhone}"/> 
+                                        
+                                        <p:separator/><p:separator/>
+                                        <h:outputLabel for="prenom" value="PRENOMS DU MAIRE" style="text-align: right;"/>  
+                                        <p:spinner id="prenom" label="PRENOMS DU MAIRE" value="#{centreBean.centreToUpdate.prenom_maire}"/> 
+
+                                        <h:outputLabel for="nomm" value="NOM DU MAIRE" style="text-align: right;"/>  
+                                        <p:inputText id="nomm" label="NOM DU MAIRE" value="#{centreBean.centreToUpdate.nom_maire}"/> 
+
+                                        <h:outputLabel for="dateA" value="DATE D'ACCES A LA MAIRIE" style="text-align: right;"/>  
+                                        <p:inputText id="dateA"  required="true" label="DATE ACCES" value="#{centreBean.centreToUpdate.acces}"/> 
                                     </h:panelGrid>
                                 </div>
                             </p:fieldset>
                         </h:panelGrid>
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 70%;">
+                            <p:fieldset legend="A PROPOS DU CENTRE">
+                                <div align="center">
+                                        <p:fieldset>
+                                            <div align="center">
+                                                <p:inputTextarea value="#{centreBean.centreToUpdate.description}"  rows="15" cols="160" style="width: 100%; " label="A propos du centre" />  
+                                            </div>
+                                        </p:fieldset> 
+                                    
+                                    
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
                         <div align="center">
-                            <h:panelGrid columns="2" cellspacing="5">
+                            <h:panelGrid columns="1" cellspacing="5">
                                 <p:commandButton value=" Enregistrer " update="growl" action="#{centreBean.updateConfigurationCentre}"/>
-                                <p:commandButton value=" Annuler "/>
+                                
                             </h:panelGrid>
                         </div>
                     </h:form>

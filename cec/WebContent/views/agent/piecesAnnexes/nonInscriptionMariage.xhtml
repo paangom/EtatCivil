@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Pièces annexes</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+
+    <body>
+
+        <ui:composition template="./../../adminTemplate.xhtml">
+
+                      <ui:define name="content">
+                
+                <div class="breadcrumb">
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Accueil" url="#{menuBean.home}"/>
+                        </p:breadCrumb>
+                    </h:form>
+                </div>
+                <h1 align="center">CERTIFICAT DE NON INSCRIPTION DE MARIAGE</h1>
+                <div class="panContent" align="center">
+                    <h:form id="formAddDec">
+                        <p:growl id="growl" showDetail="true" life="6000" /> 
+						
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="INFORMATIONS DU MARIAGE">
+                                <div align="center">
+                                    <h:panelGrid columns="4" cellpadding="6" style="width: 80%;"> 
+                                        
+                                        <h:outputLabel for="dateM" value="Date du mariage" style="text-align: right;" />  
+                                        <p:calendar id="dateM" pattern="dd/MM/yyyy" showButtonPanel="true" effect="fadeIn" navigator="true" value="#{nonInscriptionMariage.dateMariage}" maxdate="calwidget.today()" widgetVar="calwidget" />
+                                        
+                                         <h:outputLabel for="option" value="Option" style="text-align: right;" />  
+                                        <p:selectOneRadio id="option" value="#{nonInscriptionMariage.option}" >  
+                                            <f:selectItem itemLabel="Polygamie " itemValue="Polygamie" />  
+                                            <f:selectItem itemLabel="Monogamie " itemValue="Monogamie" />  
+                                        </p:selectOneRadio> 
+                                        
+                                        <h:outputLabel for="dot" value="Dot" style="text-align: right;" />  
+                                        <p:inputText id="dot" value="#{nonInscriptionMariage.dot}" required="true" label="Dot" />  
+
+                                       
+                                        <h:outputLabel for="regime" value="Régime matrimonial" style="text-align: right;" />  
+                                        <p:selectOneRadio id="regime" value="#{nonInscriptionMariage.regime}" >  
+                                            <f:selectItem itemLabel="Partage des biens " itemValue="Partage des biens" />  
+                                            <f:selectItem itemLabel="Communauté des biens " itemValue="Communauté des biens" />  
+                                        </p:selectOneRadio> 
+                                        
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="INFORMATIONS DE L'EPOUX">
+                                <div align="center">
+                                    <h:panelGrid columns="4" cellpadding="6" style="width: 80%;"> 
+                                        <h:outputLabel for="prenomEpoux" value="Prénoms" style="text-align: right;" />  
+                                        <p:inputText id="prenomEpoux" value="#{nonInscriptionMariage.prenom_epoux}" required="true" label="Prénoms" />
+                                        
+                                        <h:outputLabel for="nomEpoux" value="Nom" style="text-align: right;" />  
+                                        <p:inputText id="nomEpoux" value="#{nonInscriptionMariage.nom_epoux}" required="true" label="Nom" />  
+                                        
+                                        <h:outputLabel for="dateNEpoux" value="Date de naissance" style="text-align: right;" />  
+                                        <p:calendar id="dateNEpoux" pattern="dd/MM/yyyy" showButtonPanel="true" effect="fadeIn" navigator="true" value="#{nonInscriptionMariage.dateNaissanceEpoux}" maxdate="calwidget.today()" widgetVar="calwidget" />
+                                        
+                                        <h:outputLabel for="lieuNEpoux" value="Lieu naissance" style="text-align: right;" />  
+                                        <p:inputText id="lieuNEpoux" value="#{nonInscriptionMariage.lieu_naissance_epoux}" required="true" label="Lieu naissance" />  
+
+                                        <h:outputLabel for="profEpoux" value="Profession" style="text-align: right;" />  
+                                        <p:inputText id="profEpoux" value="#{nonInscriptionMariage.profession_epoux}" required="true" label="Profession" /> 
+                                        
+                                        <h:outputLabel for="adresse" value="Adresse" style="text-align: right;" />  
+                                        <p:inputText id="adresse" value="#{nonInscriptionMariage.adresse_epoux}" required="true" label="Adresse" /> 
+                                        
+                                        <h:outputLabel for="prenomPEpoux" value="Prénoms père" style="text-align: right;" />  
+                                        <p:inputText id="prenomPEpoux" value="#{nonInscriptionMariage.prenom_pere_epoux}" required="true" label="Prénoms père" />  
+                                        
+                                        <h:outputLabel for="nomPEpoux" value="Nom père" style="text-align: right;" />  
+                                        <p:inputText id="nomPEpoux" value="#{nonInscriptionMariage.nom_pere_epoux}" required="true" label="Nom père" />  
+                                        
+                                        <h:outputLabel for="prenomMEpoux" value="Prénoms mère" style="text-align: right;" />  
+                                        <p:inputText id="prenomMEpoux" value="#{nonInscriptionMariage.prenom_mere_epoux}" required="true" label="Prénoms père" />  
+                                        
+                                        <h:outputLabel for="nomMEpoux" value="Nom mère" style="text-align: right;" />  
+                                        <p:inputText id="nomMEpoux" value="#{nonInscriptionMariage.nom_mere_epoux}" required="true" label="Nom père" />  
+                                         
+                                        
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="INFORMATIONS DE L'EPOUSE">
+                                <div align="center">
+                                    <h:panelGrid columns="4" cellpadding="6" style="width: 80%;"> 
+                                        <h:outputLabel for="prenomEpouse" value="Prénoms" style="text-align: right;" />  
+                                        <p:inputText id="prenomEpouse" value="#{nonInscriptionMariage.prenom_epouse}" required="true" label="Prénoms" />
+                                        
+                                        <h:outputLabel for="nomEpouse" value="Nom" style="text-align: right;" />  
+                                        <p:inputText id="nomEpouse" value="#{nonInscriptionMariage.nom_epouse}" required="true" label="Nom" />  
+                                        
+                                        <h:outputLabel for="dateNEpouse" value="Date de naissance" style="text-align: right;" />  
+                                        <p:calendar id="dateNEpouse" pattern="dd/MM/yyyy" showButtonPanel="true" effect="fadeIn" navigator="true" value="#{nonInscriptionMariage.dateNaissanceEpouse}" maxdate="calwidget.today()" widgetVar="calwidget" />
+                                        
+                                        <h:outputLabel for="lieuNEpouse" value="Lieu naissance" style="text-align: right;" />  
+                                        <p:inputText id="lieuNEpouse" value="#{nonInscriptionMariage.lieu_naissance_epouse}" required="true" label="Lieu naissance" />  
+
+                                        <h:outputLabel for="profEpouse" value="Profession" style="text-align: right;" />  
+                                        <p:inputText id="profEpouse" value="#{nonInscriptionMariage.profession_epouse}" required="true" label="Profession" /> 
+                                        
+                                        <h:outputLabel for="adresseEpouse" value="Adresse" style="text-align: right;" />  
+                                        <p:inputText id="adresseEpouse" value="#{nonInscriptionMariage.adresse_epouse}" required="true" label="Adresse" /> 
+                                        
+                                        <h:outputLabel for="prenomPEpouse" value="Prénoms père" style="text-align: right;" />  
+                                        <p:inputText id="prenomPEpouse" value="#{nonInscriptionMariage.prenom_pere_epouse}" required="true" label="Prénoms père" />  
+                                        
+                                        <h:outputLabel for="nomPEpouse" value="Nom père" style="text-align: right;" />  
+                                        <p:inputText id="nomPEpouse" value="#{nonInscriptionMariage.nom_pere_epouse}" required="true" label="Nom père" />  
+                                        
+                                        <h:outputLabel for="prenomMEpouse" value="Prénoms mère" style="text-align: right;" />  
+                                        <p:inputText id="prenomMEpouse" value="#{nonInscriptionMariage.prenom_mere_epouse}" required="true" label="Prénoms père" />  
+                                        
+                                        <h:outputLabel for="nomMEpouse" value="Nom mère" style="text-align: right;" />  
+                                        <p:inputText id="nomMEpouse" value="#{nonInscriptionMariage.nom_mere_epouse}" required="true" label="Nom père" />  
+                                         
+                                        
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="1" cellspacing="5">
+                            <p:commandButton value="Valider" update="growl" action="#{nonInscriptionMariage.save}" />
+                            
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed) {
+                    jQuery('#formAddDec').effect("shake", {times: 6}, 100);
+                }
+                else {
+                    location.href = args.route;
+                }
+            }
+        </script> 
+    </body>
+</html>

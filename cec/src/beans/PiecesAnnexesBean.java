@@ -61,14 +61,14 @@ public class PiecesAnnexesBean implements Serializable{
 			this.pieceTOAdd.setDate_creation(Tools.getCurrentDateTime());
 			pService.createPiece(this.pieceTOAdd);
 			//allPieces = pService.allPieces();
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le document "+this.pieceTOAdd.getLibelle()+" a été ajoutée avec succès!", null);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Le document "+this.pieceTOAdd.getLibelle()+" a été ajoutée avec succès!");
 			FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
         	context.getExternalContext().getFlash().setKeepMessages(true);
 		}
 		else{
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Aucun libelé n'est attribué pour ce document!", null);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Aucun libelé n'est attribué pour ce document!");
 			FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -83,14 +83,14 @@ public class PiecesAnnexesBean implements Serializable{
 				this.pieceToConsult.setPrix("0");
 			pService.updatePieces(this.pieceToConsult);
 			//allPieces = pService.allPieces();
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le document "+this.pieceToConsult.getLibelle()+" a été mise à jour!", null);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Le document "+this.pieceToConsult.getLibelle()+" a été mise à jour!");
 			FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
         	context.getExternalContext().getFlash().setKeepMessages(true);
 		}
 		else{
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erreur de la modification de la pièce "+this.pieceToConsult.getLibelle(), null);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Erreur de la modification de la pièce "+this.pieceToConsult.getLibelle());
 			FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
@@ -101,7 +101,7 @@ public class PiecesAnnexesBean implements Serializable{
 	@SuppressWarnings("static-access")
 	public void deletePieces(){
 		pService.deletePieces(this.pieceToConsult.getId());
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le document "+this.pieceToConsult.getLibelle()+" a été supprimé avec succès!", null);
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Le document "+this.pieceToConsult.getLibelle()+" a été supprimé avec succès!");
 		FacesContext context = FacesContext.getCurrentInstance();
         context.getCurrentInstance().addMessage(null, message);
     	

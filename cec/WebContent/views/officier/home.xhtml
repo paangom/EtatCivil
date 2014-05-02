@@ -29,12 +29,7 @@
                             <h:panelGrid columns="2" cellpadding="10" style="width: 100%;"> 
 
                                 <p:panel header="A propos du Centre" style="align-text:top; height:300px">  
-                                    <h:outputText value="FC Barcelona one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,  
-                                                  having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.  
-                                                  They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,  
-                                                  including ten UEFA competitions. They have won three UEFA Champions League titles, a record four UEFA Cup Winners' Cups,  
-                                                  a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.  
-                                                  The club is also the only European side to have played continental football in every season since its inception in 1955." />  
+                                    <h:outputText value="#{userBean.userConnect.centre.description}" />  
                                 </p:panel> 
 								
                                 <p:panel header="Mairie de #{userBean.userConnect.centre.centerName}" style="align-text:top; height:300px" >  
@@ -48,13 +43,13 @@
 	                                        <h:outputText id="departement" value="#{userBean.userConnect.centre.centerDepartement}" style="font-weight:bold;"/>
 	
 	                                        <h:outputLabel for="mairie" value="MAIRE : " style="text-align: right;" />  
-	                                        <h:outputText id="mairie" value="XXXXXXXXX" style="font-weight:bold;"/>
+	                                        <h:outputText id="mairie" value="#{userBean.userConnect.centre.prenom_maire} #{userBean.userConnect.centre.nom_maire}" style="font-weight:bold;"/>
 	
 	                                        <h:outputLabel for="mandat" value="MANDAT : " style="text-align: right;" />  
 	                                        <h:outputText id="mandat" value="XXXX-XXXX" style="font-weight:bold;"/>
 	                                        
 	                                        <h:outputLabel for="population" value="POPULATION : " style="text-align: right;" />  
-	                                        <h:outputText id="population" value="XXXXXX habitants" style="font-weight:bold;"/>
+	                                        <h:outputText id="population" value="#{consultBean.population} habitants" style="font-weight:bold;"/>
 	                                    </h:panelGrid>  
   
 									   
@@ -84,7 +79,7 @@
                                 <p:panel header="Les agents connectés" style="align-text:top; height:250px"  >  
                                     
 				                   	<div align="center">
-				                            <p:dataTable var="dec" value="#{loginBean.listc}" style="width: 400px;">  
+				                            <p:dataTable var="dec" value="#{loginBean.listc}" style="width: 380px;">  
 				
 				
 				                                <p:column headerText="Prénoms">  

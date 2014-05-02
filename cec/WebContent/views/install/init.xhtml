@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Déclaration d'Acte de Naissance</title>
+        <link href="http://localhost:8080/cec/resources/css/appCSS.css" type="text/css" rel="stylesheet"/>
+    </h:head>
+
+    <body>
+			<div class="breadcrumb">
+                    
+                </div>
+                <h1 align="center">INITIALISATION DES PARAMETRES DU CENTRE</h1>
+                <div class="panContent" align="center">
+                    <h:form id="formAddDec"> 
+                        <p:growl id="growl" showDetail="true" life="6000" /> 
+
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                           <p:fieldset legend="INFORMATIONS DU CENTRE">
+                                <div align="center">
+                                    <h:panelGrid columns="2" cellpadding="6" style="width: 80%;"> 
+                                        <h:outputLabel for="region" value="Région" style="text-align: right;" />  
+                                        <p:inputText id="region" value="#{centreBean.centreToAdd.centerRegion}" required="true" label="Région" />  
+
+                                        <h:outputLabel for="depart" value="Département" style="text-align: right;"/>  
+                                        <p:inputText id="depart" value="#{centreBean.centreToAdd.centerDepartement}" required="true" label="Département"/> 
+
+                                        <h:outputLabel for="arrond" value="Arrondissement" style="text-align: right;"/>  
+                                        <p:inputText id="arrond" value="#{centreBean.centreToAdd.centerArrondissement}" required="true" label="Arrondissement"/> 
+
+							
+										 <h:outputLabel for="collect" value="Circonscription" style="text-align: right;" />  
+                                        <p:selectOneRadio id="collect" value="#{centreBean.centreToAdd.centerCollectivite}" required="true">  
+                                            <f:selectItem itemLabel="Commune " itemValue="Commune" />  
+                                            <f:selectItem itemLabel="Communauté rurale " itemValue="Communauté rurale" />  
+                                        </p:selectOneRadio>
+                                        
+                                        <h:outputLabel for="nom" value="Nom centre" style="text-align: right;"/>  
+                                        <p:inputText id="nom" value="#{centreBean.centreToAdd.centerName}" required="true" label="Nom centre"/> 
+                                        
+                                        <h:outputLabel for="type" value="Type de centre" style="text-align: right;" />  
+                                        <p:selectOneRadio id="type" value="#{centreBean.centreToAdd.centerType}" required="true">  
+                                            <f:selectItem itemLabel="Principal " itemValue="Principal" />  
+                                            <f:selectItem itemLabel="Secondaire " itemValue="Secondaire" />  
+                                        </p:selectOneRadio>
+                                        
+                                        <h:outputLabel for="prince" value="Centre principal" style="text-align: right;"/>  
+                                        <p:inputText id="prince" value="#{centreBean.centreToAdd.mainCenter}" label="Centre principal"/>
+                                        
+                                        <h:outputLabel for="code" value="Code" style="text-align: right;"/>  
+                                        <p:inputText id="code" value="#{centreBean.centreToAdd.centerCode}" required="true" label="Code"/>
+                                        
+                                        <h:outputLabel for="adresse" value="Adresse" style="text-align: right;"/>  
+                                        <p:inputText id="adresse" value="#{centreBean.centreToAdd.centerAddress}" required="true" label="Adresse"/>
+                                        
+                                        <h:outputLabel for="tel" value="Téléphone" style="text-align: right;"/>  
+                                        <p:inputText id="tel" value="#{centreBean.centreToAdd.centerPhone}" label="Téléphone"/>
+                                        
+                                        <h:outputLabel for="email" value="Courriel" style="text-align: right;"/>  
+                                        <p:inputText id="email" value="#{centreBean.centreToAdd.centerMail}" label="Courriel"/>
+                                        
+                                        <h:outputLabel for="bp" value="Boite postale" style="text-align: right;"/>  
+                                        <p:inputText id="bp" value="#{centreBean.centreToAdd.centerBp}" label="Boite postale"/>
+                                        
+                                        <h:outputLabel for="prenom" value="Prénoms du maire" style="text-align: right;"/>  
+                                        <p:inputText id="prenom" value="#{centreBean.centreToAdd.prenom_maire}" required="true" label="Prénoms"/>
+                                        
+                                        <h:outputLabel for="nomm" value="Nom du maire" style="text-align: right;"/>  
+                                        <p:inputText id="nomm" value="#{centreBean.centreToAdd.centerPhone}" required="true" label="Nom du maire"/>
+                                        
+                                        <h:outputLabel for="dateA" value="Date d'acces à la mairie" style="text-align: right;" />  
+                                        <p:calendar id="dateA" pattern="dd/MM/yyyy" showButtonPanel="true" effect="fadeIn" navigator="true" required="true" value="#{centreBean.centreToAdd.accesD}" maxdate="calwidget.today()" widgetVar="calwidget" />
+                                        
+                                        <h:outputLabel for="annee" value="Année des registres" style="text-align: right;"/>  
+                                        <p:inputMask id="annee" mask="9999" value="#{centreBean.centreToAdd.anneeRegistre}" required="true" label="Année des registres" requiredMessage="Année de commencement des registres obligatoire"/>
+                                        
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid>
+                        
+                         <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="A PROPOS DU CENTRE">
+                                <div align="center">
+                                    <h:panelGrid columns="1" cellpadding="5">
+                                      	<div align="center">
+                                    		<p:inputTextarea value="#{centreBean.centreToAdd.description}"  rows="15" cols="160" style="width: 100%; " label="Mention marginale" />  
+                                		</div>
+                                    </h:panelGrid>
+                                </div>
+                            </p:fieldset>
+                        </h:panelGrid >
+                        <h:panelGrid columns="1" cellspacing="5">
+                            <p:commandButton value="Enregistrer" update="growl" action="#{centreBean.saveCentre}" />
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            
+
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed) {
+                    jQuery('#formAddDec').effect("shake", {times: 6}, 100);
+                }
+                else {
+                    location.href = args.route;
+                }
+            }
+        </script> 
+    </body>
+</html>
