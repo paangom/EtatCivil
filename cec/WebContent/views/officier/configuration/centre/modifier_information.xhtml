@@ -87,13 +87,14 @@
                                         
                                         <p:separator/><p:separator/>
                                         <h:outputLabel for="prenom" value="PRENOMS DU MAIRE" style="text-align: right;"/>  
-                                        <p:spinner id="prenom" label="PRENOMS DU MAIRE" value="#{centreBean.centreToUpdate.prenom_maire}"/> 
+                                        <p:inputText id="prenom" label="PRENOMS DU MAIRE" value="#{centreBean.centreToUpdate.prenom_maire}" required="true"/> 
 
                                         <h:outputLabel for="nomm" value="NOM DU MAIRE" style="text-align: right;"/>  
-                                        <p:inputText id="nomm" label="NOM DU MAIRE" value="#{centreBean.centreToUpdate.nom_maire}"/> 
+                                        <p:inputText id="nomm" label="NOM DU MAIRE" value="#{centreBean.centreToUpdate.nom_maire}" required="true"/> 
 
                                         <h:outputLabel for="dateA" value="DATE D'ACCES A LA MAIRIE" style="text-align: right;"/>  
-                                        <p:inputText id="dateA"  required="true" label="DATE ACCES" value="#{centreBean.centreToUpdate.acces}"/> 
+                                        <p:calendar id="datedc" effect="fadeIn" navigator="true" value="#{centreBean.centreToUpdate.accesD}" required="true" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true"/>
+                                        
                                     </h:panelGrid>
                                 </div>
                             </p:fieldset>

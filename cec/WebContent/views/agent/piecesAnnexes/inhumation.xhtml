@@ -62,7 +62,13 @@
                         </h:panelGrid>
                         
                         <h:panelGrid columns="1" cellspacing="5">
-                            <p:commandButton value="Enregistrer" update="growl" action="#{permis.saveI}" />
+                            <p:commandButton value="Enregistrer" update="growl" action="#{permis.saveI}">
+                            	<p:confirm header="Confirmation" message="Voulez-vous vraiement délivré un permis d'inhumation?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+						        <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+						        <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/> 	
+						    </p:confirmDialog>
                         </h:panelGrid>
                     </h:form>
                 </div>

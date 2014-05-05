@@ -7,7 +7,9 @@
 package services;
 
 import dao.ActeDecesDAO;
+
 import java.util.List;
+
 import models.DeclarationDeces;
 import models.Search;
 import models.Users;
@@ -53,14 +55,6 @@ public class ActeDecesServices {
         return deceDAO.getAllDeclarationValider();
     }
     
-//    public boolean validateDeclarationDece(DeclarationDeces dec){
-//        return deceDAO.validateDeclarationDece(dec);
-//    }
-//    
-//    public boolean invalidateDeclarationDece(DeclarationDeces dec){
-//        return deceDAO.invalidateDeclarationDece(dec);
-//    }
-    
     public List<DeclarationDeces> searchAD(Search s){
         return deceDAO.searchAD(s);
     }
@@ -75,6 +69,14 @@ public class ActeDecesServices {
     
     public boolean verifyNumeroJugement(String num ,String annee, Integer id){
     	return deceDAO.verifyNumeroJugement(num, annee, id);
+    }
+    
+    public int findInstanceByDate(String date){
+    	return deceDAO.findInstanceByDate(date);
+    }
+    
+    public int findValidateByDate(String date){
+    	return deceDAO.findValidateByDate(date);
     }
     
 }

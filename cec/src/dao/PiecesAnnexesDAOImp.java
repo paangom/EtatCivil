@@ -17,17 +17,23 @@ public class PiecesAnnexesDAOImp implements PiecesAnnexesDAO{
 	private Session session = null;
 
 	@Override
-	public void createPieces(PiecesAnnexes p) {
+	public boolean createPieces(PiecesAnnexes p) {
 		// TODO Auto-generated method stub
-		if (session == null)
-			session = HibernateUtil.getSessionFactory();
-        // Debuter une transaction
-		Transaction t = session.beginTransaction();
+		boolean flag;
+        if(session == null)
+            session = HibernateUtil.getSessionFactory();
+        try {
+       	 
+            session.beginTransaction();
+            session.save(p);
+            session.beginTransaction().commit();
+            flag = true;
+        } catch (Exception e) {
+            flag = false;
+            session.beginTransaction().rollback();
+        }
 
-		// Sauvegarde du centre dans la base
-		
-		session.save(p);
-		t.commit();
+       return flag;
 	}
 
 	@Override

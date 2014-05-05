@@ -59,13 +59,22 @@ public class PiecesAnnexesBean implements Serializable{
 			if(this.pieceTOAdd.getPrix() == null)
 				this.pieceTOAdd.setPrix("0");
 			this.pieceTOAdd.setDate_creation(Tools.getCurrentDateTime());
-			pService.createPiece(this.pieceTOAdd);
-			//allPieces = pService.allPieces();
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Le document "+this.pieceTOAdd.getLibelle()+" a été ajoutée avec succès!");
-			FacesContext context = FacesContext.getCurrentInstance();
-            context.getCurrentInstance().addMessage(null, message);
+			if(pService.createPiece(this.pieceTOAdd)){
+				//allPieces = pService.allPieces();
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Le document "+this.pieceTOAdd.getLibelle()+" a été ajoutée avec succès!");
+				FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+	        	
+	        	context.getExternalContext().getFlash().setKeepMessages(true);
+        	}
+			else{
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Information", "Impossible d'ajouter le document "+this.pieceTOAdd.getLibelle()+"!");
+				FacesContext context = FacesContext.getCurrentInstance();
+	            context.getCurrentInstance().addMessage(null, message);
+	        	
+	        	context.getExternalContext().getFlash().setKeepMessages(true);
+			}
         	
-        	context.getExternalContext().getFlash().setKeepMessages(true);
 		}
 		else{
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Information", "Aucun libelé n'est attribué pour ce document!");

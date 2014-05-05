@@ -21,4 +21,6 @@ public interface PieceDelivredDAO {
 	public boolean updateByUser(Users u);
 	
 	public List<DelivredPieces> findAll();
+	
+	public int nombreDePiece(PiecesAnnexes p, String date);
 }

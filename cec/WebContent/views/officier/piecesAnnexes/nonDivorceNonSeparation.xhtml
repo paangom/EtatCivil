@@ -111,7 +111,13 @@
                                         </p:fieldset>
                         	</h:panelGrid>
                         <h:panelGrid columns="1" cellspacing="5">
-                            <p:commandButton value="Valider" update="growl" action="#{individualite.save}" />
+                            <p:commandButton value="Valider" update="growl" action="#{individualite.save}">
+                            	<p:confirm header="Confirmation" message="Voulez-vous vraiement délivré un certificat de non divorce et de non séparation de corps?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+						        <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+						        <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/> 	
+						    </p:confirmDialog>
                             
                         </h:panelGrid>
                     </h:form>

@@ -19,5 +19,6 @@
 			<attribute name="owner.project.facets" value="jst.jsf"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/admin/git/cec/cec/WebContent/WEB-INF/lib/jfreechart-1.0.13.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

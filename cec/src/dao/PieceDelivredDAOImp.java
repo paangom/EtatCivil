@@ -152,4 +152,18 @@ public class PieceDelivredDAOImp implements PieceDelivredDAO, Serializable{
 		return model;
 	}
 
+	@Override
+	public int nombreDePiece(PiecesAnnexes p, String date) {
+		// TODO Auto-generated method stub
+		int model=0;
+		if (session == null)
+			session = HibernateUtil.getSessionFactory();
+		Query q = session.createQuery("from DelivredPieces a where a.piecedelivred = :id and date_delivre like :dates")
+				.setParameter("id", p).setString("dates", "%"+date+"%");
+		
+		model = q.list().size();
+		
+		return model;
+	}
+
 }

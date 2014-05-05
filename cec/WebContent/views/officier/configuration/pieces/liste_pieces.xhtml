@@ -72,6 +72,9 @@
 
                                 <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">   
 
+                                    <h:outputText value="Code : " />  
+                                    <p:inputText value="#{piecesBean.pieceTOAdd.code}" maxlength="3" required="true"/>
+                                    
                                     <h:outputText value="Libelé : " />  
                                     <p:inputText value="#{piecesBean.pieceTOAdd.libelle}" required="true"/>
                                     

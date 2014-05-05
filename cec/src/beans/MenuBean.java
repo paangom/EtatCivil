@@ -53,6 +53,7 @@ public class MenuBean implements Serializable{
     private String listPieces;
     private String nonInscription;
     private String attestationdecoutume;
+    private String stat;
     private String nonExistance;
     private String residence;
     private String celibat;
@@ -110,6 +111,7 @@ public class MenuBean implements Serializable{
         individuel  = MyUtil.basePath()+"piecesAnnexes/individuel.xhtml";
         individuelFammile  = MyUtil.basePath()+"piecesAnnexes/individuelFamille.xhtml";
         inhumation  = MyUtil.basePath()+"piecesAnnexes/inhumation.xhtml";
+        stat = MyUtil.basePath()+"statistiques/statistiques.xhtml";
         createPieModel();
     }
 
@@ -587,6 +589,20 @@ public class MenuBean implements Serializable{
             context.getCurrentInstance().addMessage(null, msg);
         	
         	context.getExternalContext().getFlash().setKeepMessages(true);  
+	}
+
+	/**
+	 * @return the stat
+	 */
+	public String getStat() {
+		return stat;
+	}
+
+	/**
+	 * @param stat the stat to set
+	 */
+	public void setStat(String stat) {
+		this.stat = stat;
 	}  
 	
 

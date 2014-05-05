@@ -7,7 +7,9 @@
 package services;
 
 import dao.ActeMariageDAO;
+
 import java.util.List;
+
 import models.DeclarationMariage;
 import models.Search;
 import models.Users;
@@ -63,6 +65,14 @@ public class ActeMariageServices {
     
     public List<DeclarationMariage> registreMariageCurrentYear(String year){
     	return mariageDAO.registreMariageCurrentYear(year);
+    }
+    
+    public int findInstanceByDate(String date){
+    	return mariageDAO.findInstanceByDate(date);
+    }
+    
+    public int findValidateByDate(String date){
+    	return mariageDAO.findValidateByDate(date);
     }
     
 }

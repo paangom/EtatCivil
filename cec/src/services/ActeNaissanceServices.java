@@ -38,16 +38,6 @@ public class ActeNaissanceServices implements Serializable {
         return acteDAO.getActeNaissance(numActe);
     }
 
-//    // Valider une déclaration
-//    public boolean validateDeclaration(DeclarationNaissance d) {
-//        return acteDAO.validateDeclaration(d);
-//    }
-//
-//    // Rejeter une déclaration
-//    public boolean invalidateDeclaration(DeclarationNaissance d) {
-//        return acteDAO.invalidateDeclaration(d);
-//    }
-
     // Liste de toutes les déclarations
     public List<DeclarationNaissance> getAllDeclaration() {
         return acteDAO.getAllDeclaration();
@@ -103,6 +93,14 @@ public class ActeNaissanceServices implements Serializable {
     public List<DeclarationNaissance> registresCurrentYear(String year){
     	
     	return acteDAO.registresCurrentYear(year);
+    }
+    
+    public int findInstanceByDate(String date){
+    	return acteDAO.findInstanceByDate(date);
+    }
+    
+    public int findValidateByDate(String date){
+    	return acteDAO.findValidateByDate(date);
     }
     
    

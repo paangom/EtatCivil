@@ -6,17 +6,9 @@
 
 package beans;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
 import models.DeclarationDeces;
 import models.DeclarationMariage;
 import models.DeclarationNaissance;
-import services.ActeDecesServices;
-import services.ActeMariageServices;
-import services.ActeNaissanceServices;
-import util.MyUtil;
-import util.Tools;
 
 /**
  *
@@ -27,10 +19,6 @@ public class RegistreBean {
 	private DeclarationNaissance decToConsult;
     private DeclarationDeces decDCToConsult;
     private DeclarationMariage decMarToConsult;
-    private ActeNaissanceServices acteService = new ActeNaissanceServices();
-    private ActeDecesServices deceService = new ActeDecesServices();
-    private ActeMariageServices marService = new ActeMariageServices();
-
     /**
      * Creates a new instance of registreBean
      */

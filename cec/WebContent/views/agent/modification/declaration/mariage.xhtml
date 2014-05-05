@@ -35,10 +35,10 @@
                                 <div align="center">
                                     <h:panelGrid columns="4" cellpadding="6" style="width: 80%;">
                                         <h:outputLabel value="Date mariage" />   
-                                        <p:calendar effect="fadeIn" navigator="true" value="#{consultBean.decMarToConsult.dateMariage}" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true"/>
+                                        <p:calendar effect="fadeIn" navigator="true" required="true" value="#{consultBean.decMarToConsult.dateMariage}" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true"/>
                                         
                                         <h:outputLabel for="heureM" value="Heure du mariage" style="text-align: right;" />  
-                                        <p:calendar id="heureM"  pattern="HH:mm" timeOnly="true" value="#{consultBean.decMarToConsult.heureMariage}">
+                                        <p:calendar id="heureM"  pattern="HH:mm" timeOnly="true" value="#{consultBean.decMarToConsult.heureMariage}" required="true">
                                             <f:convertDateTime type="time"  timeStyle="short" pattern="HH:mm" />
                                         </p:calendar>
                                         
@@ -46,23 +46,23 @@
                                         <p:inputText id="lieuM"  required="true" label="Lieu du mariage" value="#{consultBean.decMarToConsult.lieu_Mariage}" />
 										
 										 <h:outputLabel for="type" value="Type mariage" style="text-align: right;" />  
-                                        <p:selectOneRadio id="type" value="#{consultBean.decMarToConsult.type_Mariage}">  
+                                        <p:selectOneRadio id="type" value="#{consultBean.decMarToConsult.type_Mariage}" required="true">  
                                             <f:selectItem itemLabel="Célébré " itemValue="Célébré" />  
                                             <f:selectItem itemLabel="Constaté " itemValue="Constaté" />  
                                         </p:selectOneRadio>
                                         
                                         <h:outputLabel for="dot" value="Dot"/>
-                                        <p:inputText id="dot" label="Dot" value="#{consultBean.decMarToConsult.dot_Mariage}"/>
+                                        <p:inputText id="dot" label="Dot" value="#{consultBean.decMarToConsult.dot_Mariage}" required="true"/>
                                         
                                         <h:outputLabel value="Genre" />
-                                        <p:selectOneRadio id="poly" value="#{consultBean.decMarToConsult.genre_Mariage}">  
+                                        <p:selectOneRadio id="poly" value="#{consultBean.decMarToConsult.genre_Mariage}" required="true">  
                                             <f:selectItem itemLabel="Polygamie " itemValue="Polygamie" />  
                                             <f:selectItem itemLabel="Monogamie " itemValue="Monogamie" />  
                                         </p:selectOneRadio>
 
 
                                         <h:outputLabel value="Régime matrimonial" />
-                                        <p:selectOneMenu value="#{consultBean.decMarToConsult.regime_Mariage}">  
+                                        <p:selectOneMenu value="#{consultBean.decMarToConsult.regime_Mariage}" required="true">  
                                             <f:selectItem itemLabel="Régime matrimonial"/>  
                                             <f:selectItem itemLabel="Partage de biens" itemValue="Partage de biens" />  
                                             <f:selectItem itemLabel="Communauté de biens" itemValue="Communauté de biens" />   
@@ -86,7 +86,7 @@
                                                 <p:inputText id="nom"  required="true" label="Nom" value="#{consultBean.decMarToConsult.nom_Epoux}"/> 
 
                                                 <h:outputLabel for="dateN" value="Date de naissance" style="text-align: right;" />  
-                                                <p:calendar id="dateN" effect="fadeIn" navigator="true" value="#{consultBean.decMarToConsult.dateNaissanceEpoux}" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true"/>
+                                                <p:calendar id="dateN" effect="fadeIn" navigator="true" required="true" value="#{consultBean.decMarToConsult.dateNaissanceEpoux}" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true"/>
 
                                                 <h:outputLabel for="lieuN" value="Lieu de naissance" style="text-align: right;"/>  
                                                 <p:inputText id="lieuN" required="true" label="Lieu de naissance" value="#{consultBean.decMarToConsult.lieu_Naissance_Epoux}"/> 
@@ -169,7 +169,7 @@
                                                 <p:inputText id="nomZ"  required="true" label="Nom" value="#{consultBean.decMarToConsult.nom_Epouse}"/> 
 
                                                 <h:outputLabel for="dateNZ" value="Date de naissance" style="text-align: right;" />  
-                                                <p:calendar id="dateNZ" effect="fadeIn" navigator="true" value="#{consultBean.decMarToConsult.dateNaissanceEpouse}" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true"/>
+                                                <p:calendar id="dateNZ" effect="fadeIn" required="true" navigator="true" value="#{consultBean.decMarToConsult.dateNaissanceEpouse}" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true"/>
 
                                                 <h:outputLabel for="lieuNZ" value="Lieu de naissance" style="text-align: right;"/>  
                                                 <p:inputText id="lieuNZ" required="true" label="Lieu de naissance" value="#{consultBean.decMarToConsult.lieu_Naissance_Epouse}"/> 
@@ -350,9 +350,8 @@
                             </p:fieldset>
                         </h:panelGrid>
                         
-                        <h:panelGrid columns="2" cellspacing="5">
+                        <h:panelGrid columns="1" cellspacing="5">
                             <p:commandButton value=" Enregistrer " update="growl" action="#{consultBean.updateDeclarationMariage}" />
-                            <p:commandButton value=" Annuler " update="growl"  oncomplete="handleLoginRequest(xhr, status, args)"/>
                         </h:panelGrid>
                     </h:form>
                 </div>

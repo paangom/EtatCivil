@@ -73,7 +73,7 @@
                                             <p:inputText id="nomM" value="#{consultBean.decToConsult.nom_mere}" required="true" label="Nom"/> 
 
                                             <h:outputLabel for="dateNM" value="Date de naissance" style="text-align: right;" />  
-                                            <p:calendar id="dateNM" effect="fadeIn" navigator="true" value="#{consultBean.decToConsult.date_naissanceM}" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true"/>
+                                            <p:calendar id="dateNM" effect="fadeIn" navigator="true" value="#{consultBean.decToConsult.date_naissanceM}" required="true" maxdate="calwidget.today()" widgetVar="calwidget" pattern="dd/MM/yyyy" showButtonPanel="true"/>
 
                                             <h:outputLabel for="lieuNM" value="Lieu de naissance" style="text-align: right;"/>  
                                             <p:inputText id="lieuNM" value="#{consultBean.decToConsult.lieu_naissance_mere}" required="true" label="Lieu de naissance"/> 
@@ -170,9 +170,8 @@
                                 </div>
                             </p:fieldset>
                         </h:panelGrid >
-                         <h:panelGrid columns="2" cellspacing="5">
+                         <h:panelGrid columns="1" cellspacing="5">
                             <p:commandButton value="Enregistrer" update="growl" action="#{consultBean.updateDeclarationNaissance}"/>
-                            <p:commandButton value="Annuler" update="growl" />
                         </h:panelGrid>
                     </h:form> 
                	</div>

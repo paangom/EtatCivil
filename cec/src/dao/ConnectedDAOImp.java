@@ -29,7 +29,6 @@ public class ConnectedDAOImp implements ConnectedDAO, Serializable{
         if(session == null)
             session = HibernateUtil.getSessionFactory();
         Connected con = new Connected();
-        
         try {
         	long temps = System.currentTimeMillis()/1000;
     		con.setTemps_connexion(temps);

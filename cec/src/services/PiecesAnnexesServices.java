@@ -18,8 +18,8 @@ public class PiecesAnnexesServices {
 		return pieceDAO.findById(idPiece);
 	}
 	
-	public void createPiece(PiecesAnnexes p){
-		pieceDAO.createPieces(p);
+	public boolean createPiece(PiecesAnnexes p){
+		return pieceDAO.createPieces(p);
 	}
 	
 	public void updatePieces(PiecesAnnexes p){

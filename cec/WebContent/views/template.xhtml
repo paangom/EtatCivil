@@ -63,7 +63,7 @@
                             <p:menuitem value="Régistres"  update="messages" url="#{menuBean.registreDeces}" /> 
                         </p:submenu>
                       </p:menu>
-                      <p:megaMenu>  
+                      <p:megaMenu style="width:100%;">  
 				        <p:submenu label=" Pièces annexes " icon="ui-icon-contact"  style="width:100%;">  
 				            <p:column>  
 				                <p:submenu >  
@@ -94,10 +94,12 @@
 				  
 				        </p:submenu>
 				       </p:megaMenu>
-				       <p:menu>
-				       	<p:submenu>
-				       		 <p:menuitem value="Certificat de non mariage, de non remariage"  update="messages" url="#{menuBean.nonMariageNonRemariage}" /> 
-				       	</p:submenu>
+				       <p:menu style="width:100%;">
+                      	
+				       	
+				       		 <p:menuitem value="Statistiques" url="#{menuBean.stat}"/>
+                        
+				       	
 				       </p:menu>
                     </h:form>
                

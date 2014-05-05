@@ -1,19 +1,29 @@
 package util;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.Calendar;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
 
 public class Test { 
+	static Session session = null;
+	
+	public static int findInstanceByDate(String date) {
+		// TODO Auto-generated method stub
+		int x=0;
+		System.out.println("jglcvkjmhbgl");
+		if (session == null)
+			session = HibernateUtil.getSessionFactory();
+		
+		Query q = session.createQuery("from DeclarationDeces a where a.date_creation like  :annee and etat = :etat")
+				.setString("annee", "%"+"2014"+"%").setString("etat", "Instance");
+		x = q.list().size();
+		System.out.println(q.list());
+        return x;
+	}
+	
 public static void main(String[] args) {
-File file = new File ("C:/Users/admin/git/cec/cec/parametre/test.txt");
-System.out .println ( file.exists ( ) );  // true car memoire.txt existe sur disque
-File f = new File("c:/memoire2.txt");
-System.out .println( f.exists ( ) );// false car memoire2.txt n’existe pas encore
-try {
-boolean creation = f.createNewFile ( );// memoire2.txt est créé sur disque
-}
-catch ( IOException ex) 
-{ex.printStackTrace() ;}
-System.out .println (f.exists ( ) );
+	Calendar cal = Calendar.getInstance();
+	 System.out.println(findInstanceByDate(Tools.getCurrentDateDDMMYYYY().substring(3))+",v:n,vb;b");
 }
 }

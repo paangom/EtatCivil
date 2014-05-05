@@ -6,7 +6,7 @@ import models.PiecesAnnexes;
 
 public interface PiecesAnnexesDAO {
 	
-	public void createPieces(PiecesAnnexes p);
+	public boolean createPieces(PiecesAnnexes p);
 	
 	public void updatePieces(PiecesAnnexes p);
 	

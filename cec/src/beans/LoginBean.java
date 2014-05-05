@@ -28,6 +28,9 @@ public class LoginBean implements Serializable{
     private List<Connected> listc;
     
     private boolean conneted = false;
+    
+    private String login;
+    private String pwd;
 
     /**
      * Creates a new instance of loginBean
@@ -87,7 +90,7 @@ public class LoginBean implements Serializable{
         	            	route = "/views/" + u.getUserProfil() + "/update?faces-redirect=true";
         	            }
         	        } else {
-        	        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur d'authentification",  "Vous vous êtes déjà connecté. Veuillez vous déconnecter!");
+        	        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur d'authentification",  "Impossible de vous connecter veuillez réinitialiser les paramétres de connexion!");
         	        	FacesContext context = FacesContext.getCurrentInstance();
         	            context.getCurrentInstance().addMessage(null, message);
     	            	
@@ -146,34 +149,35 @@ public class LoginBean implements Serializable{
     @SuppressWarnings("static-access")
 	public String verifyLoginOfficier(){
     	String route = "";
-    	this.user.setUserId(this.userConnect.getUserId());
-    	this.user.setCni(this.userConnect.getCni());
-    	this.user.setUserAddress(this.userConnect.getUserAddress());
-    	this.user.setUserNom(this.userConnect.getUserNom());
-    	this.user.setUserNumMatricule(this.userConnect.getUserNumMatricule());
-    	this.user.setUserNumTel(this.userConnect.getUserNumTel());
-    	this.user.setUserPrenom(this.userConnect.getUserPrenom());
-    	this.user.setUserProfil(this.userConnect.getUserProfil());
-    	this.user.setCentre(this.userConnect.getCentre());
-    	this.user.setSexe(this.userConnect.getSexe());
-    	this.user.setModify(true);
-    	
-    	if(uService.findByUsername(this.user.getUserUserName()) != null){
-    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Votre nouveau login est: "+user.getUserUserName()+" et votre mot de passe est: "+user.getUserPassword(), null);
+    	if(uService.findByUsername(this.getLogin()) != null){
+    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Information", "Ce nom utilisateur existe déjà");
     		FacesContext context = FacesContext.getCurrentInstance();
             context.getCurrentInstance().addMessage(null, message);
         	
         	context.getExternalContext().getFlash().setKeepMessages(true);
     	}
     	else{
+    		Users us = uService.findByUsername(this.user.getUserUserName());
+    		if(us != null){
+    			us.setUserUserName(this.getLogin());
+    			us.setUserPassword(this.getPwd());
+    			us.setModify(true);
+    			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Information", "Votre nouveau login est: "+user.getUserUserName()+" et votre mot de passe est: "+user.getUserPassword());
+        		FacesContext context = FacesContext.getCurrentInstance();
+                context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+        		uService.updateUser(us);
+        		route = "/views/officier/home?faces-redirect=true";
+    		}
+    		else{
+    			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Information", "Aucun utilisateur du nom de "+this.user.getUserUserName()+" n'existe pas!");
+        		FacesContext context = FacesContext.getCurrentInstance();
+                context.getCurrentInstance().addMessage(null, message);
+            	
+            	context.getExternalContext().getFlash().setKeepMessages(true);
+    		}
     		
-    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Les paramètres de connexions ont été modifié avec succès!", null);
-    		FacesContext context = FacesContext.getCurrentInstance();
-            context.getCurrentInstance().addMessage(null, message);
-        	
-        	context.getExternalContext().getFlash().setKeepMessages(true);
-    		uService.updateUser(user);
-    		route = "/views/officier/home?faces-redirect=true";
     	}
     	return route;
     }
@@ -221,7 +225,9 @@ public class LoginBean implements Serializable{
     
     public void verifyUseLogin(ComponentSystemEvent event){
   	  if(!isLogin){
-  		String url = MyUtil.basePathLogin();
+  		  String url = "";
+  		  if(MyUtil.getProfil() == null)
+  			  url = MyUtil.basePathLogin();
   	   doRedirect(url);
   	  }
   	 }
@@ -267,6 +273,36 @@ public class LoginBean implements Serializable{
 	public void setConneted(boolean conneted) {
 		this.conneted = conneted;
 	}
+
+	/**
+	 * @return the login
+	 */
+	public String getLogin() {
+		return login;
+	}
+
+	/**
+	 * @param login the login to set
+	 */
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	/**
+	 * @return the pwd
+	 */
+	public String getPwd() {
+		return pwd;
+	}
+
+	/**
+	 * @param pwd the pwd to set
+	 */
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	
 
 
 }

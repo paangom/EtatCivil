@@ -24,7 +24,7 @@
                         </p:breadCrumb>
                     </h:form>
                 </div>
-                <h1 align="center">CERTIFICAT DE VIE INDIVIDUEL</h1>
+                <h1 align="center">CERTIFICAT D'INDIVIDUALITE</h1>
                 <div class="panContent" align="center">
                     <h:form id="formAddDec">
 						<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
@@ -98,7 +98,7 @@
                                                         <h:outputLabel for="nomME" value="Nom" style="text-align: right;"/>  
                                                         <p:inputText id="nomME" label="Nom" value="#{individualite.nom_T2}"/>  
 
-                                                        <h:outputLabel for="professionME" value="Carte d'identité" style="text-align: right;"/>  
+                                                        <h:outputLabel for="professionME" value="Carte d'identité nationale" style="text-align: right;"/>  
                                                         <p:inputText id="professionME"  label="Carte d'identité nationale" value="#{individualite.cni_T2}"/> 
 
                                                         <h:outputLabel for="domicilleME" value="Adresse" style="text-align: right;"/>  
@@ -111,7 +111,13 @@
                                         </p:fieldset>
                         	</h:panelGrid>
                         <h:panelGrid columns="1" cellspacing="5">
-                            <p:commandButton value="Valider" update="growl" action="#{individualite.save}" />
+                            <p:commandButton value="Valider" update="growl" action="#{individualite.save}">
+                            	<p:confirm header="Confirmation" message="Voulez-vous vraiement délivré un certificat d'individualité?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+						        <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+						        <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/> 	
+						    </p:confirmDialog>
                             
                         </h:panelGrid>
                     </h:form>

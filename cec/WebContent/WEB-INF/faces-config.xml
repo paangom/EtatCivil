@@ -60,9 +60,9 @@
     </managed-bean>
     
     <managed-bean>
-        <managed-bean-name>pdfBean</managed-bean-name>
-        <managed-bean-class>beans.PdfBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-name>statistiques</managed-bean-name>
+        <managed-bean-class>beans.Statistiques</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     
     <managed-bean>
@@ -84,7 +84,7 @@
     <managed-bean>
         <managed-bean-name>piecesBean</managed-bean-name>
         <managed-bean-class>beans.PiecesAnnexesBean</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     
     <managed-bean>

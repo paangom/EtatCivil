@@ -27,7 +27,6 @@
                 <h1 align="center">ATTESTATION DE COUTUME</h1>
                 <div class="panContent" align="center">
                     <h:form id="formAddDec">
-						<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
                         <p:growl id="growl" showDetail="true" life="6000" /> 
 						
                         <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
@@ -61,36 +60,45 @@
                             </p:fieldset>
                         </h:panelGrid>
                         
-                        <h:panelGrid columns="2" cellpadding="5" style="width: 90%;">
-                            <p:fieldset legend="INFORMATIONS PERE">
-                                <div align="center">
-                                    <h:panelGrid columns="4" cellpadding="6" style="width: 80%;"> 
-                                        <h:outputLabel for="firstP" value="Prénoms" style="text-align: right;" />  
-                                        <p:inputText id="firstP" value="#{coutume.prenom_P}" required="true" label="Prénoms" />  
+                        <h:panelGrid columns="1" cellpadding="5" style="width: 90%;">
+                            <p:fieldset legend="INFORMATIONS SUR LES PARENTS">
+                                <h:panelGrid columns="2" cellpadding="4" style="width: 100%">
+                                    
+                                    <p:panel header="LE PERE">
+                                        <h:panelGrid columns="2" cellpadding="5" style="width: 100%">
+                                            <h:outputLabel for="firstnameP" value="Prénoms" style="text-align: right;" />  
+                                            <p:inputText id="firstnameP" value="#{coutume.prenom_P}"  label="Prénoms" />  
 
-                                        <h:outputLabel for="nomP" value="Nom" style="text-align: right;"/>  
-                                        <p:inputText id="nomP" value="#{coutume.nom_P}" required="true" label="Nom"/> 
+                                            <h:outputLabel for="nomP" value="Nom" style="text-align: right;"/>  
+                                            <p:inputText id="nomP" value="#{coutume.nom_P}"  label="Nom"/> 
 
-                                    </h:panelGrid>
-                                </div>
-                            </p:fieldset>
-                            <p:fieldset legend="INFORMATIONS MERE">
-                                <div align="center">
-                                    <h:panelGrid columns="4" cellpadding="6" style="width: 80%;"> 
-                                        <h:outputLabel for="firstM" value="Prénoms" style="text-align: right;" />  
-                                        <p:inputText id="firstM" value="#{coutume.prenom_M}" required="true" label="Prénoms" />  
+                                            
+                                        </h:panelGrid>
+                                    </p:panel>
+                                    
+                                    <p:panel header="LA MERE">
+                                        <h:panelGrid columns="2" cellpadding="5" style="width: 100%">
+                                            <h:outputLabel for="firstnameM" value="Prénoms" style="text-align: right;" />  
+                                            <p:inputText id="firstnameM" value="#{coutume.prenom_M}" required="true" label="Prénoms" />  
 
-                                        <h:outputLabel for="nomM" value="Nom" style="text-align: right;"/>  
-                                        <p:inputText id="nomM" value="#{coutume.nom_M}" required="true" label="Nom"/> 
+                                            <h:outputLabel for="nomM" value="Nom" style="text-align: right;"/>  
+                                            <p:inputText id="nomM" value="#{coutume.nom_M}" required="true" label="NOM"/> 
 
-                                    </h:panelGrid>
-                                </div>
+                                            
+                                        </h:panelGrid>
+                                    </p:panel>
+                                </h:panelGrid>
                             </p:fieldset>
                         </h:panelGrid>
                         
-                        
                         <h:panelGrid columns="1" cellspacing="5">
-                            <p:commandButton value="Valider" update="growl" action="#{coutume.save}" />
+                            <p:commandButton value="Valider" update="growl" action="#{coutume.save}" >
+                            	<p:confirm header="Confirmation" message="Voulez-vous vraiement délivré une attestation de coutume?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+						        <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+						        <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/> 	
+						    </p:confirmDialog>
                             
                         </h:panelGrid>
                     </h:form>

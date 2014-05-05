@@ -285,5 +285,31 @@ public class ActeNaissanceDAOImp implements ActeNaissanceDAO {
         return list;
 	}
 
+	@Override
+	public int findInstanceByDate(String date) {
+		// TODO Auto-generated method stub
+		int x=0;
+		if (session == null)
+			session = HibernateUtil.getSessionFactory();
+		
+		Query q = session.createQuery("from DeclarationNaissance a where a.date_creation like  :annee and etat != :etat")
+				.setString("annee", "%"+date+"%").setString("etat", "Valider");
+		x = q.list().size();
+        return x;
+	}
+
+	@Override
+	public int findValidateByDate(String date) {
+		// TODO Auto-generated method stub
+		int x=0;
+		if (session == null)
+			session = HibernateUtil.getSessionFactory();
+		
+		Query q = session.createQuery("from DeclarationNaissance a where a.date_creation like  :annee and etat = :etat")
+				.setString("annee", "%"+date+"%").setString("etat", "Valider");
+		x = q.list().size();
+        return x;
+	}
+
 
 }

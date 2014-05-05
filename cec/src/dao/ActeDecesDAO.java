@@ -62,4 +62,8 @@ public interface ActeDecesDAO {
     public boolean verifyNumeroJugement(String num, String annee);
     
     public boolean verifyNumeroJugement(String num, String annee, Integer id);
+    
+    public int findInstanceByDate(String date);
+    
+    public int findValidateByDate(String date);
 }

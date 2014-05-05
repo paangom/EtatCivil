@@ -43,6 +43,10 @@ public interface ActeNaissanceDAO {
     // Modification d'un acte de naissance
     public boolean updateDeclaration(DeclarationNaissance d);
     
+    public int findInstanceByDate(String date);
+    
+    public int findValidateByDate(String date);
+    
     public abstract List<DeclarationNaissance> searchAN(Search s);
     
     public String numeroActe(String annee);

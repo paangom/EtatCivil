@@ -58,4 +58,8 @@ public interface ActeMariageDAO {
     public boolean verifyNumeroJugement(String num, String annee, Integer id);
     
     public List<DeclarationMariage> registreMariageCurrentYear(String year);
+    
+    public int findInstanceByDate(String date);
+    
+    public int findValidateByDate(String date);
 }

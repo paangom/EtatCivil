@@ -34,4 +34,8 @@ public class DelivredPieceService {
 	public boolean updatePiece(DelivredPieces p){
 		return daoPiece.updateDelivred(p);
 	}
+	
+	public int nombreDePieces(PiecesAnnexes p, String date){
+		return daoPiece.nombreDePiece(p, date);
+	}
 }

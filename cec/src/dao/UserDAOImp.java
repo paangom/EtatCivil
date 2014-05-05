@@ -90,7 +90,6 @@ public class UserDAOImp implements UserDAO, Serializable {
 			session = HibernateUtil.getSessionFactory();
 		// D�but de la transaction Hibernate
 		Transaction tx = session.beginTransaction();
-		System.out.println(u.getUserId()+"imp");
 		// Cherche s'il existe d�j� dans la BDD
 		Users a = this.getUserById(u.getUserId());
 		
